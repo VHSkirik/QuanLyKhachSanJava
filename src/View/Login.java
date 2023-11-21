@@ -6,7 +6,6 @@ package View;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,6 +44,7 @@ public class Login extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtPass = new javax.swing.JPasswordField();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng Nhập");
@@ -76,10 +76,12 @@ public class Login extends javax.swing.JFrame {
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 130, 40));
 
         jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, 290, -1));
+        jLabel3.setEnabled(false);
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, 310, -1));
 
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 290, -1));
+        jLabel5.setEnabled(false);
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 310, -1));
 
         txtUser.setBackground(new java.awt.Color(13, 39, 51));
         txtUser.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -90,7 +92,7 @@ public class Login extends javax.swing.JFrame {
                 txtUserKeyPressed(evt);
             }
         });
-        jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 182, 290, 30));
+        jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 182, 310, 30));
 
         pnLogin.setBackground(new java.awt.Color(0, 204, 102));
         pnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -114,19 +116,19 @@ public class Login extends javax.swing.JFrame {
         pnLoginLayout.setHorizontalGroup(
             pnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLoginLayout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
+                .addContainerGap(105, Short.MAX_VALUE)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89))
+                .addGap(95, 95, 95))
         );
         pnLoginLayout.setVerticalGroup(
             pnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnLoginLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLoginLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jPanel3.add(pnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 290, 40));
+        jPanel3.add(pnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 310, 40));
 
         jLabel7.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,7 +139,18 @@ public class Login extends javax.swing.JFrame {
         txtPass.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtPass.setForeground(new java.awt.Color(255, 255, 255));
         txtPass.setBorder(null);
-        jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 282, 290, 30));
+        jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 282, 310, 30));
+
+        jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Quên mật khẩu?");
+        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 410, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,6 +188,11 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "Login");
     }//GEN-LAST:event_pnLoginMouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jLabel9MouseClicked
 
     /**
      * @param args the command line arguments
@@ -220,6 +238,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel pnLogin;
