@@ -111,6 +111,7 @@ public class Login extends javax.swing.JFrame {
         txtUser.setBackground(new java.awt.Color(13, 39, 51));
         txtUser.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtUser.setForeground(new java.awt.Color(255, 255, 255));
+        txtUser.setText("admin");
         txtUser.setBorder(null);
         txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -120,6 +121,7 @@ public class Login extends javax.swing.JFrame {
         jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 182, 310, 30));
 
         pnLogin.setBackground(new java.awt.Color(0, 204, 102));
+        pnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnLoginMouseClicked(evt);
@@ -166,6 +168,7 @@ public class Login extends javax.swing.JFrame {
         txtPass.setBackground(new java.awt.Color(13, 39, 51));
         txtPass.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtPass.setForeground(new java.awt.Color(255, 255, 255));
+        txtPass.setText("admin");
         txtPass.setBorder(null);
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

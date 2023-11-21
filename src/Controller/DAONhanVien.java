@@ -11,10 +11,10 @@ import java.sql.*;
  */
 public class DAONhanVien implements InterfaceDAO<NhanVien> {
 
-    public static DAONhanVien getInstance(){
+    public static DAONhanVien getInstance() {
         return new DAONhanVien();
     }
-    
+
     @Override
     public int insert(NhanVien nv) {
         String tk = nv.getTaikhoan();
@@ -23,14 +23,14 @@ public class DAONhanVien implements InterfaceDAO<NhanVien> {
         String gt = nv.getGioitinhnv();
         String mk = nv.getMatkhau();
         String loai = nv.getLoainguoidung();
-        String query = "INSERT INTO nhanvien VALUES('"+tk+"','"+ten+"','"+ns+"','"+gt+"','"+mk+"','"+loai+"')";
+        String query = "INSERT INTO nhanvien VALUES('" + tk + "','" + ten + "','" + ns + "','" + gt + "','" + mk + "','" + loai + "')";
         return SqlManager.updateData(query);
     }
 
     @Override
     public int delete(NhanVien nv) {
         String tk = nv.getTaikhoan();
-        String query = "DELETE FROM nhanvien WHERE taikhoan='"+tk+"'";
+        String query = "DELETE FROM nhanvien WHERE taikhoan='" + tk + "'";
         return SqlManager.updateData(query);
     }
 
@@ -42,13 +42,30 @@ public class DAONhanVien implements InterfaceDAO<NhanVien> {
         String gt = nv.getGioitinhnv();
         String mk = nv.getMatkhau();
         String loai = nv.getLoainguoidung();
-        String query = "UPDATE nhanvien SET hotennv='"+ten+"', ngaysinhnv='"+ns+"', gioitinhnv='"+gt+"', matkhau='"+mk+"', loainguoidung='"+loai+"' WHERE taikhoan='"+tk+"'";
+        String query = "UPDATE nhanvien SET hotennv='" + ten + "', ngaysinhnv='" + ns + "', gioitinhnv='" + gt + "', matkhau='" + mk + "', loainguoidung='" + loai + "' WHERE taikhoan='" + tk + "'";
         return SqlManager.updateData(query);
     }
 
     @Override
     public ArrayList<NhanVien> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
+        try {
+            ResultSet rs = SqlManager.getDataTable("nhanvien");
+            if (rs != null) {
+                while (rs.next()) {
+                    String tk = rs.getString("taikhoan");
+                    String ten = rs.getString("hotennv");
+                    String ns = rs.getString("ngaysinhnv");
+                    String gt = rs.getString("gioitinhnv");
+                    String mk = rs.getString("matkhau");
+                    String loai = rs.getString("loainguoidung");
+                    dsNhanVien.add(new NhanVien(tk,ten,ns,gt,mk,loai));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsNhanVien;
     }
 
     @Override
@@ -56,10 +73,10 @@ public class DAONhanVien implements InterfaceDAO<NhanVien> {
         NhanVien nv = null;
         try {
             ResultSet rs = SqlManager.getDataTable("nhanvien WHERE taikhoan='" + id + "'");
-            if (rs.next()){
+            if (rs.next()) {
                 nv = new NhanVien(rs.getString("taikhoan"), rs.getString("hotennv"), rs.getString("ngaysinhnv"), rs.getString("gioitinhnv"), rs.getString("matkhau"), rs.getString("loainguoidung"));
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return nv;

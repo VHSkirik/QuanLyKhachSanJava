@@ -15,14 +15,16 @@ import javax.swing.JOptionPane;
 public class Main extends javax.swing.JFrame {
 
     NhanVien nhanvien;
-    Color clButton;
-    Color clButtonClick;
+    Color defaultColor;
+    Color clickColor;
 
     public Main(NhanVien nhanvien) {
         initComponents();
         this.nhanvien = nhanvien;
-        clButton = new Color(0, 153, 102);
-        clButtonClick = new Color(0, 204, 204);
+        lbTitle.setText(nhanvien.getLoainguoidung().toUpperCase());
+        lbTenNV.setText(nhanvien.getHotenvn());
+        defaultColor = new Color(89, 168, 105);
+        clickColor = new Color(26, 188, 156);
     }
 
     public void logOut() {
@@ -39,6 +41,11 @@ public class Main extends javax.swing.JFrame {
         pnMainContent.removeAll();
         pnMainContent.add(qlnhanvien).setVisible(true);
     }
+    public void hienthiQLKH(){
+        vQLKhachHang qlkhachhang = new vQLKhachHang();
+        pnMainContent.removeAll();
+        pnMainContent.add(qlkhachhang).setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,13 +61,18 @@ public class Main extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         pnButtonNV = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        pnButtonKH = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        lbTitle = new javax.swing.JLabel();
+        lbTenNV = new javax.swing.JLabel();
         pnMainContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phần mềm quản lý khách sạn");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnButton.setBackground(new java.awt.Color(0, 153, 102));
+        pnButton.setBackground(new java.awt.Color(89, 168, 105));
         pnButton.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 pnButtonAncestorAdded(evt);
@@ -72,6 +84,8 @@ public class Main extends javax.swing.JFrame {
         });
         pnButton.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnButtonLogout.setBackground(new java.awt.Color(89, 168, 105));
+        pnButtonLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnButtonLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnButtonLogoutMouseClicked(evt);
@@ -103,14 +117,16 @@ public class Main extends javax.swing.JFrame {
         );
         pnButtonLogoutLayout.setVerticalGroup(
             pnButtonLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnButtonLogoutLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+            .addGroup(pnButtonLogoutLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        pnButton.add(pnButtonLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 230, 50));
+        pnButton.add(pnButtonLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 230, 60));
 
+        pnButtonNV.setBackground(new java.awt.Color(89, 168, 105));
+        pnButtonNV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnButtonNV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnButtonNVMouseClicked(evt);
@@ -128,7 +144,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_nhanvien.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_nhanvien2.png"))); // NOI18N
         jLabel9.setText("NHÂN VIÊN");
 
         javax.swing.GroupLayout pnButtonNVLayout = new javax.swing.GroupLayout(pnButtonNV);
@@ -143,12 +159,71 @@ public class Main extends javax.swing.JFrame {
         pnButtonNVLayout.setVerticalGroup(
             pnButtonNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnButtonNVLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        pnButton.add(pnButtonNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 230, 50));
+        pnButton.add(pnButtonNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 230, 60));
+
+        pnButtonKH.setBackground(new java.awt.Color(89, 168, 105));
+        pnButtonKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnButtonKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnButtonKHMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnButtonKHMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnButtonKHMousePressed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_khachhang2.png"))); // NOI18N
+        jLabel10.setText("KHÁCH HÀNG");
+        jLabel10.setIconTextGap(5);
+
+        javax.swing.GroupLayout pnButtonKHLayout = new javax.swing.GroupLayout(pnButtonKH);
+        pnButtonKH.setLayout(pnButtonKHLayout);
+        pnButtonKHLayout.setHorizontalGroup(
+            pnButtonKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnButtonKHLayout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(30, 30, 30))
+        );
+        pnButtonKHLayout.setVerticalGroup(
+            pnButtonKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnButtonKHLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        pnButton.add(pnButtonKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 230, 60));
+
+        jPanel1.setBackground(new java.awt.Color(13, 39, 51));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lbTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/admin.png"))); // NOI18N
+        lbTitle.setText("Loại NV");
+        lbTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbTitle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 210, 110));
+
+        lbTenNV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbTenNV.setForeground(new java.awt.Color(255, 255, 255));
+        lbTenNV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTenNV.setText("Name");
+        jPanel1.add(lbTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 230, 30));
+
+        pnButton.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 160));
 
         getContentPane().add(pnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 630));
 
@@ -177,22 +252,22 @@ public class Main extends javax.swing.JFrame {
 
     private void pnButtonLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonLogoutMouseEntered
         // TODO add your handling code here:
-        pnButtonLogout.setBackground(clButtonClick);
+        pnButtonLogout.setBackground(clickColor);
     }//GEN-LAST:event_pnButtonLogoutMouseEntered
 
     private void pnButtonLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonLogoutMouseExited
         // TODO add your handling code here:
-        pnButtonLogout.setBackground(clButton);
+        pnButtonLogout.setBackground(defaultColor);
     }//GEN-LAST:event_pnButtonLogoutMouseExited
 
     private void pnButtonNVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonNVMouseEntered
         // TODO add your handling code here:
-        pnButtonNV.setBackground(clButtonClick);
+        pnButtonNV.setBackground(clickColor);
     }//GEN-LAST:event_pnButtonNVMouseEntered
 
     private void pnButtonNVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonNVMouseExited
         // TODO add your handling code here:
-        pnButtonNV.setBackground(clButton);
+        pnButtonNV.setBackground(defaultColor);
     }//GEN-LAST:event_pnButtonNVMouseExited
 
     private void pnButtonLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonLogoutMouseClicked
@@ -215,45 +290,34 @@ public class Main extends javax.swing.JFrame {
         hienthiQLNV();
     }//GEN-LAST:event_pnButtonNVMousePressed
 
+    private void pnButtonKHMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonKHMouseEntered
+        // TODO add your handling code here:
+        pnButtonKH.setBackground(clickColor);
+    }//GEN-LAST:event_pnButtonKHMouseEntered
+
+    private void pnButtonKHMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonKHMouseExited
+        // TODO add your handling code here:
+        pnButtonKH.setBackground(defaultColor);
+    }//GEN-LAST:event_pnButtonKHMouseExited
+
+    private void pnButtonKHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonKHMousePressed
+        // TODO add your handling code here:
+        hienthiQLKH();
+    }//GEN-LAST:event_pnButtonKHMousePressed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main(new NhanVien("admin")).setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbTenNV;
+    private javax.swing.JLabel lbTitle;
     private javax.swing.JPanel pnButton;
+    private javax.swing.JPanel pnButtonKH;
     private javax.swing.JPanel pnButtonLogout;
     private javax.swing.JPanel pnButtonNV;
     private javax.swing.JPanel pnMainContent;

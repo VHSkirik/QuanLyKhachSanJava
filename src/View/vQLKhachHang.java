@@ -4,42 +4,21 @@
  */
 package View;
 
-import Controller.DAONhanVien;
-import Model.NhanVien;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author @VHSkirik
  */
-public class vQLNhanVien extends javax.swing.JInternalFrame {
+public class vQLKhachHang extends javax.swing.JInternalFrame {
 
-    DefaultTableModel dtm;
-
-    public vQLNhanVien() {
+    /**
+     * Creates new form vQLKhachHang
+     */
+    public vQLKhachHang() {
         initComponents();
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
-        dtm = (DefaultTableModel) tbNhanVien.getModel();
-        loadDataTable();
-    }
-
-    public void loadDataTable() {
-        ArrayList<NhanVien> dsNhanVien = DAONhanVien.getInstance().getAll();
-        dtm.setRowCount(0);
-        for (NhanVien nv : dsNhanVien) {
-            dtm.addRow(new Object[]{
-                nv.getTaikhoan(),
-                nv.getHotenvn(),
-                nv.getNgaysinhnv(),
-                nv.getGioitinhnv(),
-                nv.getMatkhau(),
-                nv.getLoainguoidung()});
-        }
     }
 
     /**
@@ -53,7 +32,7 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbNhanVien = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -61,33 +40,30 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jPanel2 = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
-        setClosable(true);
-        setPreferredSize(new java.awt.Dimension(800, 610));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(820, 630));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbNhanVien.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Tài Khoản", "Họ Tên", "Ngày Sinh", "Giới Tính", "Mật Khẩu", "Loại ND"
+                "Mã KH", "Họ Tên", "Ngày Sinh", "Căn Cước", "Quốc Tịch", "Giới Tính", "SDT"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false
+                false, false, false, false, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tbNhanVien);
+        jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 790, 500));
 
@@ -123,11 +99,6 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
         jToolBar1.add(jButton5);
         jToolBar1.add(jSeparator1);
 
@@ -142,13 +113,6 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        if (tbNhanVien.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(this, "Chưa có nhân viên nào được chọn!","Thông Báo",JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -158,7 +122,7 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTable tbNhanVien;
     // End of variables declaration//GEN-END:variables
 }
