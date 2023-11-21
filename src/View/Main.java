@@ -4,7 +4,9 @@
  */
 package View;
 
+import Model.NhanVien;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,13 +14,30 @@ import java.awt.Color;
  */
 public class Main extends javax.swing.JFrame {
 
+    NhanVien nhanvien;
     Color clButton;
     Color clButtonClick;
-    
-    public Main() {
+
+    public Main(NhanVien nhanvien) {
         initComponents();
-        clButton = new Color(0,153,102);
-        clButtonClick = new Color(0,204,204);
+        this.nhanvien = nhanvien;
+        clButton = new Color(0, 153, 102);
+        clButtonClick = new Color(0, 204, 204);
+    }
+
+    public void logOut() {
+        int check = JOptionPane.showConfirmDialog(this, "Bạn muốn đăng xuất?", "Xác Nhận", JOptionPane.YES_NO_OPTION);
+        if (check == JOptionPane.YES_OPTION) {
+            Login login = new Login();
+            login.setVisible(true);
+            this.dispose();
+        }
+    }
+
+    public void hienthiQLNV() {
+        vQLNhanVien qlnhanvien = new vQLNhanVien();
+        pnMainContent.removeAll();
+        pnMainContent.add(qlnhanvien).setVisible(true);
     }
 
     /**
@@ -33,6 +52,8 @@ public class Main extends javax.swing.JFrame {
         pnButton = new javax.swing.JPanel();
         pnButtonLogout = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        pnButtonNV = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         pnMainContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,11 +73,17 @@ public class Main extends javax.swing.JFrame {
         pnButton.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnButtonLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnButtonLogoutMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnButtonLogoutMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 pnButtonLogoutMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnButtonLogoutMousePressed(evt);
             }
         });
 
@@ -84,7 +111,46 @@ public class Main extends javax.swing.JFrame {
 
         pnButton.add(pnButtonLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 230, 50));
 
-        getContentPane().add(pnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 630));
+        pnButtonNV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnButtonNVMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnButtonNVMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnButtonNVMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnButtonNVMousePressed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_nhanvien.png"))); // NOI18N
+        jLabel9.setText("NHÂN VIÊN");
+
+        javax.swing.GroupLayout pnButtonNVLayout = new javax.swing.GroupLayout(pnButtonNV);
+        pnButtonNV.setLayout(pnButtonNVLayout);
+        pnButtonNVLayout.setHorizontalGroup(
+            pnButtonNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnButtonNVLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+        pnButtonNVLayout.setVerticalGroup(
+            pnButtonNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnButtonNVLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        pnButton.add(pnButtonNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 230, 50));
+
+        getContentPane().add(pnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 630));
 
         pnMainContent.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -119,6 +185,36 @@ public class Main extends javax.swing.JFrame {
         pnButtonLogout.setBackground(clButton);
     }//GEN-LAST:event_pnButtonLogoutMouseExited
 
+    private void pnButtonNVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonNVMouseEntered
+        // TODO add your handling code here:
+        pnButtonNV.setBackground(clButtonClick);
+    }//GEN-LAST:event_pnButtonNVMouseEntered
+
+    private void pnButtonNVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonNVMouseExited
+        // TODO add your handling code here:
+        pnButtonNV.setBackground(clButton);
+    }//GEN-LAST:event_pnButtonNVMouseExited
+
+    private void pnButtonLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonLogoutMouseClicked
+        // TODO add your handling code here:
+        logOut();
+    }//GEN-LAST:event_pnButtonLogoutMouseClicked
+
+    private void pnButtonLogoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonLogoutMousePressed
+        // TODO add your handling code here:
+        logOut();
+    }//GEN-LAST:event_pnButtonLogoutMousePressed
+
+    private void pnButtonNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonNVMouseClicked
+        // TODO add your handling code here:
+        hienthiQLNV();
+    }//GEN-LAST:event_pnButtonNVMouseClicked
+
+    private void pnButtonNVMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonNVMousePressed
+        // TODO add your handling code here:
+        hienthiQLNV();
+    }//GEN-LAST:event_pnButtonNVMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -149,15 +245,17 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new Main(new NhanVien("admin")).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel pnButton;
     private javax.swing.JPanel pnButtonLogout;
+    private javax.swing.JPanel pnButtonNV;
     private javax.swing.JPanel pnMainContent;
     // End of variables declaration//GEN-END:variables
 }

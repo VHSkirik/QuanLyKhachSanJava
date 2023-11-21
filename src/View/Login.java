@@ -4,9 +4,14 @@
  */
 package View;
 
+import Controller.DAONhanVien;
+import Model.NhanVien;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -21,7 +26,27 @@ public class Login extends javax.swing.JFrame {
         LoginIn = new Color(0,204,204);
         LoginOut = new Color(0,204,102);
     }
-
+    public void checkLogin(){
+        String taikhoan = txtUser.getText().trim();
+        String matkhau = txtPass.getText().trim();
+        if (taikhoan.isBlank() || matkhau.isBlank()){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin!","Cảnh Báo",JOptionPane.WARNING_MESSAGE);
+        } else {
+            NhanVien nv = DAONhanVien.getInstance().getByID(taikhoan);
+            if (nv == null){
+                JOptionPane.showMessageDialog(this, "Tài khoản không tồn tại!","Cảnh Báo",JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (!nv.getMatkhau().equals(matkhau)){
+                    JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác!","Cảnh Báo",JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công!","Thông báo",JOptionPane.INFORMATION_MESSAGE);
+                    Main main = new Main(nv);
+                    main.setVisible(true);
+                    this.dispose();
+                }
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,6 +130,9 @@ public class Login extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 pnLoginMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnLoginMousePressed(evt);
+            }
         });
 
         jLabel6.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
@@ -124,11 +152,11 @@ public class Login extends javax.swing.JFrame {
             pnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLoginLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel3.add(pnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 310, 40));
+        jPanel3.add(pnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 310, 50));
 
         jLabel7.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -139,6 +167,11 @@ public class Login extends javax.swing.JFrame {
         txtPass.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtPass.setForeground(new java.awt.Color(255, 255, 255));
         txtPass.setBorder(null);
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPassKeyPressed(evt);
+            }
+        });
         jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 282, 310, 30));
 
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 12)); // NOI18N
@@ -150,7 +183,7 @@ public class Login extends javax.swing.JFrame {
                 jLabel9MouseClicked(evt);
             }
         });
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 410, -1, -1));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 420, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,7 +219,7 @@ public class Login extends javax.swing.JFrame {
 
     private void pnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnLoginMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Login");
+        checkLogin();
     }//GEN-LAST:event_pnLoginMouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
@@ -194,34 +227,27 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel9MouseClicked
 
+    private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            checkLogin();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_UP){
+            txtUser.requestFocus();
+        }
+    }//GEN-LAST:event_txtPassKeyPressed
+
+    private void pnLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnLoginMousePressed
+        // TODO add your handling code here:
+        checkLogin();
+    }//GEN-LAST:event_pnLoginMousePressed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+    public static void main(String args[]) throws UnsupportedLookAndFeelException {
+        UIManager.setLookAndFeel(new FlatLightLaf());
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
