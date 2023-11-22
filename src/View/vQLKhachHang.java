@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ConvertTime;
+import Controller.SearchKhachHang;
 import DAO.DAOKhachHang;
 import Model.KhachHang;
 import java.util.ArrayList;
@@ -41,6 +42,20 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         }
     }
 
+    public void setDataTable(ArrayList<KhachHang> dsHienThi) {
+        dtm.setRowCount(0);
+        for (KhachHang kh : dsHienThi) {
+            dtm.addRow(new Object[]{
+                kh.getMakh(),
+                kh.getTenkh(),
+                ConvertTime.changeToDMY(kh.getNgaysinhkh()),
+                kh.getCmt(),
+                kh.getQuoctich(),
+                kh.getGioitinh(),
+                kh.getSodienthoai()});
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,6 +74,9 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         btXoa = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jPanel2 = new javax.swing.JPanel();
+        cbLoaiTK = new javax.swing.JComboBox<>();
+        txtTimKiem = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setBorder(null);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -67,12 +85,13 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(820, 630));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tbKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         tbKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã KH", "Họ Tên", "Ngày Sinh", "Căn Cước", "Quốc Tịch", "Giới Tính", "SDT"
+                "Mã KH", "Họ Tên", "Ngày Sinh", "CMT", "Quốc Tịch", "Giới Tính", "SDT"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -85,19 +104,20 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbKhachHang);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 790, 500));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 850, 500));
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jToolBar1.setRollover(true);
 
-        btThem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btThem.setFont(new java.awt.Font("SF Pro Display", 1, 14)); // NOI18N
         btThem.setForeground(new java.awt.Color(0, 0, 0));
         btThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
         btThem.setText("Thêm");
         btThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btThem.setFocusable(false);
         btThem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btThem.setIconTextGap(1);
         btThem.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,13 +126,14 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btThem);
 
-        btSua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btSua.setFont(new java.awt.Font("SF Pro Display", 1, 14)); // NOI18N
         btSua.setForeground(new java.awt.Color(0, 0, 0));
         btSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_sua.png"))); // NOI18N
         btSua.setText("Sửa");
         btSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btSua.setFocusable(false);
         btSua.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btSua.setIconTextGap(1);
         btSua.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,13 +142,14 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btSua);
 
-        btXoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btXoa.setFont(new java.awt.Font("SF Pro Display", 1, 14)); // NOI18N
         btXoa.setForeground(new java.awt.Color(0, 0, 0));
         btXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_xoa.png"))); // NOI18N
         btXoa.setText("Xóa");
         btXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btXoa.setFocusable(false);
         btXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btXoa.setIconTextGap(1);
         btXoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,13 +159,36 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         jToolBar1.add(btXoa);
         jToolBar1.add(jSeparator1);
 
-        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 80));
+        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 90));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 510, 80));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 620));
+        cbLoaiTK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CMT", "Họ tên" }));
+        jPanel2.add(cbLoaiTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, 40));
+
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 300, 40));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_reset.png"))); // NOI18N
+        jButton1.setText("Reset");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 120, 40));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 570, 90));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 620));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -194,16 +239,42 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btSuaActionPerformed
 
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        // TODO add your handling code here:
+        String luachon = cbLoaiTK.getSelectedItem().toString();
+        String noidungTK = txtTimKiem.getText().trim().toLowerCase();
+        ArrayList<KhachHang> result = new ArrayList<>();
+        switch (luachon) {
+            case "CMT":
+                result = SearchKhachHang.getByCMT(noidungTK);
+                break;
+            case "Mã KH":
+                break;
+            case "Họ tên":
+                result = SearchKhachHang.getByName(noidungTK);
+                break;
+        }
+        setDataTable(result);
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        txtTimKiem.setText("");
+        loadDataTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSua;
     private javax.swing.JButton btThem;
     private javax.swing.JButton btXoa;
+    private javax.swing.JComboBox<String> cbLoaiTK;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTable tbKhachHang;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

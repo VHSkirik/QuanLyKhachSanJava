@@ -107,60 +107,70 @@ public class AddUpdateKH extends javax.swing.JDialog {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 60));
+
+        txtSDT.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jPanel1.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 320, 40));
 
-        txtMaKH.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtMaKH.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jPanel1.add(txtMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 320, 40));
+
+        txtTenKH.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jPanel1.add(txtTenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 40));
 
+        txtNgaySinh.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         txtNgaySinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNgaySinhActionPerformed(evt);
             }
         });
         jPanel1.add(txtNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 320, 40));
+
+        txtCanCuoc.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jPanel1.add(txtCanCuoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 320, 40));
+
+        txtQuocTich.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jPanel1.add(txtQuocTich, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 320, 40));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("SF Mono", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Số điện thoại");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 110, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 310, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("SF Mono", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Mã khách hàng");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 130, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("SF Mono", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Họ Tên");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 110, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("SF Mono", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Giới tính");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 110, -1));
 
+        cbGioiTinh.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         cbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ", "Khác" }));
         jPanel1.add(cbGioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 320, 40));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("SF Mono", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Ngày sinh (dd/mm/yyyy)");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 320, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("SF Mono", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Căn cước");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 110, -1));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("SF Mono", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Quốc tịch");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 110, -1));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jButton1.setText("HỦY");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +181,7 @@ public class AddUpdateKH extends javax.swing.JDialog {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 570, 140, 40));
 
         btSubmit.setBackground(new java.awt.Color(153, 153, 255));
-        btSubmit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btSubmit.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         btSubmit.setForeground(new java.awt.Color(255, 255, 255));
         btSubmit.setText("THÊM");
         btSubmit.setBorder(null);
