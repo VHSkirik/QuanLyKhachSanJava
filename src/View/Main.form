@@ -227,7 +227,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="0" width="230" height="120"/>
+              <AbsoluteConstraints x="0" y="0" width="230" height="130"/>
             </Constraint>
           </Constraints>
 
@@ -249,11 +249,12 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i NV"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="iconTextGap" type="int" value="1"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="10" y="0" width="210" height="90"/>
+                  <AbsoluteConstraints x="10" y="0" width="210" height="100"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -270,7 +271,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="0" y="90" width="230" height="30"/>
+                  <AbsoluteConstraints x="0" y="100" width="230" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>

@@ -22,8 +22,8 @@ public class DAOLoaiPhong implements InterfaceDAO<LoaiPhong> {
     }
 
     @Override
-    public int delete(LoaiPhong lp) {
-        String query = "DELETE FROM loaiphong WHERE maloaiphong='" + lp.getMaloaiphong() + "'";
+    public int delete(String id) {
+        String query = "DELETE FROM loaiphong WHERE maloaiphong='" + id + "'";
         return SqlManager.updateData(query);
     }
 

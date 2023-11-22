@@ -22,8 +22,8 @@ public class DAODichVu implements InterfaceDAO<DichVu> {
     }
 
     @Override
-    public int delete(DichVu dv) {
-        String query = "DELETE FROM dichvu WHERE madichvu='" + dv.getMadichvu() + "'";
+    public int delete(String id) {
+        String query = "DELETE FROM dichvu WHERE madichvu='" + id + "'";
         return SqlManager.updateData(query);
     }
 

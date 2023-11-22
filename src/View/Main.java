@@ -217,16 +217,17 @@ public class Main extends javax.swing.JFrame {
         lbTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/admin.png"))); // NOI18N
         lbTitle.setText("Loại NV");
         lbTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbTitle.setIconTextGap(1);
         lbTitle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 210, 90));
+        jPanel1.add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 210, 100));
 
         lbTenNV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbTenNV.setForeground(new java.awt.Color(255, 255, 255));
         lbTenNV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbTenNV.setText("Name");
-        jPanel1.add(lbTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 230, 30));
+        jPanel1.add(lbTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 230, 30));
 
-        pnButton.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 120));
+        pnButton.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 130));
 
         getContentPane().add(pnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 630));
 

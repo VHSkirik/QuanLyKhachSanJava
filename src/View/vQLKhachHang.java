@@ -8,6 +8,7 @@ import DAO.DAOKhachHang;
 import Model.KhachHang;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -126,6 +127,11 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton5);
         jToolBar1.add(jSeparator1);
 
@@ -145,6 +151,27 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         AddUpdateKH formUpdate = new AddUpdateKH(this, new JFrame());
         formUpdate.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        int currentRow = tbKhachHang.getSelectedRow();
+        if (currentRow == -1) {
+            JOptionPane.showMessageDialog(this, "Chưa bọn khách hàng cần xóa!", "Thông Báo", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int rs = JOptionPane.showConfirmDialog(this, "Xác nhận xóa", "Thông Báo", JOptionPane.YES_NO_OPTION);
+            if (rs == JOptionPane.YES_OPTION) {
+                String ma = dtm.getValueAt(currentRow, 0).toString();
+                int kq = DAOKhachHang.getInstance().delete(ma);
+                if (kq == -1) {
+                    JOptionPane.showMessageDialog(this, "Xóa thất bại", "Thông Báo", JOptionPane.ERROR_MESSAGE);
+                    return;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+                loadDataTable();
+            }
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

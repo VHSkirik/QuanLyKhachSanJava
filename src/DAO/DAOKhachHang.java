@@ -22,8 +22,8 @@ public class DAOKhachHang implements InterfaceDAO<KhachHang> {
     }
 
     @Override
-    public int delete(KhachHang kh) {
-        String query = "DELETE FROM khachhang WHERE makh='" + kh.getMakh() + "'";
+    public int delete(String id) {
+        String query = "DELETE FROM khachhang WHERE makh='" + id + "'";
         return SqlManager.updateData(query);
     }
 

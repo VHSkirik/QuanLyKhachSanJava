@@ -22,8 +22,11 @@ public class DAOChiTietHoaDon implements InterfaceDAO<ChiTietHoaDon> {
     }
 
     @Override
-    public int delete(ChiTietHoaDon cthd) {
-        String query = "DELETE FROM chitiethoadon WHERE mahd='" + cthd.getMahd() + "' AND madichvu='" + cthd.getMadichvu() + "'";
+    public int delete(String id) {
+        String[] dsID = id.split(",");
+        String mahd = dsID[0];
+        String madichvu = dsID[1];
+        String query = "DELETE FROM chitiethoadon WHERE mahd='" + mahd + "' AND madichvu='" + madichvu + "'";
         return SqlManager.updateData(query);
     }
 
@@ -60,15 +63,15 @@ public class DAOChiTietHoaDon implements InterfaceDAO<ChiTietHoaDon> {
         String mahd = dsID[0];
         String madichvu = dsID[1];
         try {
-            ResultSet rs = SqlManager.getDataTable("chitiethoadon WHERE mahd='" +mahd+ "' AND madichvu='" +madichvu+ "'");
-            if (rs.next()){
+            ResultSet rs = SqlManager.getDataTable("chitiethoadon WHERE mahd='" + mahd + "' AND madichvu='" + madichvu + "'");
+            if (rs.next()) {
                 cthd = new ChiTietHoaDon(
-                rs.getString("mahd"),
-                rs.getString("madichvu"),
-                rs.getInt("dongia"),
-                rs.getInt("soluong"));
+                        rs.getString("mahd"),
+                        rs.getString("madichvu"),
+                        rs.getInt("dongia"),
+                        rs.getInt("soluong"));
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;

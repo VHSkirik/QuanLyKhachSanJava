@@ -4,8 +4,12 @@
  */
 package View;
 
+import Controller.ConvertTime;
+import DAO.DAOKhachHang;
+import Model.KhachHang;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,10 +19,10 @@ public class AddUpdateKH extends javax.swing.JDialog {
 
     vQLKhachHang formKH;
 
-    public AddUpdateKH(JInternalFrame parent, JFrame frame) {
+    public AddUpdateKH(vQLKhachHang parent, JFrame frame) {
         super(frame, true);
         initComponents();
-        formKH = (vQLKhachHang) parent;
+        formKH = parent;
     }
 
     /**
@@ -54,6 +58,7 @@ public class AddUpdateKH extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.setName(""); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
@@ -121,8 +126,8 @@ public class AddUpdateKH extends javax.swing.JDialog {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Ngày sinh");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 110, -1));
+        jLabel6.setText("Ngày sinh (dd/mm/yyyy)");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 320, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -185,10 +190,34 @@ public class AddUpdateKH extends javax.swing.JDialog {
         String ma = txtMaKH.getText();
         String ten = txtTenKH.getText();
         String gt = cbGioiTinh.getSelectedItem().toString();
-        String ns = txtNgaySinh.getText();
+        String ns = ConvertTime.changeToYMD(txtNgaySinh.getText().trim());
         String cmt = txtCanCuoc.getText();
         String qt = txtQuocTich.getText();
         String sdt = txtSDT.getText();
+
+        if (ma.isBlank() || gt.isBlank() || ten.isBlank() || cmt.isBlank() || qt.isBlank() || sdt.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Chưa nhập đủ thông tin!", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (ns == null) {
+                JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ!", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
+            } else {
+                //kiem tra ton tai
+                if (DAOKhachHang.getInstance().getByID(ma) != null) {
+                    JOptionPane.showMessageDialog(this, "Khách hàng đã tồn tại!", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    KhachHang kh = new KhachHang(ma, ten, ns, cmt, qt, gt, sdt);
+                    int kq = DAOKhachHang.getInstance().insert(kh);
+                    if (kq == -1){
+                        JOptionPane.showMessageDialog(this, "Thêm thất bại","Thông Báo",JOptionPane.ERROR_MESSAGE);
+                        return;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Thêm thành công","Thông Báo",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    formKH.loadDataTable();
+                    this.dispose();
+                }
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -221,7 +250,7 @@ public class AddUpdateKH extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AddUpdateKH dialog = new AddUpdateKH(new vQLKhachHang(),new javax.swing.JFrame());
+                AddUpdateKH dialog = new AddUpdateKH(new vQLKhachHang(), new javax.swing.JFrame());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

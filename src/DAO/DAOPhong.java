@@ -22,8 +22,8 @@ public class DAOPhong implements InterfaceDAO<Phong> {
     }
 
     @Override
-    public int delete(Phong p) {
-        String query = "DELETE FROM phong WHERE maphong='" + p.getMaphong() + "'";
+    public int delete(String id) {
+        String query = "DELETE FROM phong WHERE maphong='" + id + "'";
         return SqlManager.updateData(query);
     }
 

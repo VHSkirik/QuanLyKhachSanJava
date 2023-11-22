@@ -28,9 +28,8 @@ public class DAONhanVien implements InterfaceDAO<NhanVien> {
     }
 
     @Override
-    public int delete(NhanVien nv) {
-        String tk = nv.getTaikhoan();
-        String query = "DELETE FROM nhanvien WHERE taikhoan='" + tk + "'";
+    public int delete(String id) {
+        String query = "DELETE FROM nhanvien WHERE taikhoan='" + id + "'";
         return SqlManager.updateData(query);
     }
 
