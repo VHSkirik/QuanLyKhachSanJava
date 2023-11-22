@@ -4,7 +4,7 @@
  */
 package View;
 
-import Controller.DAONhanVien;
+import DAO.DAONhanVien;
 import Model.NhanVien;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;

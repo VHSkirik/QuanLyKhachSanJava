@@ -4,7 +4,7 @@
  */
 package View;
 
-import Controller.DAONhanVien;
+import DAO.DAONhanVien;
 import Model.NhanVien;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;

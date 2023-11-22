@@ -1,4 +1,4 @@
-package Controller;
+package DAO;
 
 import DataBase.SqlManager;
 import Model.NhanVien;
@@ -74,7 +74,13 @@ public class DAONhanVien implements InterfaceDAO<NhanVien> {
         try {
             ResultSet rs = SqlManager.getDataTable("nhanvien WHERE taikhoan='" + id + "'");
             if (rs.next()) {
-                nv = new NhanVien(rs.getString("taikhoan"), rs.getString("hotennv"), rs.getString("ngaysinhnv"), rs.getString("gioitinhnv"), rs.getString("matkhau"), rs.getString("loainguoidung"));
+                nv = new NhanVien(
+                        rs.getString("taikhoan"),
+                        rs.getString("hotennv"),
+                        rs.getString("ngaysinhnv"),
+                        rs.getString("gioitinhnv"),
+                        rs.getString("matkhau"),
+                        rs.getString("loainguoidung"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
