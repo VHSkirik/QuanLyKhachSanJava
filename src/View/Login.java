@@ -117,7 +117,7 @@ public class Login extends javax.swing.JFrame {
                 txtUserKeyPressed(evt);
             }
         });
-        jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 182, 310, 30));
+        jPanel3.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 310, 30));
 
         pnLogin.setBackground(new java.awt.Color(0, 204, 102));
         pnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

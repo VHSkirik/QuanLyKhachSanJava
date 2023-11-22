@@ -5,8 +5,11 @@
 package View;
 
 import Model.NhanVien;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -21,9 +24,9 @@ public class Main extends javax.swing.JFrame {
     public Main(NhanVien nhanvien) {
         initComponents();
         this.nhanvien = nhanvien;
-        lbTitle.setText(nhanvien.getLoainguoidung().toUpperCase());
-        lbTenNV.setText(nhanvien.getHotenvn());
-        defaultColor = new Color(89, 168, 105);
+//        lbTitle.setText(this.nhanvien.getLoainguoidung().toUpperCase());
+//        lbTenNV.setText(this.nhanvien.getHotenvn());
+        defaultColor = new Color(0,153,255);
         clickColor = new Color(26, 188, 156);
     }
 
@@ -72,7 +75,7 @@ public class Main extends javax.swing.JFrame {
         setTitle("Phần mềm quản lý khách sạn");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnButton.setBackground(new java.awt.Color(89, 168, 105));
+        pnButton.setBackground(new java.awt.Color(0, 153, 255));
         pnButton.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 pnButtonAncestorAdded(evt);
@@ -84,7 +87,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnButton.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnButtonLogout.setBackground(new java.awt.Color(89, 168, 105));
+        pnButtonLogout.setBackground(new java.awt.Color(255, 102, 102));
         pnButtonLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnButtonLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -125,7 +128,7 @@ public class Main extends javax.swing.JFrame {
 
         pnButton.add(pnButtonLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 230, 60));
 
-        pnButtonNV.setBackground(new java.awt.Color(89, 168, 105));
+        pnButtonNV.setBackground(new java.awt.Color(0, 153, 255));
         pnButtonNV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnButtonNV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -166,7 +169,7 @@ public class Main extends javax.swing.JFrame {
 
         pnButton.add(pnButtonNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 230, 60));
 
-        pnButtonKH.setBackground(new java.awt.Color(89, 168, 105));
+        pnButtonKH.setBackground(new java.awt.Color(0, 153, 255));
         pnButtonKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnButtonKH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -252,12 +255,12 @@ public class Main extends javax.swing.JFrame {
 
     private void pnButtonLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonLogoutMouseEntered
         // TODO add your handling code here:
-        pnButtonLogout.setBackground(clickColor);
+        pnButtonLogout.setBackground(new Color(255,0,0));
     }//GEN-LAST:event_pnButtonLogoutMouseEntered
 
     private void pnButtonLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonLogoutMouseExited
         // TODO add your handling code here:
-        pnButtonLogout.setBackground(defaultColor);
+        pnButtonLogout.setBackground(new Color(255,102,102));
     }//GEN-LAST:event_pnButtonLogoutMouseExited
 
     private void pnButtonNVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonNVMouseEntered
@@ -308,6 +311,15 @@ public class Main extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    public static void main(String args[]) throws UnsupportedLookAndFeelException {
+        UIManager.setLookAndFeel(new FlatLightLaf());
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Main(new NhanVien("admin")).setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel10;
