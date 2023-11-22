@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package View;
 
+import Controller.ConvertTime;
 import DAO.DAOKhachHang;
 import Model.KhachHang;
 import java.util.ArrayList;
@@ -36,7 +33,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
             dtm.addRow(new Object[]{
                 kh.getMakh(),
                 kh.getTenkh(),
-                kh.getNgaysinhkh(),
+                ConvertTime.changeToDMY(kh.getNgaysinhkh()),
                 kh.getCmt(),
                 kh.getQuoctich(),
                 kh.getGioitinh(),
@@ -57,9 +54,9 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbKhachHang = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btThem = new javax.swing.JButton();
+        btSua = new javax.swing.JButton();
+        btXoa = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jPanel2 = new javax.swing.JPanel();
 
@@ -94,45 +91,50 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         jToolBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jToolBar1.setRollover(true);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
-        jButton1.setText("Thêm");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btThem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btThem.setForeground(new java.awt.Color(0, 0, 0));
+        btThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
+        btThem.setText("Thêm");
+        btThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btThem.setFocusable(false);
+        btThem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btThem.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btThemActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar1.add(btThem);
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_sua.png"))); // NOI18N
-        jButton4.setText("Sửa");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
-
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_xoa.png"))); // NOI18N
-        jButton5.setText("Xóa");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btSua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btSua.setForeground(new java.awt.Color(0, 0, 0));
+        btSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_sua.png"))); // NOI18N
+        btSua.setText("Sửa");
+        btSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btSua.setFocusable(false);
+        btSua.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btSua.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btSuaActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton5);
+        jToolBar1.add(btSua);
+
+        btXoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btXoa.setForeground(new java.awt.Color(0, 0, 0));
+        btXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_xoa.png"))); // NOI18N
+        btXoa.setText("Xóa");
+        btXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btXoa.setFocusable(false);
+        btXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btXoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXoaActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btXoa);
         jToolBar1.add(jSeparator1);
 
         jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 80));
@@ -146,13 +148,13 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         // TODO add your handling code here:
         AddUpdateKH formUpdate = new AddUpdateKH(this, new JFrame());
         formUpdate.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btThemActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         // TODO add your handling code here:
         int currentRow = tbKhachHang.getSelectedRow();
         if (currentRow == -1) {
@@ -171,13 +173,32 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
                 loadDataTable();
             }
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btXoaActionPerformed
+
+    private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
+        // TODO add your handling code here:
+        int currentRow = tbKhachHang.getSelectedRow();
+        if (currentRow == -1) {
+            JOptionPane.showMessageDialog(this, "Chưa bọn khách hàng cần sửa!", "Thông Báo", JOptionPane.WARNING_MESSAGE);
+        } else {
+            String ma = dtm.getValueAt(currentRow, 0).toString();
+            String ten = dtm.getValueAt(currentRow, 1).toString();
+            String ns = dtm.getValueAt(currentRow, 2).toString();
+            String cmt = dtm.getValueAt(currentRow, 3).toString();
+            String qt = dtm.getValueAt(currentRow, 4).toString();
+            String gt = dtm.getValueAt(currentRow, 5).toString();
+            String sdt = dtm.getValueAt(currentRow, 6).toString();
+            KhachHang kh = new KhachHang(ma, ten, ns, cmt, qt, gt, sdt);
+            AddUpdateKH formUpdate = new AddUpdateKH(this, new JFrame(), kh);
+            formUpdate.setVisible(true);
+        }
+    }//GEN-LAST:event_btSuaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btSua;
+    private javax.swing.JButton btThem;
+    private javax.swing.JButton btXoa;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

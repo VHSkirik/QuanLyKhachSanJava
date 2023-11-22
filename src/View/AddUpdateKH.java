@@ -8,7 +8,6 @@ import Controller.ConvertTime;
 import DAO.DAOKhachHang;
 import Model.KhachHang;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,11 +17,33 @@ import javax.swing.JOptionPane;
 public class AddUpdateKH extends javax.swing.JDialog {
 
     vQLKhachHang formKH;
+    KhachHang kh;
 
     public AddUpdateKH(vQLKhachHang parent, JFrame frame) {
         super(frame, true);
         initComponents();
         formKH = parent;
+    }
+
+    public AddUpdateKH(vQLKhachHang parent, JFrame frame, KhachHang kh) {
+        super(frame, true);
+        initComponents();
+        formKH = parent;
+        this.kh = kh;
+        btSubmit.setText("SỬA");
+        lbTitle.setText("SỬA THÔNG TIN KHÁCH HÀNG");
+        loadText();
+    }
+
+    private void loadText() {
+        txtMaKH.setText(kh.getMakh());;
+        txtMaKH.setEnabled(false);
+        txtTenKH.setText(kh.getTenkh());
+        cbGioiTinh.setSelectedItem(kh.getGioitinh());
+        txtSDT.setText(kh.getSodienthoai());
+        txtQuocTich.setText(kh.getQuoctich());
+        txtCanCuoc.setText(kh.getCmt());
+        txtNgaySinh.setText(kh.getNgaysinhkh());
     }
 
     /**
@@ -36,7 +57,7 @@ public class AddUpdateKH extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lbTitle = new javax.swing.JLabel();
         txtSDT = new javax.swing.JTextField();
         txtMaKH = new javax.swing.JTextField();
         txtTenKH = new javax.swing.JTextField();
@@ -52,7 +73,7 @@ public class AddUpdateKH extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btSubmit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -63,25 +84,25 @@ public class AddUpdateKH extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("THÊM KHÁCH HÀNG");
+        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lbTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTitle.setText("THÊM KHÁCH HÀNG");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(lbTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -139,6 +160,7 @@ public class AddUpdateKH extends javax.swing.JDialog {
         jLabel8.setText("Quốc tịch");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 110, -1));
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("HỦY");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -148,18 +170,18 @@ public class AddUpdateKH extends javax.swing.JDialog {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 570, 140, 40));
 
-        jButton2.setBackground(new java.awt.Color(153, 153, 255));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("THÊM");
-        jButton2.setBorder(null);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btSubmit.setBackground(new java.awt.Color(153, 153, 255));
+        btSubmit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btSubmit.setForeground(new java.awt.Color(255, 255, 255));
+        btSubmit.setText("THÊM");
+        btSubmit.setBorder(null);
+        btSubmit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btSubmitActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 140, 40));
+        jPanel1.add(btSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 140, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,7 +207,7 @@ public class AddUpdateKH extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSubmitActionPerformed
         // TODO add your handling code here:
         String ma = txtMaKH.getText();
         String ten = txtTenKH.getText();
@@ -201,24 +223,40 @@ public class AddUpdateKH extends javax.swing.JDialog {
             if (ns == null) {
                 JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ!", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
             } else {
-                //kiem tra ton tai
-                if (DAOKhachHang.getInstance().getByID(ma) != null) {
-                    JOptionPane.showMessageDialog(this, "Khách hàng đã tồn tại!", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
-                } else {
+                //dien du thong tin
+                if (btSubmit.getText().equals("THÊM")) {
+                    //Bấm thêm
+                    if (DAOKhachHang.getInstance().getByID(ma) != null) {
+                        JOptionPane.showMessageDialog(this, "Khách hàng đã tồn tại!", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        KhachHang kh = new KhachHang(ma, ten, ns, cmt, qt, gt, sdt);
+                        int kq = DAOKhachHang.getInstance().insert(kh);
+                        if (kq == -1) {
+                            JOptionPane.showMessageDialog(this, "Thêm thất bại", "Thông Báo", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Thêm thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        formKH.loadDataTable();
+                        this.dispose();
+                    }
+                }
+                //Sua
+                if (btSubmit.getText().equals("SỬA")) {
                     KhachHang kh = new KhachHang(ma, ten, ns, cmt, qt, gt, sdt);
-                    int kq = DAOKhachHang.getInstance().insert(kh);
-                    if (kq == -1){
-                        JOptionPane.showMessageDialog(this, "Thêm thất bại","Thông Báo",JOptionPane.ERROR_MESSAGE);
+                    int kq = DAOKhachHang.getInstance().update(kh);
+                    if (kq == -1) {
+                        JOptionPane.showMessageDialog(this, "Sửa thất bại", "Thông Báo", JOptionPane.ERROR_MESSAGE);
                         return;
                     } else {
-                        JOptionPane.showMessageDialog(this, "Thêm thành công","Thông Báo",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Sửa thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
                     }
                     formKH.loadDataTable();
                     this.dispose();
                 }
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btSubmitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,10 +301,9 @@ public class AddUpdateKH extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSubmit;
     private javax.swing.JComboBox<String> cbGioiTinh;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -276,6 +313,7 @@ public class AddUpdateKH extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbTitle;
     private javax.swing.JTextField txtCanCuoc;
     private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtNgaySinh;
