@@ -4,7 +4,11 @@
  */
 package View;
 
+import DAO.DAOKhachHang;
+import Model.KhachHang;
+import java.util.ArrayList;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,13 +16,30 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 public class vQLKhachHang extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form vQLKhachHang
-     */
+    DefaultTableModel dtm;
+
     public vQLKhachHang() {
         initComponents();
+        dtm = (DefaultTableModel) tbKhachHang.getModel();
+        //Xóa title
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
+        loadDataTable();
+    }
+
+    public void loadDataTable() {
+        ArrayList<KhachHang> dsKhachHang = DAOKhachHang.getInstance().getAll();
+        dtm.setRowCount(0);
+        for (KhachHang kh : dsKhachHang) {
+            dtm.addRow(new Object[]{
+                kh.getMakh(),
+                kh.getTenkh(),
+                kh.getNgaysinhkh(),
+                kh.getCmt(),
+                kh.getQuoctich(),
+                kh.getGioitinh(),
+                kh.getSodienthoai()});
+        }
     }
 
     /**
@@ -32,7 +53,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbKhachHang = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -47,7 +68,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(820, 630));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -63,7 +84,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbKhachHang);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 790, 500));
 
@@ -122,7 +143,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JTable tbKhachHang;
     // End of variables declaration//GEN-END:variables
 }

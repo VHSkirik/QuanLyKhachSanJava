@@ -111,7 +111,6 @@ public class Login extends javax.swing.JFrame {
         txtUser.setBackground(new java.awt.Color(13, 39, 51));
         txtUser.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtUser.setForeground(new java.awt.Color(255, 255, 255));
-        txtUser.setText("admin");
         txtUser.setBorder(null);
         txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -168,7 +167,6 @@ public class Login extends javax.swing.JFrame {
         txtPass.setBackground(new java.awt.Color(13, 39, 51));
         txtPass.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtPass.setForeground(new java.awt.Color(255, 255, 255));
-        txtPass.setText("admin");
         txtPass.setBorder(null);
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
