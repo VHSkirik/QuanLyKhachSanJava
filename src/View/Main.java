@@ -208,7 +208,7 @@ public class Main extends javax.swing.JFrame {
 
         pnButton.add(pnButtonKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 230, 60));
 
-        jPanel1.setBackground(new java.awt.Color(13, 39, 51));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -218,15 +218,15 @@ public class Main extends javax.swing.JFrame {
         lbTitle.setText("Loại NV");
         lbTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lbTitle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 100));
+        jPanel1.add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 210, 90));
 
         lbTenNV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbTenNV.setForeground(new java.awt.Color(255, 255, 255));
         lbTenNV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbTenNV.setText("Name");
-        jPanel1.add(lbTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 230, 40));
+        jPanel1.add(lbTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 230, 30));
 
-        pnButton.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 140));
+        pnButton.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 120));
 
         getContentPane().add(pnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 630));
 

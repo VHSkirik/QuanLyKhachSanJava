@@ -184,9 +184,11 @@ public class AddUpdateKH extends javax.swing.JDialog {
         // TODO add your handling code here:
         String ma = txtMaKH.getText();
         String ten = txtTenKH.getText();
-        String ngaysinh = txtNgaySinh.getText();
+        String gt = cbGioiTinh.getSelectedItem().toString();
+        String ns = txtNgaySinh.getText();
         String cmt = txtCanCuoc.getText();
-        String gioitinh = cbGioiTinh.getSelectedItem().toString();
+        String qt = txtQuocTich.getText();
+        String sdt = txtSDT.getText();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
