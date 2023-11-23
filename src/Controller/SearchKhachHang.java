@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class SearchKhachHang {
 
-    public static ArrayList<KhachHang> getByName(String name) {
+    public static ArrayList<KhachHang> getALLByName(String name) {
         ArrayList<KhachHang> rs = new ArrayList<>();
         ArrayList<KhachHang> dsKhachHang = DAOKhachHang.getInstance().getAll();
         for (KhachHang kh : dsKhachHang) {
@@ -21,7 +21,7 @@ public class SearchKhachHang {
         return rs;
     }
 
-    public static ArrayList<KhachHang> getByCMT(String cmt) {
+    public static ArrayList<KhachHang> getAllByCMT(String cmt) {
         ArrayList<KhachHang> rs = new ArrayList<>();
         ArrayList<KhachHang> dsKhachHang = DAOKhachHang.getInstance().getAll();
         for (KhachHang kh : dsKhachHang) {

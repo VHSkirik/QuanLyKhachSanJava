@@ -76,7 +76,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         cbLoaiTK = new javax.swing.JComboBox<>();
         txtTimKiem = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btReset = new javax.swing.JButton();
 
         setBorder(null);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -85,7 +85,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(820, 630));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        tbKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -104,20 +104,19 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbKhachHang);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 850, 500));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 850, 510));
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jToolBar1.setRollover(true);
 
-        btThem.setFont(new java.awt.Font("SF Pro Display", 1, 14)); // NOI18N
+        btThem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btThem.setForeground(new java.awt.Color(0, 0, 0));
         btThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
         btThem.setText("Thêm");
         btThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btThem.setFocusable(false);
         btThem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btThem.setIconTextGap(1);
         btThem.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,14 +125,13 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btThem);
 
-        btSua.setFont(new java.awt.Font("SF Pro Display", 1, 14)); // NOI18N
+        btSua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btSua.setForeground(new java.awt.Color(0, 0, 0));
         btSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_sua.png"))); // NOI18N
         btSua.setText("Sửa");
         btSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btSua.setFocusable(false);
         btSua.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btSua.setIconTextGap(1);
         btSua.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,14 +140,13 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btSua);
 
-        btXoa.setFont(new java.awt.Font("SF Pro Display", 1, 14)); // NOI18N
+        btXoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btXoa.setForeground(new java.awt.Color(0, 0, 0));
         btXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_xoa.png"))); // NOI18N
         btXoa.setText("Xóa");
         btXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btXoa.setFocusable(false);
         btXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btXoa.setIconTextGap(1);
         btXoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,27 +172,28 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         });
         jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 300, 40));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_reset.png"))); // NOI18N
-        jButton1.setText("Reset");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btReset.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_reset.png"))); // NOI18N
+        btReset.setText("Reset");
+        btReset.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btReset.setIconTextGap(10);
+        btReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btResetActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 120, 40));
+        jPanel2.add(btReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 120, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 570, 90));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 620));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         // TODO add your handling code here:
-        AddUpdateKH formUpdate = new AddUpdateKH(this, new JFrame());
+        UpdateKH formUpdate = new UpdateKH(this, new JFrame());
         formUpdate.setVisible(true);
     }//GEN-LAST:event_btThemActionPerformed
 
@@ -234,7 +232,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
             String gt = dtm.getValueAt(currentRow, 5).toString();
             String sdt = dtm.getValueAt(currentRow, 6).toString();
             KhachHang kh = new KhachHang(ma, ten, ns, cmt, qt, gt, sdt);
-            AddUpdateKH formUpdate = new AddUpdateKH(this, new JFrame(), kh);
+            UpdateKH formUpdate = new UpdateKH(this, new JFrame(), kh);
             formUpdate.setVisible(true);
         }
     }//GEN-LAST:event_btSuaActionPerformed
@@ -246,29 +244,27 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         ArrayList<KhachHang> result = new ArrayList<>();
         switch (luachon) {
             case "CMT":
-                result = SearchKhachHang.getByCMT(noidungTK);
-                break;
-            case "Mã KH":
+                result = SearchKhachHang.getAllByCMT(noidungTK);
                 break;
             case "Họ tên":
-                result = SearchKhachHang.getByName(noidungTK);
+                result = SearchKhachHang.getALLByName(noidungTK);
                 break;
         }
         setDataTable(result);
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
         txtTimKiem.setText("");
         loadDataTable();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btResetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btReset;
     private javax.swing.JButton btSua;
     private javax.swing.JButton btThem;
     private javax.swing.JButton btXoa;
     private javax.swing.JComboBox<String> cbLoaiTK;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

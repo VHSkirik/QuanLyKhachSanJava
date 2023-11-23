@@ -118,30 +118,15 @@ public class Main extends javax.swing.JFrame {
                 pnButtonLogoutMousePressed(evt);
             }
         });
+        pnButtonLogout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_logout.png"))); // NOI18N
         jLabel8.setText(" ĐĂNG XUẤT");
+        pnButtonLogout.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, 32));
 
-        javax.swing.GroupLayout pnButtonLogoutLayout = new javax.swing.GroupLayout(pnButtonLogout);
-        pnButtonLogout.setLayout(pnButtonLogoutLayout);
-        pnButtonLogoutLayout.setHorizontalGroup(
-            pnButtonLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnButtonLogoutLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel8)
-                .addContainerGap(58, Short.MAX_VALUE))
-        );
-        pnButtonLogoutLayout.setVerticalGroup(
-            pnButtonLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnButtonLogoutLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        pnButton.add(pnButtonLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 230, 60));
+        pnButton.add(pnButtonLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 230, 50));
 
         pnButtonNV.setBackground(new java.awt.Color(0, 153, 255));
         pnButtonNV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

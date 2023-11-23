@@ -14,18 +14,18 @@ import javax.swing.JOptionPane;
  *
  * @author @VHSkirik
  */
-public class AddUpdateKH extends javax.swing.JDialog {
+public class UpdateKH extends javax.swing.JDialog {
 
     vQLKhachHang formKH;
     KhachHang kh;
 
-    public AddUpdateKH(vQLKhachHang parent, JFrame frame) {
+    public UpdateKH(vQLKhachHang parent, JFrame frame) {
         super(frame, true);
         initComponents();
         formKH = parent;
     }
 
-    public AddUpdateKH(vQLKhachHang parent, JFrame frame, KhachHang kh) {
+    public UpdateKH(vQLKhachHang parent, JFrame frame, KhachHang kh) {
         super(frame, true);
         initComponents();
         formKH = parent;
@@ -36,7 +36,7 @@ public class AddUpdateKH extends javax.swing.JDialog {
     }
 
     private void loadText() {
-        txtMaKH.setText(kh.getMakh());;
+        txtMaKH.setText(kh.getMakh());
         txtMaKH.setEnabled(false);
         txtTenKH.setText(kh.getTenkh());
         cbGioiTinh.setSelectedItem(kh.getGioitinh());
@@ -157,7 +157,7 @@ public class AddUpdateKH extends javax.swing.JDialog {
 
         jLabel6.setFont(new java.awt.Font("SF Mono", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Ngày sinh (dd/mm/yyyy)");
+        jLabel6.setText("Ngày sinh (dd-mm-yyyy)");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 320, -1));
 
         jLabel7.setFont(new java.awt.Font("SF Mono", 0, 14)); // NOI18N
@@ -247,8 +247,6 @@ public class AddUpdateKH extends javax.swing.JDialog {
                         } else {
                             JOptionPane.showMessageDialog(this, "Thêm thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
                         }
-                        formKH.loadDataTable();
-                        this.dispose();
                     }
                 }
                 //Sua
@@ -261,9 +259,10 @@ public class AddUpdateKH extends javax.swing.JDialog {
                     } else {
                         JOptionPane.showMessageDialog(this, "Sửa thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
                     }
-                    formKH.loadDataTable();
-                    this.dispose();
+
                 }
+                formKH.loadDataTable();
+                this.dispose();
             }
         }
     }//GEN-LAST:event_btSubmitActionPerformed
@@ -285,20 +284,21 @@ public class AddUpdateKH extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddUpdateKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddUpdateKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddUpdateKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddUpdateKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AddUpdateKH dialog = new AddUpdateKH(new vQLKhachHang(), new javax.swing.JFrame());
+                UpdateKH dialog = new UpdateKH(new vQLKhachHang(), new javax.swing.JFrame());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

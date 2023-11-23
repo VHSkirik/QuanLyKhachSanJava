@@ -19,8 +19,6 @@ public class ConvertTime {
             SimpleDateFormat formatter;
             if (dateString.trim().contains("-")) {
                 formatter = new SimpleDateFormat("dd-MM-yyyy");
-            } else if (dateString.trim().contains("/")) {
-                formatter = new SimpleDateFormat("dd/MM/yyyy");
             } else {
                 return null;
             }
@@ -29,17 +27,16 @@ public class ConvertTime {
             Date tmp = formatter.parse(dateString);
             return new SimpleDateFormat("yyyy-MM-dd").format(tmp);
         } catch (ParseException e) {
+            e.printStackTrace();
             return null;
         }
     }
-    
+
     public static String changeToDMY(String dateString) {
         try {
             SimpleDateFormat formatter;
             if (dateString.trim().contains("-")) {
                 formatter = new SimpleDateFormat("yyyy-MM-dd");
-            } else if (dateString.trim().contains("/")) {
-                formatter = new SimpleDateFormat("yyyy/MM/dd");
             } else {
                 return null;
             }
@@ -47,7 +44,19 @@ public class ConvertTime {
             Date tmp = formatter.parse(dateString);
             return new SimpleDateFormat("dd-MM-yyyy").format(tmp);
         } catch (ParseException e) {
+            e.printStackTrace();
             return null;
         }
+    }
+    public static String changeToYDMTime(Date input){
+        String rsText = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(input);
+        return rsText;
+//            Date result = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rsText);
+//            return result;
+    }
+    
+    public static void main(String[] args) {
+        Date date = new Date();
+        System.out.println(changeToYDMTime(date));
     }
 }
