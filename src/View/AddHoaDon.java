@@ -83,6 +83,12 @@ public class AddHoaDon extends javax.swing.JInternalFrame {
         }
     }
 
+    public void backKhachHang() {
+        vQLKhachHang formKhachHang = new vQLKhachHang();
+        pnMainThuePhong.removeAll();
+        pnMainThuePhong.add(formKhachHang).setVisible(true);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -295,7 +301,14 @@ public class AddHoaDon extends javax.swing.JInternalFrame {
                 if (DAOHoaDon.getInstance().getByID(mahd) != null) {
                     JOptionPane.showMessageDialog(this, "Mã hóa đơn đã tồn tại");
                 } else {
-                    HoaDon hd = new HoaDon();
+                    HoaDon hd = new HoaDon(mahd, makh, manv, maphong, giaphong, ngaythue, null, 0, 0);
+                    int i = DAOHoaDon.getInstance().insert(hd);
+                    if (i == -1){
+                        JOptionPane.showMessageDialog(this, "Thêm thất bại");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Thêm thành công");
+                        backKhachHang();
+                    }
                 }
             }
 
@@ -316,9 +329,7 @@ public class AddHoaDon extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int rs = JOptionPane.showConfirmDialog(this, "Hủy hóa đơn hiện tại?", "Cảnh Báo", JOptionPane.YES_NO_OPTION);
         if (rs == JOptionPane.YES_OPTION) {
-            vQLKhachHang formKhachHang = new vQLKhachHang();
-            pnMainThuePhong.removeAll();
-            pnMainThuePhong.add(formKhachHang).setVisible(true);
+            backKhachHang();
         }
 
     }//GEN-LAST:event_btHuyActionPerformed

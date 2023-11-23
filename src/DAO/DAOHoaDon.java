@@ -17,7 +17,8 @@ public class DAOHoaDon implements InterfaceDAO<HoaDon> {
 
     @Override
     public int insert(HoaDon hd) {
-        String query = "INSERT INTO hoadon VALUES ('" + hd.getMahd() + "','" + hd.getMakh() + "','" + hd.getManv() + "','" + hd.getMaphong() + "'," + hd.getGiaphong() + ",'" + hd.getNgaythue() + "','" + hd.getNgaytra() + "'," + hd.getThanhtien() + "," + hd.getDathanhtoan() + "";
+        
+        String query = "INSERT INTO hoadon VALUES ('" + hd.getMahd() + "','" + hd.getMakh() + "','" + hd.getManv() + "','" + hd.getMaphong() + "','" + hd.getGiaphong() + "','" + hd.getNgaythue() + "'," + hd.getNgaytra() + ",'" + hd.getThanhtien() + "','" + hd.getDathanhtoan() + "')";
         return SqlManager.updateData(query);
     }
 
