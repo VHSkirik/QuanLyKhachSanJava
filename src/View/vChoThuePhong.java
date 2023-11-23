@@ -280,7 +280,7 @@ public class vChoThuePhong extends javax.swing.JInternalFrame {
 
     private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
         // TODO add your handling code here:
-        int rs = JOptionPane.showConfirmDialog(this, "Hủy hóa đơn hiện tại?", "Cảnh Báo", JOptionPane.QUESTION_MESSAGE);
+        int rs = JOptionPane.showConfirmDialog(this, "Hủy hóa đơn hiện tại?", "Cảnh Báo", JOptionPane.YES_NO_OPTION);
         if (rs == JOptionPane.YES_OPTION) {
             vQLKhachHang formKhachHang = new vQLKhachHang();
             pnMainThuePhong.removeAll();

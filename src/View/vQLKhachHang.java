@@ -83,6 +83,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         btSua = new javax.swing.JButton();
         btXoa = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
+        btThuePhong = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         cbLoaiTK = new javax.swing.JComboBox<>();
         txtTimKiem = new javax.swing.JTextField();
@@ -166,6 +167,21 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btXoa);
         jToolBar1.add(jSeparator1);
+
+        btThuePhong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btThuePhong.setForeground(new java.awt.Color(0, 0, 0));
+        btThuePhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/test.png"))); // NOI18N
+        btThuePhong.setText("Thuê Phòng");
+        btThuePhong.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btThuePhong.setFocusable(false);
+        btThuePhong.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btThuePhong.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btThuePhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThuePhongActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btThuePhong);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -300,36 +316,42 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
 
     private void tbKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhachHangMouseClicked
         // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {           
-            int currentRow = tbKhachHang.getSelectedRow();
-            if (currentRow == -1) {
-                JOptionPane.showMessageDialog(this, "Chưa chọn khác hàng nào!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            } else {
-                String ma = dtm.getValueAt(currentRow, 0).toString();
-                if (DAOHoaDon.getInstance().checkThanhToan(ma) == false){
-                    JOptionPane.showMessageDialog(this, "Khách hàng chưa thanh toán hóa đơn cũ", "Thông báo", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                String ten = dtm.getValueAt(currentRow, 1).toString();
-                String ns = dtm.getValueAt(currentRow, 2).toString();
-                String cmt = dtm.getValueAt(currentRow, 3).toString();
-                String qt = dtm.getValueAt(currentRow, 4).toString();
-                String gt = dtm.getValueAt(currentRow, 5).toString();
-                String sdt = dtm.getValueAt(currentRow, 6).toString();
-                KhachHang kh = new KhachHang(ma, ten, ns, cmt, qt, gt, sdt);
+        if (evt.getClickCount() == 2) {
 
-                vChoThuePhong formChoThuePhong = new vChoThuePhong(kh, Main.nhanvien);
-                pnMain.removeAll();
-                pnMain.add(formChoThuePhong).setVisible(true);
-            }
         }
     }//GEN-LAST:event_tbKhachHangMouseClicked
+
+    private void btThuePhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThuePhongActionPerformed
+        // TODO add your handling code here:
+        int currentRow = tbKhachHang.getSelectedRow();
+        if (currentRow == -1) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn khác hàng nào!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        } else {
+            String ma = dtm.getValueAt(currentRow, 0).toString();
+            if (DAOHoaDon.getInstance().checkThanhToan(ma) == false) {
+                JOptionPane.showMessageDialog(this, "Khách hàng chưa thanh toán hóa đơn cũ", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String ten = dtm.getValueAt(currentRow, 1).toString();
+            String ns = dtm.getValueAt(currentRow, 2).toString();
+            String cmt = dtm.getValueAt(currentRow, 3).toString();
+            String qt = dtm.getValueAt(currentRow, 4).toString();
+            String gt = dtm.getValueAt(currentRow, 5).toString();
+            String sdt = dtm.getValueAt(currentRow, 6).toString();
+            KhachHang kh = new KhachHang(ma, ten, ns, cmt, qt, gt, sdt);
+
+            vChoThuePhong formChoThuePhong = new vChoThuePhong(kh, Main.nhanvien);
+            pnMain.removeAll();
+            pnMain.add(formChoThuePhong).setVisible(true);
+        }
+    }//GEN-LAST:event_btThuePhongActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btReset;
     private javax.swing.JButton btSua;
     private javax.swing.JButton btThem;
+    private javax.swing.JButton btThuePhong;
     private javax.swing.JButton btXoa;
     private javax.swing.JComboBox<String> cbLoaiTK;
     private javax.swing.JPanel jPanel2;

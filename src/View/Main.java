@@ -61,6 +61,12 @@ public class Main extends javax.swing.JFrame {
         pnMainContent.removeAll();
         pnMainContent.add(qlphong).setVisible(true);
     }
+    
+    private void hienthiQLHD(){
+        vQLHoaDon qlhoadon = new vQLHoaDon();
+        pnMainContent.removeAll();
+        pnMainContent.add(qlhoadon).setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,6 +93,8 @@ public class Main extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         pnButtonDichVu = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
         pnMainContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -309,7 +317,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        pnButton.add(pnButtonPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 230, 60));
+        pnButton.add(pnButtonPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 230, 60));
 
         pnButtonDichVu.setBackground(new java.awt.Color(0, 153, 255));
         pnButtonDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -352,6 +360,39 @@ public class Main extends javax.swing.JFrame {
         );
 
         pnButton.add(pnButtonDichVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 230, 60));
+
+        jPanel2.setBackground(new java.awt.Color(0, 153, 255));
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel2MouseClicked(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_phong.png"))); // NOI18N
+        jLabel14.setText("HÓA ĐƠN");
+        jLabel14.setIconTextGap(10);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        pnButton.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 230, 60));
 
         getContentPane().add(pnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 630));
 
@@ -463,6 +504,10 @@ public class Main extends javax.swing.JFrame {
         pnButtonDichVu.setBackground(defaultColor);
     }//GEN-LAST:event_pnButtonDichVuMouseExited
 
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        hienthiQLHD();
+    }//GEN-LAST:event_jPanel2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -481,9 +526,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbTenNV;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JPanel pnButton;

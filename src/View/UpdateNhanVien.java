@@ -26,7 +26,7 @@ public class UpdateNhanVien extends javax.swing.JDialog {
         formNV = parent;
         this.nhanvien = nhanvien;
         loadText();
-        txtTenNV.setEnabled(false);
+        txtTaikhoan.setEnabled(false);
         lbTitle.setText("UPDATE THÔNG TIN NV");
         btSubmit.setText("UPDATE");
     }
