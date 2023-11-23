@@ -1,10 +1,13 @@
 package View;
 
+import Controller.SearchPhong;
 import DAO.DAOLoaiPhong;
 import Model.KhachHang;
 import Model.LoaiPhong;
 import Model.NhanVien;
+import Model.Phong;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,7 +21,7 @@ public class vChoThuePhong extends javax.swing.JInternalFrame {
     DefaultTableModel dtmPhong;
     KhachHang kh;
     NhanVien nv;
-    
+
     public vChoThuePhong(KhachHang kh, NhanVien nv) {
         initComponents();
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
@@ -30,21 +33,51 @@ public class vChoThuePhong extends javax.swing.JInternalFrame {
         //set du lieu khi mo form
         initData();
     }
-    public void initData(){
+
+    public void initData() {
         txtMaKH.setEnabled(false);
         txtMaNV.setEnabled(false);
         txtMaKH.setText(kh.getMakh());
         txtMaNV.setText(nv.getTaikhoan());
-        
+
         ArrayList<LoaiPhong> dsLoai = DAOLoaiPhong.getInstance().getAll();
         dtmLoai.setRowCount(0);
-        for (LoaiPhong lp : dsLoai){
+        for (LoaiPhong lp : dsLoai) {
             dtmLoai.addRow(new Object[]{
-            lp.getMaloaiphong(),
-            lp.getTenloaiphong(),
-            lp.getGiaphong()});
+                lp.getMaloaiphong(),
+                lp.getTenloaiphong(),
+                lp.getGiaphong()});
         }
     }
+
+    public void setDataPhong() {
+        int currentRow = tbLoai.getSelectedRow();
+        if (currentRow == -1) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn loại phòng!");
+        } else {
+            String maloai = dtmLoai.getValueAt(currentRow, 0).toString().toLowerCase();
+            ArrayList<Phong> dsPhong = SearchPhong.getAllbyMaLoai(maloai);
+            dtmPhong.setRowCount(0);
+            if (btCheck.isSelected()) {
+                for (Phong phong : dsPhong) {
+                    if (phong.getTinhtrang() == 0) {
+                        dtmPhong.addRow(new Object[]{
+                            phong.getMaphong(),
+                            phong.getTenphong(),
+                            phong.getTinhtrang()});
+                    }
+                }
+            } else {
+                for (Phong phong : dsPhong) {
+                    dtmPhong.addRow(new Object[]{
+                        phong.getMaphong(),
+                        phong.getTenphong(),
+                        phong.getTinhtrang()});
+                }
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,27 +87,26 @@ public class vChoThuePhong extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnMainThuePhong = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPhong = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbLoai = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtMadonhang = new javax.swing.JTextField();
+        txtMahoadon = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtMaKH = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtMaNV = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btHuy = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btCheck = new javax.swing.JCheckBox();
 
         setBorder(null);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(820, 630));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnMainThuePhong.setBackground(new java.awt.Color(255, 255, 255));
+        pnMainThuePhong.setPreferredSize(new java.awt.Dimension(820, 630));
 
         tbPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,8 +126,6 @@ public class vChoThuePhong extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbPhong);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 440, 450));
-
         tbLoai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -107,46 +137,43 @@ public class vChoThuePhong extends javax.swing.JInternalFrame {
                 "Mã Loại Phòng", "Tên Loại Phòng", "Giá"
             }
         ));
+        tbLoai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbLoaiMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbLoai);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 390, 270));
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 440, 70));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Mã nhân viên");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 160, 20));
 
-        txtMadonhang.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        jPanel1.add(txtMadonhang, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 390, 40));
+        txtMahoadon.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Mã đơn hàng");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 20));
+        jLabel2.setText("Mã hóa đơn");
 
         txtMaKH.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         txtMaKH.setEnabled(false);
-        jPanel1.add(txtMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 390, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Mã khách hàng");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 150, 20));
 
         txtMaNV.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         txtMaNV.setEnabled(false);
-        jPanel1.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 390, 40));
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 51));
-        jButton1.setFont(new java.awt.Font("SF Mono", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("HỦY");
-        jButton1.setBorder(null);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 570, 180, 50));
+        btHuy.setBackground(new java.awt.Color(255, 0, 51));
+        btHuy.setFont(new java.awt.Font("SF Mono", 0, 18)); // NOI18N
+        btHuy.setForeground(new java.awt.Color(255, 255, 255));
+        btHuy.setText("HỦY");
+        btHuy.setBorder(null);
+        btHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btHuyActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(102, 0, 204));
         jButton2.setFont(new java.awt.Font("SF Pro Display", 0, 18)); // NOI18N
@@ -154,28 +181,129 @@ public class vChoThuePhong extends javax.swing.JInternalFrame {
         jButton2.setText("SUBMIT");
         jButton2.setBorder(null);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 570, 180, 50));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 630));
+        btCheck.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btCheck.setForeground(new java.awt.Color(0, 0, 0));
+        btCheck.setText("Phòng trống");
+        btCheck.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                btCheckStateChanged(evt);
+            }
+        });
+        btCheck.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                btCheckPropertyChange(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnMainThuePhongLayout = new javax.swing.GroupLayout(pnMainThuePhong);
+        pnMainThuePhong.setLayout(pnMainThuePhongLayout);
+        pnMainThuePhongLayout.setHorizontalGroup(
+            pnMainThuePhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnMainThuePhongLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(pnMainThuePhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(pnMainThuePhongLayout.createSequentialGroup()
+                        .addGroup(pnMainThuePhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMahoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btCheck)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnMainThuePhongLayout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(btHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        pnMainThuePhongLayout.setVerticalGroup(
+            pnMainThuePhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnMainThuePhongLayout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addGroup(pnMainThuePhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnMainThuePhongLayout.createSequentialGroup()
+                        .addComponent(txtMahoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, 0)
+                        .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, 0)
+                        .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addGroup(pnMainThuePhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        getContentPane().add(pnMainThuePhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tbLoaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLoaiMouseClicked
+        // TODO add your handling code here:
+        setDataPhong();
+    }//GEN-LAST:event_tbLoaiMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int currentRowLoai = tbLoai.getSelectedRow();
+        int currentRowPhong = tbPhong.getSelectedRow();
+        String ma = txtMahoadon.getText();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btCheckStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btCheckStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btCheckStateChanged
+
+    private void btCheckPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_btCheckPropertyChange
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btCheckPropertyChange
+
+    private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
+        // TODO add your handling code here:
+        int rs = JOptionPane.showConfirmDialog(this, "Hủy hóa đơn hiện tại?", "Cảnh Báo", JOptionPane.QUESTION_MESSAGE);
+        if (rs == JOptionPane.YES_OPTION) {
+            vQLKhachHang formKhachHang = new vQLKhachHang();
+            pnMainThuePhong.removeAll();
+            pnMainThuePhong.add(formKhachHang).setVisible(true);
+        }
+
+    }//GEN-LAST:event_btHuyActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox btCheck;
+    private javax.swing.JButton btHuy;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel pnMainThuePhong;
     private javax.swing.JTable tbLoai;
     private javax.swing.JTable tbPhong;
     private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtMaNV;
-    private javax.swing.JTextField txtMadonhang;
+    private javax.swing.JTextField txtMahoadon;
     // End of variables declaration//GEN-END:variables
 }

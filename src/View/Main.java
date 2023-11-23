@@ -3,6 +3,7 @@ package View;
 import Model.NhanVien;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -19,11 +20,13 @@ public class Main extends javax.swing.JFrame {
 
     public Main(NhanVien nhanvien) {
         initComponents();
+        this.setIconImage(new ImageIcon("src/Icons/Main.png").getImage());
         this.nhanvien = nhanvien;
 //        lbTitle.setText(this.nhanvien.getLoainguoidung().toUpperCase());
 //        lbTenNV.setText(this.nhanvien.getHotenvn());
         defaultColor = new Color(0, 153, 255);
         clickColor = new Color(26, 188, 156);
+        
     }
 
     public void logOut() {

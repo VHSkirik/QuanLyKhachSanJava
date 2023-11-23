@@ -29,7 +29,7 @@ public class DAOHoaDon implements InterfaceDAO<HoaDon> {
 
     @Override
     public int update(HoaDon hd) {
-        String query = "UPDATE hoadon SET makh='" +hd.getMakh()+ "', manv='" +hd.getMakh()+ "', maphong='" + hd.getMaphong() + "', giaphong=" + hd.getGiaphong() + ", ngaythue='" +hd.getNgaythue();
+        String query = "UPDATE hoadon SET makh='" + hd.getMakh() + "', manv='" + hd.getMakh() + "', maphong='" + hd.getMaphong() + "', giaphong=" + hd.getGiaphong() + ", ngaythue='" + hd.getNgaythue();
         return -1;
     }
 
@@ -41,6 +41,18 @@ public class DAOHoaDon implements InterfaceDAO<HoaDon> {
     @Override
     public HoaDon getByID(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public boolean checkThanhToan(String maKh) {
+        try {
+            ResultSet rs = SqlManager.getDataTable("hoadon WHERE makh='" + maKh + "' AND dathanhtoan=" + 0);
+            if (rs.next()){
+                return false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return true;
     }
 
 }

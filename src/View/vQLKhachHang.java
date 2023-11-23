@@ -2,6 +2,7 @@ package View;
 
 import Controller.ConvertTime;
 import Controller.SearchKhachHang;
+import DAO.DAOHoaDon;
 import DAO.DAOKhachHang;
 import Model.KhachHang;
 import java.util.ArrayList;
@@ -299,12 +300,16 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
 
     private void tbKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhachHangMouseClicked
         // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {           
             int currentRow = tbKhachHang.getSelectedRow();
             if (currentRow == -1) {
                 JOptionPane.showMessageDialog(this, "Chưa chọn khác hàng nào!", "Thông báo", JOptionPane.WARNING_MESSAGE);
             } else {
                 String ma = dtm.getValueAt(currentRow, 0).toString();
+                if (DAOHoaDon.getInstance().checkThanhToan(ma) == false){
+                    JOptionPane.showMessageDialog(this, "Khách hàng chưa thanh toán hóa đơn cũ", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 String ten = dtm.getValueAt(currentRow, 1).toString();
                 String ns = dtm.getValueAt(currentRow, 2).toString();
                 String cmt = dtm.getValueAt(currentRow, 3).toString();
