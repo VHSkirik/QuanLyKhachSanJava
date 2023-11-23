@@ -24,7 +24,16 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         //Xóa title
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
+        setupTable();
         loadDataTable();
+    }
+
+    public void setupTable() {
+        //
+        tbKhachHang.getColumnModel().getColumn(0).setPreferredWidth(5);
+        tbKhachHang.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tbKhachHang.getColumnModel().getColumn(4).setPreferredWidth(5);
+        tbKhachHang.getColumnModel().getColumn(5).setPreferredWidth(5);
     }
 
     public void loadDataTable() {
@@ -65,7 +74,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnMain = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbKhachHang = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
@@ -79,11 +88,9 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         btReset = new javax.swing.JButton();
 
         setBorder(null);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(820, 630));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnMain.setBackground(new java.awt.Color(255, 255, 255));
+        pnMain.setPreferredSize(new java.awt.Dimension(820, 630));
 
         tbKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbKhachHang.setModel(new javax.swing.table.DefaultTableModel(
@@ -102,9 +109,12 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbKhachHangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbKhachHang);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 850, 510));
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -156,8 +166,6 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         jToolBar1.add(btXoa);
         jToolBar1.add(jSeparator1);
 
-        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 90));
-
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -184,9 +192,40 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 120, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 570, 90));
+        javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);
+        pnMain.setLayout(pnMainLayout);
+        pnMainLayout.setHorizontalGroup(
+            pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnMainLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnMainLayout.createSequentialGroup()
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        pnMainLayout.setVerticalGroup(
+            pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnMainLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 630));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -258,6 +297,29 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         loadDataTable();
     }//GEN-LAST:event_btResetActionPerformed
 
+    private void tbKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhachHangMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            int currentRow = tbKhachHang.getSelectedRow();
+            if (currentRow == -1) {
+                JOptionPane.showMessageDialog(this, "Chưa chọn khác hàng nào!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            } else {
+                String ma = dtm.getValueAt(currentRow, 0).toString();
+                String ten = dtm.getValueAt(currentRow, 1).toString();
+                String ns = dtm.getValueAt(currentRow, 2).toString();
+                String cmt = dtm.getValueAt(currentRow, 3).toString();
+                String qt = dtm.getValueAt(currentRow, 4).toString();
+                String gt = dtm.getValueAt(currentRow, 5).toString();
+                String sdt = dtm.getValueAt(currentRow, 6).toString();
+                KhachHang kh = new KhachHang(ma, ten, ns, cmt, qt, gt, sdt);
+
+                vChoThuePhong formChoThuePhong = new vChoThuePhong(kh, Main.nhanvien);
+                pnMain.removeAll();
+                pnMain.add(formChoThuePhong).setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_tbKhachHangMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btReset;
@@ -265,11 +327,11 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JButton btThem;
     private javax.swing.JButton btXoa;
     private javax.swing.JComboBox<String> cbLoaiTK;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JPanel pnMain;
     private javax.swing.JTable tbKhachHang;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables

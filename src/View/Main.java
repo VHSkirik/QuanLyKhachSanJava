@@ -13,7 +13,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class Main extends javax.swing.JFrame {
 
-    NhanVien nhanvien;
+    public static NhanVien nhanvien;
     Color defaultColor;
     Color clickColor;
 
