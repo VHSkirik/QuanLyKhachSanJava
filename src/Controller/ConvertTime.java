@@ -48,15 +48,14 @@ public class ConvertTime {
             return null;
         }
     }
-    public static String changeToYDMTime(Date input){
+
+    public static String changeToYMDTime(Date input) {
         String rsText = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(input);
         return rsText;
-//            Date result = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rsText);
-//            return result;
     }
-    
-    public static void main(String[] args) {
-        Date date = new Date();
-        System.out.println(changeToYDMTime(date));
+
+    public static String changeToDMYTime(Date input) {
+        String rsText = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(input);
+        return rsText;
     }
 }
