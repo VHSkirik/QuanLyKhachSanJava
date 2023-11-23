@@ -35,21 +35,57 @@ public class DAOHoaDon implements InterfaceDAO<HoaDon> {
 
     @Override
     public ArrayList<HoaDon> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<HoaDon> dsHoadon = new ArrayList<>();
+        try {
+            ResultSet rs = SqlManager.getDataTable("hoadon");
+            while (rs.next()) {
+                HoaDon hd = new HoaDon(
+                        rs.getString("mahd"),
+                        rs.getString("makh"),
+                        rs.getString("manv"),
+                        rs.getString("maphong"),
+                        rs.getInt("giaphong"),
+                        rs.getString("ngaythue"),
+                        rs.getString("ngaytra"),
+                        rs.getInt("thanhtien"),
+                        rs.getInt("dathanhtoan"));
+                dsHoadon.add(hd);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsHoadon;
     }
 
     @Override
-    public HoaDon getByID(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public HoaDon getByID(String mahd) {
+        HoaDon hd = null;
+        try {
+            ResultSet rs = SqlManager.getDataTable("hoadon WHERE mahd='" + mahd + "'");
+            if (rs.next()) {
+                hd = new HoaDon(rs.getString("mahd"),
+                        rs.getString("makh"),
+                        rs.getString("manv"),
+                        rs.getString("maphong"),
+                        rs.getInt("giaphong"),
+                        rs.getString("ngaythue"),
+                        rs.getString("ngaytra"),
+                        rs.getInt("thanhtien"),
+                        rs.getInt("dathanhtoan"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return hd;
     }
 
     public boolean checkThanhToan(String maKh) {
         try {
             ResultSet rs = SqlManager.getDataTable("hoadon WHERE makh='" + maKh + "' AND dathanhtoan=" + 0);
-            if (rs.next()){
+            if (rs.next()) {
                 return false;
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return true;

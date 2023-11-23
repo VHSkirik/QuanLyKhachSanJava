@@ -1,10 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package View;
 
+import Controller.ConvertTime;
+import DAO.DAOHoaDon;
+import Model.HoaDon;
+import java.util.ArrayList;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
+import java.util.Objects;
 
 /**
  *
@@ -12,13 +14,39 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 public class vQLHoaDon extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form vQLHoaDon
-     */
+    DefaultTableModel dtm_Hoadon;
+    DefaultTableModel dtm_ChitietHD;
+
     public vQLHoaDon() {
         initComponents();
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
+        dtm_Hoadon = (DefaultTableModel) tbHoaDon.getModel();
+        dtm_ChitietHD = (DefaultTableModel) tbChitietHD.getModel();
+        loadAllHoadon();
+    }
+
+    public vQLHoaDon(String makh) {
+
+    }
+
+    public void loadAllHoadon() {
+        dtm_Hoadon.setRowCount(0);
+        ArrayList<HoaDon> dsHoadon = DAOHoaDon.getInstance().getAll();
+        for (HoaDon hd : dsHoadon) {   
+            String ngaythue = hd.getNgaythue() == null ? "" : ConvertTime.changeToDMY(hd.getNgaythue());
+            String ngaytra = hd.getNgaytra()== null ? "" : ConvertTime.changeToDMY(hd.getNgaytra());
+            dtm_Hoadon.addRow(new Object[]{
+                hd.getMahd(),
+                hd.getMakh(),
+                hd.getManv(),
+                hd.getMaphong(),
+                hd.getGiaphong(),
+                ngaythue,
+                ngaytra,
+                hd.getThanhtien(),
+                hd.getDathanhtoan()});
+        }
     }
 
     /**
@@ -34,16 +62,18 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbHoaDon = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btThemDV = new javax.swing.JButton();
+        btSua = new javax.swing.JButton();
+        btXoa = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton2 = new javax.swing.JButton();
+        btThanhTien = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbChitietHD = new javax.swing.JTable();
         btThanhToan = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lbTongtien = new javax.swing.JLabel();
 
         setBorder(null);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -76,55 +106,65 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         jToolBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jToolBar1.setRollover(true);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setLabel("Thêm Dịch Vụ");
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
+        btThemDV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btThemDV.setForeground(new java.awt.Color(0, 0, 0));
+        btThemDV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
+        btThemDV.setFocusable(false);
+        btThemDV.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btThemDV.setLabel("Thêm Dịch Vụ");
+        btThemDV.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btThemDV);
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_sua.png"))); // NOI18N
-        jButton4.setText("Sửa");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
+        btSua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btSua.setForeground(new java.awt.Color(0, 0, 0));
+        btSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_sua.png"))); // NOI18N
+        btSua.setText("Sửa");
+        btSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btSua.setFocusable(false);
+        btSua.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btSua.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btSua);
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_xoa.png"))); // NOI18N
-        jButton5.setText("Xóa");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btXoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btXoa.setForeground(new java.awt.Color(0, 0, 0));
+        btXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_xoa.png"))); // NOI18N
+        btXoa.setText("Xóa");
+        btXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btXoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btXoaActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton5);
+        jToolBar1.add(btXoa);
         jToolBar1.add(jSeparator1);
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pay.png"))); // NOI18N
-        jButton2.setText("Thành Tiền");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setIconTextGap(3);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        btThanhTien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btThanhTien.setForeground(new java.awt.Color(0, 0, 0));
+        btThanhTien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pay.png"))); // NOI18N
+        btThanhTien.setText("Thành Tiền");
+        btThanhTien.setFocusable(false);
+        btThanhTien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btThanhTien.setIconTextGap(3);
+        btThanhTien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btThanhTien);
+        jToolBar1.add(jSeparator2);
 
-        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 320, 290, 80));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/excel.png"))); // NOI18N
+        jButton3.setText("Xuất Excel");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton3);
+
+        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, 380, 80));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 550, 80));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 460, 80));
 
         tbChitietHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -148,34 +188,37 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         btThanhToan.setText("THANH TOÁN");
         jPanel1.add(btThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 570, 230, 50));
 
-        jLabel1.setFont(new java.awt.Font("SF Pro Display", 0, 20)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel1.setText("Tổng tiền:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 590, 50));
+        lbTongtien.setFont(new java.awt.Font("SF Pro Display", 0, 20)); // NOI18N
+        lbTongtien.setForeground(new java.awt.Color(255, 0, 0));
+        lbTongtien.setText("  Tổng tiền:");
+        lbTongtien.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 2, true));
+        jPanel1.add(lbTongtien, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 590, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btXoaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSua;
+    private javax.swing.JButton btThanhTien;
     private javax.swing.JButton btThanhToan;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btThemDV;
+    private javax.swing.JButton btXoa;
+    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lbTongtien;
     private javax.swing.JTable tbChitietHD;
     private javax.swing.JTable tbHoaDon;
     // End of variables declaration//GEN-END:variables

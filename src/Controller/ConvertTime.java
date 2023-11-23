@@ -58,4 +58,9 @@ public class ConvertTime {
         String rsText = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(input);
         return rsText;
     }
+    
+    public static String toString(Date date){
+        String datesString = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        return datesString;
+    }
 }

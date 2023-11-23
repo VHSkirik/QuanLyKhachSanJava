@@ -84,6 +84,8 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         btXoa = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btThuePhong = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         cbLoaiTK = new javax.swing.JComboBox<>();
         txtTimKiem = new javax.swing.JTextField();
@@ -182,20 +184,30 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btThuePhong);
+        jToolBar1.add(jSeparator2);
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/excel.png"))); // NOI18N
+        jButton1.setText("Xuất Excel");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton1);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cbLoaiTK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CMT", "Họ tên" }));
-        jPanel2.add(cbLoaiTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, 40));
+        jPanel2.add(cbLoaiTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 90, 40));
 
         txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimKiemKeyReleased(evt);
             }
         });
-        jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 300, 40));
+        jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 260, 40));
 
         btReset.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_reset.png"))); // NOI18N
@@ -207,7 +219,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
                 btResetActionPerformed(evt);
             }
         });
-        jPanel2.add(btReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 120, 40));
+        jPanel2.add(btReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 120, 40));
 
         javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);
         pnMain.setLayout(pnMainLayout);
@@ -217,9 +229,9 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnMainLayout.createSequentialGroup()
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         pnMainLayout.setVerticalGroup(
@@ -340,7 +352,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
             String sdt = dtm.getValueAt(currentRow, 6).toString();
             KhachHang kh = new KhachHang(ma, ten, ns, cmt, qt, gt, sdt);
 
-            vChoThuePhong formChoThuePhong = new vChoThuePhong(kh, Main.nhanvien);
+            AddHoaDon formChoThuePhong = new AddHoaDon(kh, Main.nhanvien);
             pnMain.removeAll();
             pnMain.add(formChoThuePhong).setVisible(true);
         }
@@ -354,9 +366,11 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JButton btThuePhong;
     private javax.swing.JButton btXoa;
     private javax.swing.JComboBox<String> cbLoaiTK;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JPanel pnMain;
     private javax.swing.JTable tbKhachHang;
