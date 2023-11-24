@@ -293,13 +293,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Chưa bọn khách hàng cần sửa!", "Thông Báo", JOptionPane.WARNING_MESSAGE);
         } else {
             String ma = dtm.getValueAt(currentRow, 0).toString();
-            String ten = dtm.getValueAt(currentRow, 1).toString();
-            String ns = dtm.getValueAt(currentRow, 2).toString();
-            String cmt = dtm.getValueAt(currentRow, 3).toString();
-            String qt = dtm.getValueAt(currentRow, 4).toString();
-            String gt = dtm.getValueAt(currentRow, 5).toString();
-            String sdt = dtm.getValueAt(currentRow, 6).toString();
-            KhachHang kh = new KhachHang(ma, ten, ns, cmt, qt, gt, sdt);
+            KhachHang kh = DAOKhachHang.getInstance().getByID(ma);
             UpdateKH formUpdate = new UpdateKH(this, new JFrame(), kh);
             formUpdate.setVisible(true);
         }

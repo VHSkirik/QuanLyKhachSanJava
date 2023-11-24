@@ -92,7 +92,7 @@ public class Main extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         pnButtonDichVu = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        pnButtonHoaDon = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         pnMainContent = new javax.swing.JPanel();
 
@@ -360,10 +360,19 @@ public class Main extends javax.swing.JFrame {
 
         pnButton.add(pnButtonDichVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 230, 60));
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 255));
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnButtonHoaDon.setBackground(new java.awt.Color(0, 153, 255));
+        pnButtonHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel2MouseClicked(evt);
+                pnButtonHoaDonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnButtonHoaDonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnButtonHoaDonMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnButtonHoaDonMousePressed(evt);
             }
         });
 
@@ -374,24 +383,24 @@ public class Main extends javax.swing.JFrame {
         jLabel14.setText("HÓA ĐƠN");
         jLabel14.setIconTextGap(10);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnButtonHoaDonLayout = new javax.swing.GroupLayout(pnButtonHoaDon);
+        pnButtonHoaDon.setLayout(pnButtonHoaDonLayout);
+        pnButtonHoaDonLayout.setHorizontalGroup(
+            pnButtonHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnButtonHoaDonLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(68, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        pnButtonHoaDonLayout.setVerticalGroup(
+            pnButtonHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnButtonHoaDonLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        pnButton.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 230, 60));
+        pnButton.add(pnButtonHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 230, 60));
 
         getContentPane().add(pnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 630));
 
@@ -503,9 +512,21 @@ public class Main extends javax.swing.JFrame {
         pnButtonDichVu.setBackground(defaultColor);
     }//GEN-LAST:event_pnButtonDichVuMouseExited
 
-    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+    private void pnButtonHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHoaDonMouseClicked
         hienthiQLHD();
-    }//GEN-LAST:event_jPanel2MouseClicked
+    }//GEN-LAST:event_pnButtonHoaDonMouseClicked
+
+    private void pnButtonHoaDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHoaDonMousePressed
+        hienthiQLHD();
+    }//GEN-LAST:event_pnButtonHoaDonMousePressed
+
+    private void pnButtonHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHoaDonMouseEntered
+        pnButtonHoaDon.setBackground(clickColor);
+    }//GEN-LAST:event_pnButtonHoaDonMouseEntered
+
+    private void pnButtonHoaDonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHoaDonMouseExited
+        pnButtonHoaDon.setBackground(defaultColor);
+    }//GEN-LAST:event_pnButtonHoaDonMouseExited
 
     /**
      * @param args the command line arguments
@@ -529,11 +550,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbTenNV;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JPanel pnButton;
     private javax.swing.JPanel pnButtonDichVu;
+    private javax.swing.JPanel pnButtonHoaDon;
     private javax.swing.JPanel pnButtonHome;
     private javax.swing.JPanel pnButtonKH;
     private javax.swing.JPanel pnButtonLogout;

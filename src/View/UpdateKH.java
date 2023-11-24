@@ -43,7 +43,7 @@ public class UpdateKH extends javax.swing.JDialog {
         txtSDT.setText(kh.getSodienthoai());
         txtQuocTich.setText(kh.getQuoctich());
         txtCanCuoc.setText(kh.getCmt());
-        txtNgaySinh.setText(kh.getNgaysinhkh());
+        txtNgaySinh.setText(ConvertTime.changeToDMY(kh.getNgaysinhkh()));
     }
 
     /**

@@ -276,13 +276,16 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
             return;
         }
         if (target.equals("CTHD")) {
-            ChiTietHoaDon cthd = new ChiTietHoaDon(
-            dtm_ChitietHD.getValueAt(currentRowCTHD, 0).toString(),
-            dtm_ChitietHD.getValueAt(currentRowCTHD, 1).toString(),
-            Integer.parseInt(dtm_ChitietHD.getValueAt(currentRowCTHD, 2).toString()),
-            Integer.parseInt(dtm_ChitietHD.getValueAt(currentRowCTHD, 3).toString()));
+            String mahd = dtm_ChitietHD.getValueAt(currentRowCTHD, 0).toString();
+            String madv = dtm_ChitietHD.getValueAt(currentRowCTHD, 1).toString();
+            ChiTietHoaDon cthd = DAOChiTietHoaDon.getInstance().getByID(mahd, madv);
             UpdateCTHD updateCTHD = new UpdateCTHD(this, new JFrame(), cthd);
             updateCTHD.setVisible(true);
+        }
+        if (target.equals("HD")) {
+            HoaDon hd = DAOHoaDon.getInstance().getByID(dtm_Hoadon.getValueAt(currentRowHoaDon, 0).toString());
+            UpdateHoaDon updateHD = new UpdateHoaDon(this, new JFrame(), hd);
+            updateHD.setVisible(true);
         }
     }//GEN-LAST:event_btSuaActionPerformed
 
