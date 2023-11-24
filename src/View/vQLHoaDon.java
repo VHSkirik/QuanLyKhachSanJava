@@ -20,6 +20,7 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
 
     DefaultTableModel dtm_Hoadon;
     DefaultTableModel dtm_ChitietHD;
+    String target = "";
 
     public vQLHoaDon() {
         initComponents();
@@ -157,6 +158,11 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         btSua.setFocusable(false);
         btSua.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btSua.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSuaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btSua);
 
         btXoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -211,6 +217,11 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
                 "Mã hóa đơn", "Mã dịch vụ", "Đơn giá", "Số lượng"
             }
         ));
+        tbChitietHD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbChitietHDMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbChitietHD);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 850, 150));
@@ -238,11 +249,11 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void tbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonMouseClicked
+        target = "HD";
         hienthiCTHD();
     }//GEN-LAST:event_tbHoaDonMouseClicked
 
     private void btThemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemDVActionPerformed
-        // TODO add your handling code here:
         int currentRow = tbHoaDon.getSelectedRow();
         if (currentRow == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn hóa đơn cần thêm dịch vụ");
@@ -252,6 +263,28 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
             addCthd.setVisible(true);
         }
     }//GEN-LAST:event_btThemDVActionPerformed
+
+    private void tbChitietHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChitietHDMouseClicked
+        target = "CTHD";
+    }//GEN-LAST:event_tbChitietHDMouseClicked
+
+    private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
+        int currentRowHoaDon = tbHoaDon.getSelectedRow();
+        int currentRowCTHD = tbChitietHD.getSelectedRow();
+        if (currentRowCTHD == -1 && currentRowHoaDon == -1) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần sửa");
+            return;
+        }
+        if (target.equals("CTHD")) {
+            ChiTietHoaDon cthd = new ChiTietHoaDon(
+            dtm_ChitietHD.getValueAt(currentRowCTHD, 0).toString(),
+            dtm_ChitietHD.getValueAt(currentRowCTHD, 1).toString(),
+            Integer.parseInt(dtm_ChitietHD.getValueAt(currentRowCTHD, 2).toString()),
+            Integer.parseInt(dtm_ChitietHD.getValueAt(currentRowCTHD, 3).toString()));
+            UpdateCTHD updateCTHD = new UpdateCTHD(this, new JFrame(), cthd);
+            updateCTHD.setVisible(true);
+        }
+    }//GEN-LAST:event_btSuaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

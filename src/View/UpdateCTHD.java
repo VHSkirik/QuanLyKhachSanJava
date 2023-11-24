@@ -17,20 +17,32 @@ public class UpdateCTHD extends javax.swing.JDialog {
 
     private vQLHoaDon fromHoaDon;
     private ArrayList<String> dsGia = new ArrayList<>();
+    ChiTietHoaDon cthdCu;
 
     public UpdateCTHD(vQLHoaDon parent, JFrame frame, String mahd) {
         super(frame, true);
         this.fromHoaDon = parent;
         initComponents();
-        txtMahd.setText(mahd);
         loadComboBox();
+        txtMahd.setText(mahd);
         loadGiaDichVu();
     }
 
+    public UpdateCTHD(vQLHoaDon parent, JFrame frame, ChiTietHoaDon cthd) {
+        super(frame, true);
+        this.fromHoaDon = parent;
+        this.cthdCu = cthd;
+        initComponents();
+        loadComboBox();
+        loadGiaDichVu();
+        setDataUpdate();
+
+    }
+
     public void loadComboBox() {
-        ArrayList<DichVu> dsCTHD = DAODichVu.getInstance().getAll();
-        for (DichVu dv : dsCTHD) {
-            String tmp = dv.getMadichvu() + "-" + dv.getTendichvu();
+        ArrayList<DichVu> dsDichVu = DAODichVu.getInstance().getAll();
+        for (DichVu dv : dsDichVu) {
+            String tmp = dv.getMadichvu();
             cbMadv.addItem(tmp);
         }
     }
@@ -38,13 +50,19 @@ public class UpdateCTHD extends javax.swing.JDialog {
     public void loadGiaDichVu() {
 
         for (int i = 0; i < cbMadv.getItemCount(); i++) {
-            String madv = cbMadv.getItemAt(i).split("-")[0];
+            String madv = cbMadv.getItemAt(i);
             DichVu dv = DAODichVu.getInstance().getByID(madv);
             dsGia.add(dv.getGiadichvu() + "");
         }
-        for (String s : dsGia){
-            System.out.println(s);
-        }
+    }
+
+    public void setDataUpdate() {
+        lbTitle.setText("SỬA CHI TIẾT HÓA ĐƠN");
+        btSubmit.setText("UPDATE");
+        txtMahd.setText(cthdCu.getMahd());
+        txtDongia.setText(cthdCu.getDongia() + "");
+        cbMadv.setSelectedItem(cthdCu.getMadichvu());
+        txtSoluong.setText(cthdCu.getSoluong() + "");
     }
 
     /**
@@ -200,23 +218,26 @@ public class UpdateCTHD extends javax.swing.JDialog {
 
         try {
             String mahd = txtMahd.getText();
-            String madv = cbMadv.getSelectedItem().toString().split("-")[0];
+            String madv = cbMadv.getSelectedItem().toString();
             int dongia = Integer.parseInt(txtDongia.getText());
             int soluong = Integer.parseInt(txtSoluong.getText());
             if (mahd.isBlank() || madv.isBlank()) {
                 JOptionPane.showMessageDialog(this, "Chưa điền đủ thông tin");
             } else {
-                ChiTietHoaDon cthd = new ChiTietHoaDon(mahd, madv, dongia, soluong);
-                int rs = LogicHoaDon.themCTHD(cthd);
+                ChiTietHoaDon cthdMoi = new ChiTietHoaDon(mahd, madv, dongia, soluong);
+                if (btSubmit.getText().equals("UPDATE")) {
+                    DAOChiTietHoaDon.getInstance().delete(cthdCu.getMahd(), cthdCu.getMadichvu());
+                }
+                int rs = LogicHoaDon.themCTHD(cthdMoi);
                 if (rs == -1) {
-                    JOptionPane.showMessageDialog(this, "Thêm thất bại");
+                    JOptionPane.showMessageDialog(this, btSubmit.getText() + " thất bại");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Thêm thành công");
+                    JOptionPane.showMessageDialog(this, btSubmit.getText() + " thành công");
                 }
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            JOptionPane.showConfirmDialog(this, "Hãy kiểm tra lại thông tin");
+            JOptionPane.showMessageDialog(this, "Hãy kiểm tra lại thông tin");
             return;
         }
         fromHoaDon.hienthiCTHD();
@@ -224,8 +245,11 @@ public class UpdateCTHD extends javax.swing.JDialog {
     }//GEN-LAST:event_btSubmitActionPerformed
 
     private void cbMadvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMadvActionPerformed
-        if (!dsGia.isEmpty())
+        if (dsGia.isEmpty()) {
+
+        } else {
             txtDongia.setText(dsGia.get(cbMadv.getSelectedIndex()));
+        }
     }//GEN-LAST:event_cbMadvActionPerformed
 
     /**

@@ -22,11 +22,8 @@ public class DAOChiTietHoaDon {
         return SqlManager.updateData(query);
     }
 
-    public int delete(String id) {
-        String[] dsID = id.split(",");
-        String mahd = dsID[0];
-        String madichvu = dsID[1];
-        String query = "DELETE FROM chitiethoadon WHERE mahd='" + mahd + "' AND madichvu='" + madichvu + "'";
+    public int delete(String mahd, String madv) {
+        String query = "DELETE FROM chitiethoadon WHERE mahd='" + mahd + "' AND madichvu='" + madv + "'";
         return SqlManager.updateData(query);
     }
 
