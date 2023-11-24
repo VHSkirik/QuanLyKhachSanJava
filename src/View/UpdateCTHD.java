@@ -6,6 +6,7 @@ import DAO.DAODichVu;
 import Model.ChiTietHoaDon;
 import Model.DichVu;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
 public class UpdateCTHD extends javax.swing.JDialog {
 
     private vQLHoaDon fromHoaDon;
-    private ArrayList<String> dsGia = new ArrayList<>();
+    LinkedHashMap<String, String> hmDichVu = new LinkedHashMap<>();
     ChiTietHoaDon cthdCu;
 
     public UpdateCTHD(vQLHoaDon parent, JFrame frame, String mahd) {
@@ -36,28 +37,30 @@ public class UpdateCTHD extends javax.swing.JDialog {
     }
 
     public void loadComboBox() {
-        ArrayList<DichVu> dsDichVu = DAODichVu.getInstance().getAll();
-        for (DichVu dv : dsDichVu) {
-            String tmp = dv.getMadichvu();
-            cbMadv.addItem(tmp);
-        }
+          for (String s : hmDichVu.keySet()){
+              cbMadv.addItem(s);
+          }
     }
-
+    //load gia khi chon ma tu combobox
     public void loadDsGia() {
-        for (int i = 0; i < cbMadv.getItemCount(); i++) {
-            String madv = cbMadv.getItemAt(i);
-            DichVu dv = DAODichVu.getInstance().getByID(madv);
-            dsGia.add(dv.getGiadichvu() + "");
-        }
+        String gia = hmDichVu.get(cbMadv.getSelectedItem());
+        txtDongia.setText(gia);
     }
-
-    public void setDataUpdate() {
+    //nhung thay doi khi chuyen sang update
+    private void setDataUpdate() {
         lbTitle.setText("SỬA CHI TIẾT HÓA ĐƠN");
         btSubmit.setText("UPDATE");
         txtMahd.setText(cthdCu.getMahd());
-        txtDongia.setText(cthdCu.getDongia() + "");
         cbMadv.setSelectedItem(cthdCu.getMadichvu());
         txtSoluong.setText(cthdCu.getSoluong() + "");
+    }
+    //khoi tao gia tri hashmap va them vao combox khi mo form
+    private void setupData(){
+        ArrayList<DichVu> dsDichVu = DAODichVu.getInstance().getAll();
+        for (DichVu dv : dsDichVu) {
+            hmDichVu.put(dv.getMadichvu(), dv.getGiadichvu()+"");
+        }
+        loadComboBox();
     }
 
     /**
@@ -245,14 +248,11 @@ public class UpdateCTHD extends javax.swing.JDialog {
     }//GEN-LAST:event_btSubmitActionPerformed
 
     private void cbMadvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMadvActionPerformed
-        if (!dsGia.isEmpty()) {
-            txtDongia.setText(dsGia.get(cbMadv.getSelectedIndex()));
-        }
+        loadDsGia();
     }//GEN-LAST:event_cbMadvActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        loadComboBox();
-        loadDsGia();
+        setupData();
     }//GEN-LAST:event_formWindowOpened
 
     /**

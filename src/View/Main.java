@@ -25,8 +25,7 @@ public class Main extends javax.swing.JFrame {
 //        lbTitle.setText(this.nhanvien.getLoainguoidung().toUpperCase());
 //        lbTenNV.setText(this.nhanvien.getHotenvn());
         defaultColor = new Color(0, 153, 255);
-        clickColor = new Color(26, 188, 156);
-        
+        clickColor = new Color(26, 188, 156);       
     }
 
     public void logOut() {
