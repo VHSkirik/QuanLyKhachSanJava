@@ -125,6 +125,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbHoaDonMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -144,7 +147,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="480" y="320" width="380" height="80"/>
+              <AbsoluteConstraints x="470" y="320" width="390" height="80"/>
             </Constraint>
           </Constraints>
 
@@ -166,6 +169,11 @@
                 <Property name="label" type="java.lang.String" value="Th&#xea;m D&#x1ecb;ch V&#x1ee5;"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btThemDVActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JToolBar$Separator" name="jSeparator3">
             </Component>
             <Component class="javax.swing.JButton" name="btSua">
               <Properties>
@@ -265,7 +273,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="320" width="460" height="80"/>
+              <AbsoluteConstraints x="10" y="320" width="450" height="80"/>
             </Constraint>
           </Constraints>
 

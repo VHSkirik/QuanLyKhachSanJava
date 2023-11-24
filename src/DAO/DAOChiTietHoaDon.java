@@ -9,19 +9,17 @@ import java.sql.*;
  *
  * @author @VHSkirik
  */
-public class DAOChiTietHoaDon implements InterfaceDAO<ChiTietHoaDon> {
+public class DAOChiTietHoaDon {
 
     public static DAOChiTietHoaDon getInstance() {
         return new DAOChiTietHoaDon();
     }
 
-    @Override
     public int insert(ChiTietHoaDon cthd) {
         String query = "INSERT INTO chitiethoadon VALUES('" + cthd.getMahd() + "','" + cthd.getMadichvu() + "'," + cthd.getDongia() + "," + cthd.getSoluong() + ")";
         return SqlManager.updateData(query);
     }
 
-    @Override
     public int delete(String id) {
         String[] dsID = id.split(",");
         String mahd = dsID[0];
@@ -30,13 +28,11 @@ public class DAOChiTietHoaDon implements InterfaceDAO<ChiTietHoaDon> {
         return SqlManager.updateData(query);
     }
 
-    @Override
     public int update(ChiTietHoaDon cthd) {
         String query = "UPDATE chitiethoadon SET dongia=" + cthd.getDongia() + ", soluong=" + cthd.getSoluong() + " WHERE mahd='" + cthd.getMahd() + "' AND madichvu='" + cthd.getMadichvu() + "'";
         return SqlManager.updateData(query);
     }
 
-    @Override
     public ArrayList<ChiTietHoaDon> getAll() {
         ArrayList<ChiTietHoaDon> dsChiTietHoaDon = new ArrayList<>();
         try {
@@ -56,14 +52,27 @@ public class DAOChiTietHoaDon implements InterfaceDAO<ChiTietHoaDon> {
         return dsChiTietHoaDon;
     }
 
-    @Override
-    public ChiTietHoaDon getByID(String id) {
+    public ChiTietHoaDon getByID(String mahd, String madv) {
         ChiTietHoaDon cthd = null;
-        String[] dsID = id.split(",");
-        String mahd = dsID[0];
-        String madichvu = dsID[1];
         try {
-            ResultSet rs = SqlManager.getDataTable("chitiethoadon WHERE mahd='" + mahd + "' AND madichvu='" + madichvu + "'");
+            ResultSet rs = SqlManager.getDataTable("chitiethoadon WHERE mahd='" + mahd + "' AND madichvu='" + madv + "'");
+            if (rs.next()) {
+                cthd = new ChiTietHoaDon(
+                        rs.getString("mahd"),
+                        rs.getString("madichvu"),
+                        rs.getInt("dongia"),
+                        rs.getInt("soluong"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ChiTietHoaDon getByMahd(String mahd) {
+        ChiTietHoaDon cthd = null;
+        try {
+            ResultSet rs = SqlManager.getDataTable("chitiethoadon WHERE mahd='" + mahd + "'");
             if (rs.next()) {
                 cthd = new ChiTietHoaDon(
                         rs.getString("mahd"),
