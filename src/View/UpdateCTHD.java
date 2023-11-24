@@ -23,9 +23,7 @@ public class UpdateCTHD extends javax.swing.JDialog {
         super(frame, true);
         this.fromHoaDon = parent;
         initComponents();
-        loadComboBox();
         txtMahd.setText(mahd);
-        loadGiaDichVu();
     }
 
     public UpdateCTHD(vQLHoaDon parent, JFrame frame, ChiTietHoaDon cthd) {
@@ -33,8 +31,6 @@ public class UpdateCTHD extends javax.swing.JDialog {
         this.fromHoaDon = parent;
         this.cthdCu = cthd;
         initComponents();
-        loadComboBox();
-        loadGiaDichVu();
         setDataUpdate();
 
     }
@@ -47,8 +43,7 @@ public class UpdateCTHD extends javax.swing.JDialog {
         }
     }
 
-    public void loadGiaDichVu() {
-
+    public void loadDsGia() {
         for (int i = 0; i < cbMadv.getItemCount(); i++) {
             String madv = cbMadv.getItemAt(i);
             DichVu dv = DAODichVu.getInstance().getByID(madv);
@@ -89,6 +84,11 @@ public class UpdateCTHD extends javax.swing.JDialog {
         cbMadv = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -245,17 +245,19 @@ public class UpdateCTHD extends javax.swing.JDialog {
     }//GEN-LAST:event_btSubmitActionPerformed
 
     private void cbMadvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMadvActionPerformed
-        if (dsGia.isEmpty()) {
-
-        } else {
+        if (!dsGia.isEmpty()) {
             txtDongia.setText(dsGia.get(cbMadv.getSelectedIndex()));
         }
     }//GEN-LAST:event_cbMadvActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        loadComboBox();
+        loadDsGia();
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btHuy;
     private javax.swing.JButton btSubmit;
