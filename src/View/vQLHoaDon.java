@@ -106,6 +106,7 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(820, 630));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tbHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -206,6 +207,7 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 450, 80));
 
+        tbChitietHD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbChitietHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

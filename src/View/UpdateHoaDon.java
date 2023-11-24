@@ -1,11 +1,16 @@
 package View;
 
+import Controller.ConvertTime;
 import Controller.LogicHoaDon;
-import DAO.DAOPhong;
+import DAO.DAOHoaDon;
+import DAO.DAOKhachHang;
+import DAO.DAONhanVien;
 import Model.HoaDon;
-import Model.Phong;
+import Model.KhachHang;
+import Model.NhanVien;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +27,7 @@ public class UpdateHoaDon extends javax.swing.JDialog {
         formQLHoaDon = parent;
         oldHoaDon = hd;
         initComponents();
+
     }
 
     //load ma phong len combox
@@ -30,12 +36,39 @@ public class UpdateHoaDon extends javax.swing.JDialog {
         for (String s : hmMLoai_GPhong.keySet()) {
             cbMaPhong.addItem(s);
         }
+        cbMaPhong.setSelectedItem(oldHoaDon.getMaphong());
+        //ma nhan vien
+        ArrayList<NhanVien> dsNhanVien = DAONhanVien.getInstance().getAll();
+        for (NhanVien nv : dsNhanVien) {
+            cbMaNV.addItem(nv.getTaikhoan());
+        }
+        cbMaNV.setSelectedItem(oldHoaDon.getManv());
+        //ma khach hang
+        ArrayList<KhachHang> dsKhachHang = DAOKhachHang.getInstance().getAll();
+        for (KhachHang kh : dsKhachHang) {
+            cbMaKH.addItem(kh.getMakh());
+        }
+        cbMaKH.setSelectedItem(oldHoaDon.getMakh());
     }
 
     //load thong tin khach hang cu
     private void loadOldData() {
         txtMahd.setText(oldHoaDon.getMahd());
         cbMaKH.setSelectedItem(oldHoaDon.getMakh());
+        txtNgaythue.setText(ConvertTime.changeToDMY(oldHoaDon.getNgaythue()));
+        String ngaytra;
+        try {
+            ngaytra = ConvertTime.changeToDMY(oldHoaDon.getNgaytra());
+        } catch (NullPointerException e) {
+            ngaytra = "";
+        }
+        txtNgaytra.setText(ngaytra);
+        txtThanhtien.setText(oldHoaDon.getThanhtien() + "");
+    }
+
+    private void setCheckBox() {
+        boolean check = oldHoaDon.getDathanhtoan() == 1 ? true : false;
+        chbThanhToan.setSelected(check);
     }
 
     /**
@@ -109,6 +142,7 @@ public class UpdateHoaDon extends javax.swing.JDialog {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 60));
 
         txtMahd.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        txtMahd.setEnabled(false);
         jPanel1.add(txtMahd, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 320, 40));
 
         jLabel4.setFont(new java.awt.Font("SF Mono", 0, 14)); // NOI18N
@@ -222,7 +256,42 @@ public class UpdateHoaDon extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSubmitActionPerformed
-        // TODO add your handling code here:
+        String mahd = txtMahd.getText();
+        String makh = cbMaKH.getSelectedItem().toString();
+        String manv = cbMaNV.getSelectedItem().toString();
+        String maphong = cbMaPhong.getSelectedItem().toString();
+        int giaphong = Integer.parseInt(txtGiaphong.getText());
+        String ngaythue = ConvertTime.changeToYMD(txtNgaythue.getText());
+        String ngaytra = txtNgaytra.getText();
+        int dathanhtoan = chbThanhToan.isSelected() == true ? 1 : 0;
+        int thanhtien;
+        try {
+            thanhtien = Integer.parseInt(txtThanhtien.getText());
+        } catch (Exception e) {
+            thanhtien = -1;
+        }
+
+        if (ngaythue == null || thanhtien == -1) {
+            JOptionPane.showMessageDialog(this, "Hãy kiểm tra lại thông tin");
+        } else {
+            if (!ngaytra.isBlank()) {
+                ngaytra = ConvertTime.changeToYMD(ngaytra);
+                if (ngaytra == null) {
+                    JOptionPane.showMessageDialog(this, "Ngày trả nhập không đúng");
+                    return;
+                }
+            }
+            HoaDon hd = new HoaDon(mahd, makh, manv, maphong, giaphong, ngaythue, ngaytra, thanhtien, dathanhtoan);
+            int rs = DAOHoaDon.getInstance().update(hd);
+            if (rs == -1) {
+                JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                return;
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                formQLHoaDon.loadAllHoadon();
+                this.dispose();
+            }
+        }
     }//GEN-LAST:event_btSubmitActionPerformed
 
     private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
@@ -233,6 +302,7 @@ public class UpdateHoaDon extends javax.swing.JDialog {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         initCombobox();
         loadOldData();
+        setCheckBox();
     }//GEN-LAST:event_formWindowOpened
 
     private void cbMaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMaPhongActionPerformed

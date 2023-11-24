@@ -16,8 +16,14 @@ public class DAOHoaDon implements InterfaceDAO<HoaDon> {
     }
 
     @Override
-    public int insert(HoaDon hd) {        
-        String query = "INSERT INTO hoadon VALUES ('" + hd.getMahd() + "','" + hd.getMakh() + "','" + hd.getManv() + "','" + hd.getMaphong() + "','" + hd.getGiaphong() + "','" + hd.getNgaythue() + "'," + hd.getNgaytra() + ",'" + hd.getThanhtien() + "','" + hd.getDathanhtoan() + "')";
+    public int insert(HoaDon hd) {
+        String ngaytra;
+        if (hd.getNgaytra() != null) {
+            ngaytra = hd.getNgaytra().isBlank() ? null : ("'" + hd.getNgaytra() + "'");
+        } else {
+            ngaytra = null;
+        }
+        String query = "INSERT INTO hoadon VALUES ('" + hd.getMahd() + "','" + hd.getMakh() + "','" + hd.getManv() + "','" + hd.getMaphong() + "','" + hd.getGiaphong() + "','" + hd.getNgaythue() + "'," + ngaytra + ",'" + hd.getThanhtien() + "','" + hd.getDathanhtoan() + "')";
         return SqlManager.updateData(query);
     }
 
@@ -29,8 +35,14 @@ public class DAOHoaDon implements InterfaceDAO<HoaDon> {
 
     @Override
     public int update(HoaDon hd) {
-        String query = "UPDATE hoadon SET makh='" + hd.getMakh() + "', manv='" + hd.getMakh() + "', maphong='" + hd.getMaphong() + "', giaphong=" + hd.getGiaphong() + ", ngaythue='" + hd.getNgaythue();
-        return -1;
+        String ngaytra;
+        if (hd.getNgaytra() != null) {
+            ngaytra = hd.getNgaytra().isBlank() ? null : ("'" + hd.getNgaytra() + "'");
+        } else {
+            ngaytra = null;
+        }
+        String query = "UPDATE hoadon SET makh='" + hd.getMakh() + "', manv='" + hd.getManv()+ "', maphong='" + hd.getMaphong() + "', giaphong='" + hd.getGiaphong() + "', ngaythue='" + hd.getNgaythue() + "', ngaytra=" + ngaytra + ", thanhtien='" + hd.getThanhtien() + "', dathanhtoan='" + hd.getDathanhtoan() + "' WHERE mahd='" + hd.getMahd() + "'";
+        return SqlManager.updateData(query);
     }
 
     @Override
