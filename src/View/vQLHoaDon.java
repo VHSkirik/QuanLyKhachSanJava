@@ -37,9 +37,9 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
     public void loadAllHoadon() {
         dtm_Hoadon.setRowCount(0);
         ArrayList<HoaDon> dsHoadon = DAOHoaDon.getInstance().getAll();
-        for (HoaDon hd : dsHoadon) {   
+        for (HoaDon hd : dsHoadon) {
             String ngaythue = hd.getNgaythue() == null ? "" : ConvertTime.changeToDMY(hd.getNgaythue());
-            String ngaytra = hd.getNgaytra()== null ? "" : ConvertTime.changeToDMY(hd.getNgaytra());
+            String ngaytra = hd.getNgaytra() == null ? "" : ConvertTime.changeToDMY(hd.getNgaytra());
             dtm_Hoadon.addRow(new Object[]{
                 hd.getMahd(),
                 hd.getMakh(),
@@ -50,6 +50,24 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
                 ngaytra,
                 hd.getThanhtien(),
                 hd.getDathanhtoan()});
+        }
+    }
+
+    public void hienthiCTHD() {
+        dtm_ChitietHD.setRowCount(0);
+        int currentRow = tbHoaDon.getSelectedRow();
+        if (currentRow != -1) {
+            String mahd = dtm_Hoadon.getValueAt(currentRow, 0).toString().toLowerCase();
+            ArrayList<ChiTietHoaDon> dsCTHD = DAOChiTietHoaDon.getInstance().getAll();
+            for (ChiTietHoaDon cthd : dsCTHD) {
+                if (cthd.getMahd().toLowerCase().equals(mahd)) {
+                    dtm_ChitietHD.addRow(new Object[]{
+                        cthd.getMahd(),
+                        cthd.getMadichvu(),
+                        cthd.getDongia(),
+                        cthd.getSoluong()});
+                }
+            }
         }
     }
 
@@ -220,27 +238,13 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void tbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonMouseClicked
-        dtm_ChitietHD.setRowCount(0);
-        int currentRow = tbHoaDon.getSelectedRow();
-        if (currentRow != -1){
-            String mahd = dtm_Hoadon.getValueAt(currentRow, 0).toString().toLowerCase();
-            ArrayList<ChiTietHoaDon> dsCTHD = DAOChiTietHoaDon.getInstance().getAll();
-            for (ChiTietHoaDon cthd : dsCTHD){
-                if (cthd.getMahd().toLowerCase().equals(mahd)){
-                    dtm_ChitietHD.addRow(new Object[]{
-                    cthd.getMahd(),
-                    cthd.getMadichvu(),
-                    cthd.getDongia(),
-                    cthd.getSoluong()});
-                }
-            }
-        }
+        hienthiCTHD();
     }//GEN-LAST:event_tbHoaDonMouseClicked
 
     private void btThemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemDVActionPerformed
         // TODO add your handling code here:
         int currentRow = tbHoaDon.getSelectedRow();
-        if (currentRow == -1){
+        if (currentRow == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn hóa đơn cần thêm dịch vụ");
         } else {
             String mahd = dtm_Hoadon.getValueAt(currentRow, 0).toString();

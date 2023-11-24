@@ -2,6 +2,7 @@ package DAO;
 
 import DataBase.SqlManager;
 import Model.ChiTietHoaDon;
+import Model.HoaDon;
 import java.util.ArrayList;
 import java.sql.*;
 
@@ -16,7 +17,8 @@ public class DAOChiTietHoaDon {
     }
 
     public int insert(ChiTietHoaDon cthd) {
-        String query = "INSERT INTO chitiethoadon VALUES('" + cthd.getMahd() + "','" + cthd.getMadichvu() + "'," + cthd.getDongia() + "," + cthd.getSoluong() + ")";
+        String query;
+        query = "INSERT INTO chitiethoadon VALUES('" + cthd.getMahd() + "','" + cthd.getMadichvu() + "'," + cthd.getDongia() + "," + cthd.getSoluong() + ")";
         return SqlManager.updateData(query);
     }
 
@@ -66,7 +68,7 @@ public class DAOChiTietHoaDon {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return cthd;
     }
 
     public ChiTietHoaDon getByMahd(String mahd) {

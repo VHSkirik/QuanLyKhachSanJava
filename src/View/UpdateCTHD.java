@@ -1,5 +1,6 @@
 package View;
 
+import Controller.LogicHoaDon;
 import DAO.DAOChiTietHoaDon;
 import DAO.DAODichVu;
 import Model.ChiTietHoaDon;
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
 public class UpdateCTHD extends javax.swing.JDialog {
 
     private vQLHoaDon fromHoaDon;
+    private ArrayList<String> dsGia = new ArrayList<>();
 
     public UpdateCTHD(vQLHoaDon parent, JFrame frame, String mahd) {
         super(frame, true);
@@ -22,6 +24,7 @@ public class UpdateCTHD extends javax.swing.JDialog {
         initComponents();
         txtMahd.setText(mahd);
         loadComboBox();
+        loadGiaDichVu();
     }
 
     public void loadComboBox() {
@@ -29,6 +32,18 @@ public class UpdateCTHD extends javax.swing.JDialog {
         for (DichVu dv : dsCTHD) {
             String tmp = dv.getMadichvu() + "-" + dv.getTendichvu();
             cbMadv.addItem(tmp);
+        }
+    }
+
+    public void loadGiaDichVu() {
+
+        for (int i = 0; i < cbMadv.getItemCount(); i++) {
+            String madv = cbMadv.getItemAt(i).split("-")[0];
+            DichVu dv = DAODichVu.getInstance().getByID(madv);
+            dsGia.add(dv.getGiadichvu() + "");
+        }
+        for (String s : dsGia){
+            System.out.println(s);
         }
     }
 
@@ -93,6 +108,7 @@ public class UpdateCTHD extends javax.swing.JDialog {
         jPanel1.add(txtMahd, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 320, 40));
 
         txtDongia.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        txtDongia.setEnabled(false);
         txtDongia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDongiaActionPerformed(evt);
@@ -149,6 +165,11 @@ public class UpdateCTHD extends javax.swing.JDialog {
         });
         jPanel1.add(btSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 140, 40));
 
+        cbMadv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMadvActionPerformed(evt);
+            }
+        });
         jPanel1.add(cbMadv, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,28 +200,33 @@ public class UpdateCTHD extends javax.swing.JDialog {
 
         try {
             String mahd = txtMahd.getText();
-            String madv = cbMadv.getSelectedItem().toString();
+            String madv = cbMadv.getSelectedItem().toString().split("-")[0];
             int dongia = Integer.parseInt(txtDongia.getText());
             int soluong = Integer.parseInt(txtSoluong.getText());
-            if (mahd.isBlank() || madv.isBlank()){
+            if (mahd.isBlank() || madv.isBlank()) {
                 JOptionPane.showMessageDialog(this, "Chưa điền đủ thông tin");
             } else {
                 ChiTietHoaDon cthd = new ChiTietHoaDon(mahd, madv, dongia, soluong);
-                int rs = DAOChiTietHoaDon.getInstance().insert(cthd);
-                if (rs == -1){
+                int rs = LogicHoaDon.themCTHD(cthd);
+                if (rs == -1) {
                     JOptionPane.showMessageDialog(this, "Thêm thất bại");
                 } else {
-                    
+                    JOptionPane.showMessageDialog(this, "Thêm thành công");
                 }
             }
-            
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             e.printStackTrace();
             JOptionPane.showConfirmDialog(this, "Hãy kiểm tra lại thông tin");
             return;
         }
+        fromHoaDon.hienthiCTHD();
         this.dispose();
     }//GEN-LAST:event_btSubmitActionPerformed
+
+    private void cbMadvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMadvActionPerformed
+        if (!dsGia.isEmpty())
+            txtDongia.setText(dsGia.get(cbMadv.getSelectedIndex()));
+    }//GEN-LAST:event_cbMadvActionPerformed
 
     /**
      * @param args the command line arguments
