@@ -97,7 +97,8 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbChitietHD = new javax.swing.JTable();
         btThanhToan = new javax.swing.JButton();
-        lbTongtien = new javax.swing.JLabel();
+        pnThanhTien = new javax.swing.JPanel();
+        lbThanhtien = new javax.swing.JLabel();
 
         setBorder(null);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -130,7 +131,7 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbHoaDon);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 850, 300));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 850, 290));
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -139,7 +140,6 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         btThemDV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btThemDV.setForeground(new java.awt.Color(0, 0, 0));
         btThemDV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
-        btThemDV.setFocusable(false);
         btThemDV.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btThemDV.setLabel("Thêm Dịch Vụ");
         btThemDV.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -189,6 +189,11 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         btThanhTien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btThanhTien.setIconTextGap(3);
         btThanhTien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btThanhTien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThanhTienActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btThanhTien);
         jToolBar1.add(jSeparator2);
 
@@ -201,11 +206,11 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton3);
 
-        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 320, 390, 80));
+        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, 390, 80));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 450, 80));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 450, 80));
 
         tbChitietHD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbChitietHD.setModel(new javax.swing.table.DefaultTableModel(
@@ -226,7 +231,7 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tbChitietHD);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 850, 150));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 850, 150));
 
         btThanhToan.setBackground(new java.awt.Color(102, 0, 204));
         btThanhToan.setFont(new java.awt.Font("SF Mono", 0, 18)); // NOI18N
@@ -235,11 +240,16 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         btThanhToan.setText("THANH TOÁN");
         jPanel1.add(btThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 570, 230, 50));
 
-        lbTongtien.setFont(new java.awt.Font("SF Pro Display", 0, 20)); // NOI18N
-        lbTongtien.setForeground(new java.awt.Color(255, 0, 0));
-        lbTongtien.setText("  Tổng tiền:");
-        lbTongtien.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 2, true));
-        jPanel1.add(lbTongtien, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 590, 50));
+        pnThanhTien.setBackground(new java.awt.Color(255, 255, 255));
+        pnThanhTien.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thành Tiền", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        pnThanhTien.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbThanhtien.setFont(new java.awt.Font("JetBrains Mono", 0, 18)); // NOI18N
+        lbThanhtien.setForeground(java.awt.Color.red);
+        lbThanhtien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pnThanhTien.add(lbThanhtien, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 13, 450, 40));
+
+        jPanel1.add(pnThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, 600, 60));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 630));
 
@@ -286,6 +296,7 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
 
     private void tbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonMouseClicked
         target = "HD";
+        lbThanhtien.setText("");
         hienthiCTHD();
     }//GEN-LAST:event_tbHoaDonMouseClicked
 
@@ -325,6 +336,18 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btSuaActionPerformed
 
+    private void btThanhTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThanhTienActionPerformed
+        int currentRowHD = tbHoaDon.getSelectedRow();
+        if (currentRowHD == -1){
+            JOptionPane.showMessageDialog(this, "Chưa có hóa đơn được chọn");
+        } else {
+            String mahd = dtm_Hoadon.getValueAt(currentRowHD, 0).toString();
+            long thanhtien = LogicHoaDon.TinhThanhTien(mahd);
+            lbThanhtien.setText(thanhtien+"");
+        }
+        
+    }//GEN-LAST:event_btThanhTienActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSua;
@@ -341,7 +364,8 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JLabel lbTongtien;
+    private javax.swing.JLabel lbThanhtien;
+    private javax.swing.JPanel pnThanhTien;
     private javax.swing.JTable tbChitietHD;
     private javax.swing.JTable tbHoaDon;
     // End of variables declaration//GEN-END:variables

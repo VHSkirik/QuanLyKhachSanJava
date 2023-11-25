@@ -26,7 +26,7 @@ public class DAOChiTietHoaDon {
         String query = "DELETE FROM chitiethoadon WHERE mahd='" + mahd + "' AND madichvu='" + madv + "'";
         return SqlManager.updateData(query);
     }
-    
+
     public int deleteByMahd(String mahd) {
         String query = "DELETE FROM chitiethoadon WHERE mahd='" + mahd + "'";
         return SqlManager.updateData(query);
@@ -73,20 +73,22 @@ public class DAOChiTietHoaDon {
         return cthd;
     }
 
-    public ChiTietHoaDon getByMahd(String mahd) {
-        ChiTietHoaDon cthd = null;
+    public ArrayList<ChiTietHoaDon> getAllbyMahd(String mahd) {
+        ArrayList<ChiTietHoaDon> dsCTHD = DAOChiTietHoaDon.getInstance().getAll();
+        ArrayList<ChiTietHoaDon> dsKetQua = new ArrayList<>();
         try {
             ResultSet rs = SqlManager.getDataTable("chitiethoadon WHERE mahd='" + mahd + "'");
-            if (rs.next()) {
-                cthd = new ChiTietHoaDon(
+            while (rs.next()) {
+                ChiTietHoaDon cthd = new ChiTietHoaDon(
                         rs.getString("mahd"),
                         rs.getString("madichvu"),
                         rs.getInt("dongia"),
                         rs.getInt("soluong"));
+                dsKetQua.add(cthd);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return dsKetQua;
     }
 }

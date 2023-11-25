@@ -8,9 +8,6 @@ import Model.ChiTietHoaDon;
 import Model.HoaDon;
 import Model.LoaiPhong;
 import Model.Phong;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -75,13 +72,36 @@ public class LogicHoaDon {
         return rs;
     }
 
-    public static long TinhThanhTien(String mahd) {
-        HoaDon hd = DAOHoaDon.getInstance().getByID(mahd);
-        int songaythue = DAOHoaDon.getInstance().soNgayThue(mahd, ConvertTime.toString(new Date()));
-        if (songaythue == 0)
-            songaythue = 1;
-        return hd.getGiaphong() * songaythue;
+    //tinh tong so tien dich vu cua 1 hoa don
+    public static int tongTienDV(String mahd) {
+        int rs = 0;
+        ArrayList<ChiTietHoaDon> dsCTHD = DAOChiTietHoaDon.getInstance().getAllbyMahd(mahd);
+        for (ChiTietHoaDon cthd : dsCTHD) {
+            if (cthd.getMahd().equals(mahd)) {
+                rs += cthd.getDongia() * cthd.getSoluong();
+            }
+        }
+        return rs;
     }
+
+    //tinh tong thanh tien cua 1 hoa don
+    public static long TinhThanhTien(String mahd) {
+        try {
+            HoaDon hd = DAOHoaDon.getInstance().getByID(mahd);
+            String ngaytra = hd.getNgaytra() == null ? ConvertTime.toString(new Date()) : hd.getNgaytra();
+            int songaythue = DAOHoaDon.getInstance().soNgayThue(mahd, ngaytra);
+            if (songaythue == 0) {
+                songaythue = 1;
+            }
+            long tienphong = hd.getGiaphong() * songaythue;
+            long tiendichvu = LogicHoaDon.tongTienDV(mahd);
+            return tienphong + tiendichvu;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+    
+
     public static void main(String[] args) {
         System.out.println(TinhThanhTien("HD001"));
     }
