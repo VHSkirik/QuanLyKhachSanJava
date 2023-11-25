@@ -1,4 +1,4 @@
-package View;
+package Form;
 
 import Model.NhanVien;
 import com.formdev.flatlaf.FlatLightLaf;

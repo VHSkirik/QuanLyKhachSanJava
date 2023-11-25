@@ -1,4 +1,4 @@
-package Controller;
+package Logic;
 
 import DAO.DAONhanVien;
 import Model.NhanVien;

@@ -1,6 +1,6 @@
-package View;
+package Form;
 
-import Controller.ConvertTime;
+import Logic.ConvertTime;
 import DAO.DAONhanVien;
 import Model.NhanVien;
 import javax.swing.JOptionPane;
