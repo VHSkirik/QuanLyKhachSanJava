@@ -25,8 +25,8 @@ Bài Tập Lớn Môn Lập Trình Mạng Nhóm 2 DHTI14A7HN.
 Để biết thêm thông tin hoặc yêu cầu hỗ trợ, vui lòng liên hệ [VHSkirik].
 
 ## Lưu ý
-- Phần mềm vẫn đang trong quá trình hoàn thị và còn tồn tại nhiều lỗi.
-- Phần mềm được tạo ra phục vụ mục đích học tập và thử sức với phần mềm desktop.
+- Phần mềm vẫn đang trong quá trình hoàn thiện và còn tồn tại nhiều lỗi.
+- Phần mềm được tạo ra phục vụ mục đích học tập và thử sức lần đầu với phần mềm desktop.
 
 ---
 
