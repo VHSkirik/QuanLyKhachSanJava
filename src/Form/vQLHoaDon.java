@@ -238,6 +238,11 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         btThanhToan.setForeground(new java.awt.Color(255, 255, 255));
         btThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/check.png"))); // NOI18N
         btThanhToan.setText("THANH TOÁN");
+        btThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThanhToanActionPerformed(evt);
+            }
+        });
         jPanel1.add(btThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 570, 230, 50));
 
         pnThanhTien.setBackground(new java.awt.Color(255, 255, 255));
@@ -347,6 +352,34 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_btThanhTienActionPerformed
+
+    private void btThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThanhToanActionPerformed
+        try {
+           if (lbThanhtien.getText().isBlank()){
+               JOptionPane.showMessageDialog(this, "Hãy kiểm tra thành tiền trước");
+           } else {
+               int currentRowHD = tbHoaDon.getSelectedRow();
+               int thanhtien = Integer.parseInt(lbThanhtien.getText());
+               String mahd = dtm_Hoadon.getValueAt(currentRowHD, 0).toString();
+               HoaDon hd = DAOHoaDon.getInstance().getByID(mahd);
+               hd.setThanhtien(thanhtien);
+               hd.setDathanhtoan(1);
+               int rs = DAOHoaDon.getInstance().update(hd);
+               if (rs == -1){
+                   JOptionPane.showMessageDialog(this, "Thanh toán thất bại");
+                   return;
+               } else {
+                   JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+                   dtm_ChitietHD.setRowCount(0);
+                   loadAllHoadon();
+                   lbThanhtien.setText("");
+               }
+           }
+        } catch (Exception e){
+            
+        }
+        
+    }//GEN-LAST:event_btThanhToanActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
