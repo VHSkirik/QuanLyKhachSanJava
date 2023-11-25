@@ -37,15 +37,17 @@ public class UpdateCTHD extends javax.swing.JDialog {
     }
 
     public void loadComboBox() {
-          for (String s : hmDichVu.keySet()){
-              cbMadv.addItem(s);
-          }
+        for (String s : hmDichVu.keySet()) {
+            cbMadv.addItem(s);
+        }
     }
+
     //load gia khi chon ma tu combobox
     public void loadDsGia() {
         String gia = hmDichVu.get(cbMadv.getSelectedItem());
         txtDongia.setText(gia);
     }
+
     //nhung thay doi khi chuyen sang update
     private void setDataUpdate() {
         lbTitle.setText("SỬA CHI TIẾT HÓA ĐƠN");
@@ -54,11 +56,12 @@ public class UpdateCTHD extends javax.swing.JDialog {
         cbMadv.setSelectedItem(cthdCu.getMadichvu());
         txtSoluong.setText(cthdCu.getSoluong() + "");
     }
+
     //khoi tao gia tri hashmap va them vao combox khi mo form
-    private void setupData(){
+    private void setupData() {
         ArrayList<DichVu> dsDichVu = DAODichVu.getInstance().getAll();
         for (DichVu dv : dsDichVu) {
-            hmDichVu.put(dv.getMadichvu(), dv.getGiadichvu()+"");
+            hmDichVu.put(dv.getMadichvu(), dv.getGiadichvu() + "");
         }
         loadComboBox();
     }
@@ -213,8 +216,9 @@ public class UpdateCTHD extends javax.swing.JDialog {
     }//GEN-LAST:event_txtDongiaActionPerformed
 
     private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        int rs = JOptionPane.showConfirmDialog(this, "Xác nhận hủy", "Xác Nhận", JOptionPane.YES_NO_OPTION);
+        if (rs == JOptionPane.YES_OPTION)
+            this.dispose();
     }//GEN-LAST:event_btHuyActionPerformed
 
     private void btSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSubmitActionPerformed

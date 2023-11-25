@@ -216,8 +216,9 @@ public class UpdateKH extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNgaySinhActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        int rs = JOptionPane.showConfirmDialog(this, "Xác nhận hủy", "Xác Nhận", JOptionPane.YES_NO_OPTION);
+        if (rs == JOptionPane.YES_OPTION)
+            this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSubmitActionPerformed

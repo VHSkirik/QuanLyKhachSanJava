@@ -62,7 +62,7 @@ public class Main extends javax.swing.JFrame {
     }
     
     private void hienthiQLHD(){
-        vQLHoaDon qlhoadon = new vQLHoaDon();
+        vQLHoaDon qlhoadon = new vQLHoaDon(null);
         pnMainContent.removeAll();
         pnMainContent.add(qlhoadon).setVisible(true);
     }

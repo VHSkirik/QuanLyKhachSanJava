@@ -288,15 +288,16 @@ public class UpdateHoaDon extends javax.swing.JDialog {
                 return;
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa thành công");
-                formQLHoaDon.loadAllHoadon();
+                formQLHoaDon.loadAllHoadon("");
                 this.dispose();
             }
         }
     }//GEN-LAST:event_btSubmitActionPerformed
 
     private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        int rs = JOptionPane.showConfirmDialog(this, "Xác nhận hủy", "Xác Nhận", JOptionPane.YES_NO_OPTION);
+        if (rs == JOptionPane.YES_OPTION)
+            this.dispose();
     }//GEN-LAST:event_btHuyActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

@@ -30,7 +30,8 @@ public class UpdateNhanVien extends javax.swing.JDialog {
         lbTitle.setText("UPDATE THÔNG TIN NV");
         btSubmit.setText("UPDATE");
     }
-    private void loadText(){
+
+    private void loadText() {
         txtTaikhoan.setText(nhanvien.getTaikhoan());
         txtTenNV.setText(nhanvien.getHotenvn());
         txtNgaySinh.setText(ConvertTime.changeToDMY(nhanvien.getNgaysinhnv()));
@@ -200,8 +201,9 @@ public class UpdateNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNgaySinhActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        int rs = JOptionPane.showConfirmDialog(this, "Xác nhận hủy","Xác Nhận",JOptionPane.YES_NO_OPTION);
+        if (rs == JOptionPane.YES_OPTION)
+            this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSubmitActionPerformed
@@ -231,6 +233,8 @@ public class UpdateNhanVien extends javax.swing.JDialog {
                             return;
                         } else {
                             JOptionPane.showMessageDialog(this, "Thêm thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
+                            formNV.loadDataTable();
+                            this.dispose();
                         }
                     }
                 }
@@ -242,10 +246,11 @@ public class UpdateNhanVien extends javax.swing.JDialog {
                         return;
                     } else {
                         JOptionPane.showMessageDialog(this, "Sửa thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
+                        formNV.loadDataTable();
+                        this.dispose();
                     }
                 }
-                formNV.loadDataTable();
-                this.dispose();
+
             }
         }
     }//GEN-LAST:event_btSubmitActionPerformed

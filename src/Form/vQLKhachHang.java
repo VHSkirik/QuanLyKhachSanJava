@@ -321,9 +321,13 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btResetActionPerformed
 
     private void tbKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhachHangMouseClicked
-        // TODO add your handling code here:
+        
         if (evt.getClickCount() == 2) {
-
+            String makh = dtm.getValueAt(tbKhachHang.getSelectedRow(), 0).toString();
+            pnMain.removeAll();
+            vQLHoaDon formLHoaDon = new vQLHoaDon(makh);
+            pnMain.add(formLHoaDon);
+            formLHoaDon.setVisible(true);
         }
     }//GEN-LAST:event_tbKhachHangMouseClicked
 
@@ -331,7 +335,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int currentRow = tbKhachHang.getSelectedRow();
         if (currentRow == -1) {
-            JOptionPane.showMessageDialog(this, "Chưa chọn khác hàng nào!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Chưa chọn khách hàng nào!", "Thông báo", JOptionPane.WARNING_MESSAGE);
         } else {
             String ma = dtm.getValueAt(currentRow, 0).toString();
             if (DAOHoaDon.getInstance().checkThanhToan(ma) == false) {

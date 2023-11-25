@@ -7,6 +7,7 @@ import DAO.DAOHoaDon;
 import Model.ChiTietHoaDon;
 import Model.HoaDon;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JFrame;
@@ -20,37 +21,41 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
 
     DefaultTableModel dtm_Hoadon;
     DefaultTableModel dtm_ChitietHD;
+    String makh;
     String target = "";
 
-    public vQLHoaDon() {
+    public vQLHoaDon(String makh) {
         initComponents();
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
         dtm_Hoadon = (DefaultTableModel) tbHoaDon.getModel();
         dtm_ChitietHD = (DefaultTableModel) tbChitietHD.getModel();
-        loadAllHoadon();
+        if (makh == null) {
+            loadAllHoadon("");
+        } else {
+            this.makh = makh;
+            loadAllHoadon(makh);
+        }
     }
 
-    public vQLHoaDon(String makh) {
-
-    }
-
-    public void loadAllHoadon() {
+    public void loadAllHoadon(String makh) {
         dtm_Hoadon.setRowCount(0);
         ArrayList<HoaDon> dsHoadon = DAOHoaDon.getInstance().getAll();
         for (HoaDon hd : dsHoadon) {
-            String ngaythue = ConvertTime.changeToDMY(hd.getNgaythue());
-            String ngaytra = ConvertTime.changeToDMY(hd.getNgaytra());
-            dtm_Hoadon.addRow(new Object[]{
-                hd.getMahd(),
-                hd.getMakh(),
-                hd.getManv(),
-                hd.getMaphong(),
-                hd.getGiaphong(),
-                ngaythue,
-                ngaytra,
-                hd.getThanhtien(),
-                hd.getDathanhtoan()});
+            if (hd.getMakh().contains(makh)) {
+                String ngaythue = ConvertTime.changeToDMY(hd.getNgaythue());
+                String ngaytra = ConvertTime.changeToDMY(hd.getNgaytra());
+                dtm_Hoadon.addRow(new Object[]{
+                    hd.getMahd(),
+                    hd.getMakh(),
+                    hd.getManv(),
+                    hd.getMaphong(),
+                    hd.getGiaphong(),
+                    ngaythue,
+                    ngaytra,
+                    hd.getThanhtien(),
+                    hd.getDathanhtoan()});
+            }
         }
     }
 
@@ -282,17 +287,17 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
                 }
             }
             //Xoa HD
-            if (target.equals("HD")){
-                int check = JOptionPane.showConfirmDialog(this, "Xóa hóa đơn và các bản Chi tiết hóa đơn của nó?","Xác Nhận",JOptionPane.YES_NO_OPTION);
-                if (check == JOptionPane.YES_OPTION){
+            if (target.equals("HD")) {
+                int check = JOptionPane.showConfirmDialog(this, "Xóa hóa đơn và các bản Chi tiết hóa đơn của nó?", "Xác Nhận", JOptionPane.YES_NO_OPTION);
+                if (check == JOptionPane.YES_OPTION) {
                     String mahd = dtm_Hoadon.getValueAt(currentRowHD, 0).toString();
                     int rs = LogicHoaDon.deleteAllbyMaHD(mahd);
-                    if (rs == -1){
-                        JOptionPane.showMessageDialog(this, "Xóa thất bại");                      
+                    if (rs == -1) {
+                        JOptionPane.showMessageDialog(this, "Xóa thất bại");
                     } else {
                         JOptionPane.showMessageDialog(this, "Xóa thành công");
                         dtm_ChitietHD.setRowCount(0);
-                        loadAllHoadon();
+                        loadAllHoadon("");
                     }
                 }
             }
@@ -343,42 +348,44 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
 
     private void btThanhTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThanhTienActionPerformed
         int currentRowHD = tbHoaDon.getSelectedRow();
-        if (currentRowHD == -1){
+        if (currentRowHD == -1) {
             JOptionPane.showMessageDialog(this, "Chưa có hóa đơn được chọn");
         } else {
             String mahd = dtm_Hoadon.getValueAt(currentRowHD, 0).toString();
             long thanhtien = LogicHoaDon.TinhThanhTien(mahd);
-            lbThanhtien.setText(thanhtien+"");
+            lbThanhtien.setText(thanhtien + "");
         }
-        
+
     }//GEN-LAST:event_btThanhTienActionPerformed
 
     private void btThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThanhToanActionPerformed
         try {
-           if (lbThanhtien.getText().isBlank()){
-               JOptionPane.showMessageDialog(this, "Hãy kiểm tra thành tiền trước");
-           } else {
-               int currentRowHD = tbHoaDon.getSelectedRow();
-               int thanhtien = Integer.parseInt(lbThanhtien.getText());
-               String mahd = dtm_Hoadon.getValueAt(currentRowHD, 0).toString();
-               HoaDon hd = DAOHoaDon.getInstance().getByID(mahd);
-               hd.setThanhtien(thanhtien);
-               hd.setDathanhtoan(1);
-               int rs = DAOHoaDon.getInstance().update(hd);
-               if (rs == -1){
-                   JOptionPane.showMessageDialog(this, "Thanh toán thất bại");
-                   return;
-               } else {
-                   JOptionPane.showMessageDialog(this, "Thanh toán thành công");
-                   dtm_ChitietHD.setRowCount(0);
-                   loadAllHoadon();
-                   lbThanhtien.setText("");
-               }
-           }
-        } catch (Exception e){
-            
+            if (lbThanhtien.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Hãy kiểm tra thành tiền trước");
+            } else {
+                int currentRowHD = tbHoaDon.getSelectedRow();
+                int thanhtien = Integer.parseInt(lbThanhtien.getText());
+                String mahd = dtm_Hoadon.getValueAt(currentRowHD, 0).toString();
+                HoaDon hd = DAOHoaDon.getInstance().getByID(mahd);
+                if (hd.getNgaytra() == null)
+                    hd.setNgaytra(ConvertTime.toString(new Date()));
+                hd.setThanhtien(thanhtien);
+                hd.setDathanhtoan(1);
+                int rs = DAOHoaDon.getInstance().update(hd);
+                if (rs == -1) {
+                    JOptionPane.showMessageDialog(this, "Thanh toán thất bại");
+                    return;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+                    dtm_ChitietHD.setRowCount(0);
+                    loadAllHoadon("");
+                    lbThanhtien.setText("");
+                }
+            }
+        } catch (Exception e) {
+
         }
-        
+
     }//GEN-LAST:event_btThanhToanActionPerformed
 
 
