@@ -15,6 +15,8 @@ public class ConvertTime {
     }
 
     public static String changeToYMD(String dateString) {
+        if (dateString == null)
+            return null;
         try {
             SimpleDateFormat formatter;
             if (dateString.trim().contains("-")) {
@@ -33,6 +35,8 @@ public class ConvertTime {
     }
 
     public static String changeToDMY(String dateString) {
+        if (dateString == null)
+            return null;
         try {
             SimpleDateFormat formatter;
             if (dateString.trim().contains("-")) {

@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ConvertTime;
+import Controller.LogicHoaDon;
 import DAO.DAOChiTietHoaDon;
 import DAO.DAOHoaDon;
 import Model.ChiTietHoaDon;
@@ -8,7 +9,6 @@ import Model.HoaDon;
 import java.util.ArrayList;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
-import java.util.Objects;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -39,8 +39,8 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         dtm_Hoadon.setRowCount(0);
         ArrayList<HoaDon> dsHoadon = DAOHoaDon.getInstance().getAll();
         for (HoaDon hd : dsHoadon) {
-            String ngaythue = hd.getNgaythue() == null ? "" : ConvertTime.changeToDMY(hd.getNgaythue());
-            String ngaytra = hd.getNgaytra() == null ? "" : ConvertTime.changeToDMY(hd.getNgaytra());
+            String ngaythue = ConvertTime.changeToDMY(hd.getNgaythue());
+            String ngaytra = ConvertTime.changeToDMY(hd.getNgaytra());
             dtm_Hoadon.addRow(new Object[]{
                 hd.getMahd(),
                 hd.getMakh(),
@@ -247,7 +247,41 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
-        // TODO add your handling code here:
+        int currentRowHD = tbHoaDon.getSelectedRow();
+        int currentRowCTHD = tbChitietHD.getSelectedRow();
+        if (currentRowCTHD == -1 && currentRowHD == -1) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần xóa");
+        } else {
+            if (target.equals("CTHD")) {
+                int check = JOptionPane.showConfirmDialog(this, "Xác chi tiết hóa đơn đang chọn?", "Xác Nhận", JOptionPane.YES_NO_OPTION);
+                if (check == JOptionPane.YES_OPTION) {
+                    String mahd = dtm_ChitietHD.getValueAt(currentRowCTHD, 0).toString();
+                    String madv = dtm_ChitietHD.getValueAt(currentRowCTHD, 1).toString();
+                    int rs = DAOChiTietHoaDon.getInstance().delete(mahd, madv);
+                    if (rs == -1) {
+                        JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Xóa Thành Công");
+                        hienthiCTHD();
+                    }
+                }
+            }
+            //Xoa HD
+            if (target.equals("HD")){
+                int check = JOptionPane.showConfirmDialog(this, "Xóa hóa đơn và các bản Chi tiết hóa đơn của nó?","Xác Nhận",JOptionPane.YES_NO_OPTION);
+                if (check == JOptionPane.YES_OPTION){
+                    String mahd = dtm_Hoadon.getValueAt(currentRowHD, 0).toString();
+                    int rs = LogicHoaDon.deleteAllbyMaHD(mahd);
+                    if (rs == -1){
+                        JOptionPane.showMessageDialog(this, "Xóa thất bại");                      
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Xóa thành công");
+                        dtm_ChitietHD.setRowCount(0);
+                        loadAllHoadon();
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void tbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonMouseClicked

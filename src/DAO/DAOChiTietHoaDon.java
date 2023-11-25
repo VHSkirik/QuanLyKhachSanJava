@@ -26,6 +26,11 @@ public class DAOChiTietHoaDon {
         String query = "DELETE FROM chitiethoadon WHERE mahd='" + mahd + "' AND madichvu='" + madv + "'";
         return SqlManager.updateData(query);
     }
+    
+    public int deleteByMahd(String mahd) {
+        String query = "DELETE FROM chitiethoadon WHERE mahd='" + mahd + "'";
+        return SqlManager.updateData(query);
+    }
 
     public int update(ChiTietHoaDon cthd) {
         String query = "UPDATE chitiethoadon SET dongia=" + cthd.getDongia() + ", soluong=" + cthd.getSoluong() + " WHERE mahd='" + cthd.getMahd() + "' AND madichvu='" + cthd.getMadichvu() + "'";
