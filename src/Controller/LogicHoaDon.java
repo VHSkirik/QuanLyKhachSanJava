@@ -8,7 +8,11 @@ import Model.ChiTietHoaDon;
 import Model.HoaDon;
 import Model.LoaiPhong;
 import Model.Phong;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 /**
@@ -55,9 +59,30 @@ public class LogicHoaDon {
         }
         return rs;
     }
-    
-    public static int deleteAllbyMaHD(String mahd){
+
+    public static int deleteAllbyMaHD(String mahd) {
         DAOChiTietHoaDon.getInstance().deleteByMahd(mahd);  //xoa cac cthd lien ket
         return DAOHoaDon.getInstance().delete(mahd);    //xoa hoa don
+    }
+
+    public static int ThemHoaDon(HoaDon hd) {
+        int rs = DAOHoaDon.getInstance().insert(hd);
+        if (rs != -1) {
+            Phong phong = DAOPhong.getInstance().getByID(hd.getMaphong());
+            phong.setTinhtrang(1);
+            DAOPhong.getInstance().update(phong);
+        }
+        return rs;
+    }
+
+    public static long TinhThanhTien(String mahd) {
+        HoaDon hd = DAOHoaDon.getInstance().getByID(mahd);
+        int songaythue = DAOHoaDon.getInstance().soNgayThue(mahd, ConvertTime.toString(new Date()));
+        if (songaythue == 0)
+            songaythue = 1;
+        return hd.getGiaphong() * songaythue;
+    }
+    public static void main(String[] args) {
+        System.out.println(TinhThanhTien("HD001"));
     }
 }

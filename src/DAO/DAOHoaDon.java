@@ -41,7 +41,7 @@ public class DAOHoaDon implements InterfaceDAO<HoaDon> {
         } else {
             ngaytra = null;
         }
-        String query = "UPDATE hoadon SET makh='" + hd.getMakh() + "', manv='" + hd.getManv()+ "', maphong='" + hd.getMaphong() + "', giaphong='" + hd.getGiaphong() + "', ngaythue='" + hd.getNgaythue() + "', ngaytra=" + ngaytra + ", thanhtien='" + hd.getThanhtien() + "', dathanhtoan='" + hd.getDathanhtoan() + "' WHERE mahd='" + hd.getMahd() + "'";
+        String query = "UPDATE hoadon SET makh='" + hd.getMakh() + "', manv='" + hd.getManv() + "', maphong='" + hd.getMaphong() + "', giaphong='" + hd.getGiaphong() + "', ngaythue='" + hd.getNgaythue() + "', ngaytra=" + ngaytra + ", thanhtien='" + hd.getThanhtien() + "', dathanhtoan='" + hd.getDathanhtoan() + "' WHERE mahd='" + hd.getMahd() + "'";
         return SqlManager.updateData(query);
     }
 
@@ -103,4 +103,17 @@ public class DAOHoaDon implements InterfaceDAO<HoaDon> {
         return true;
     }
 
+    public int soNgayThue(String mahd, String ngaytra) {
+        int songay = -1;
+        try {
+            String query = "SELECT DATEDIFF('" + ngaytra + "',ngaythue) as 'songaythue' FROM hoadon WHERE mahd='" + mahd + "'";
+            ResultSet rs = SqlManager.executeQuery(query);
+            if (rs.next()) {
+                songay = rs.getInt("songaythue");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return songay;
+    }
 }

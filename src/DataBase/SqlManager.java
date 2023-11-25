@@ -31,4 +31,16 @@ public class SqlManager {
         }
         return kq;
     }
+    
+    public static ResultSet executeQuery(String query) {
+        ResultSet rs = null;
+        try {
+            Connection c = KetNoiData.getConnection();
+            Statement stm = c.createStatement();
+            rs = stm.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }

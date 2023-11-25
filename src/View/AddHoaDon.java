@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ConvertTime;
+import Controller.LogicHoaDon;
 import Controller.SearchPhong;
 import DAO.DAOHoaDon;
 import DAO.DAOLoaiPhong;
@@ -58,7 +59,7 @@ public class AddHoaDon extends javax.swing.JInternalFrame {
     public void setDataPhong() {
         int currentRow = tbLoai.getSelectedRow();
         if (currentRow == -1) {
-            JOptionPane.showMessageDialog(this, "Chưa chọn loại phòng!");
+            
         } else {
             String maloai = dtmLoai.getValueAt(currentRow, 0).toString().toLowerCase();
             ArrayList<Phong> dsPhong = SearchPhong.getAllbyMaLoai(maloai);
@@ -302,7 +303,7 @@ public class AddHoaDon extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Mã hóa đơn đã tồn tại");
                 } else {
                     HoaDon hd = new HoaDon(mahd, makh, manv, maphong, giaphong, ngaythue, null, 0, 0);
-                    int i = DAOHoaDon.getInstance().insert(hd);
+                    int i = LogicHoaDon.ThemHoaDon(hd);
                     if (i == -1){
                         JOptionPane.showMessageDialog(this, "Thêm thất bại");
                     } else {

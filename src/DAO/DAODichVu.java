@@ -69,4 +69,7 @@ public class DAODichVu implements InterfaceDAO<DichVu> {
         }
         return dv;
     }
+    public int getTienDV(String mahd){
+        return -1; ////
+    }
 }
