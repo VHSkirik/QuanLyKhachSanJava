@@ -115,11 +115,13 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         jToolBar1 = new javax.swing.JToolBar();
         btThemPhong = new javax.swing.JButton();
         vtSuaPhong = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btXoaPhong = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton9 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btResetPhong = new javax.swing.JButton();
+        cbTKPhong = new javax.swing.JComboBox<>();
+        txtTimKiem = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbLoaiphong = new javax.swing.JTable();
         jToolBar2 = new javax.swing.JToolBar();
@@ -199,20 +201,20 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(vtSuaPhong);
 
-        jButton5.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_xoa.png"))); // NOI18N
-        jButton5.setText("Xóa");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btXoaPhong.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
+        btXoaPhong.setForeground(new java.awt.Color(0, 0, 0));
+        btXoaPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_xoa.png"))); // NOI18N
+        btXoaPhong.setText("Xóa");
+        btXoaPhong.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btXoaPhong.setFocusable(false);
+        btXoaPhong.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btXoaPhong.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btXoaPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btXoaPhongActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton5);
+        jToolBar1.add(btXoaPhong);
         jToolBar1.add(jSeparator1);
 
         jButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -235,11 +237,29 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm Phòng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_reset.png"))); // NOI18N
-        jButton2.setText("Reset");
-        jButton2.setIconTextGap(10);
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 130, 50));
+        btResetPhong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btResetPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_reset.png"))); // NOI18N
+        btResetPhong.setText("Reset");
+        btResetPhong.setIconTextGap(10);
+        btResetPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btResetPhongActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btResetPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 130, 50));
+
+        cbTKPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã Phòng" }));
+        jPanel2.add(cbTKPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 50));
+
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 300, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 590, 80));
 
@@ -385,7 +405,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btXoaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaPhongActionPerformed
         int currentRowPhong = tbPhong.getSelectedRow();
         if (currentRowPhong == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn bản ghi cần xóa");
@@ -403,7 +423,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btXoaPhongActionPerformed
 
     private void btXoaLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaLoaiActionPerformed
         int currentRowLoai = tbLoaiphong.getSelectedRow();
@@ -526,15 +546,40 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_vtSuaPhongActionPerformed
 
+    private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
+
+    }//GEN-LAST:event_txtTimKiemKeyPressed
+
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        //Hiển thị danh sách phòng theo txtTimKiem
+        String text = txtTimKiem.getText().trim().toLowerCase();
+        dtm_Phong.setRowCount(0);
+        for (Phong phong : dsPhong) {
+            if (phong.getMaphong().toLowerCase().contains(text)) {
+                dtm_Phong.addRow(new Object[]{
+                    phong.getMaphong(),
+                    phong.getTenphong(),
+                    phong.getMaloaiphong(),
+                    phong.getTinhtrang()});
+            }
+        }
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
+    private void btResetPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetPhongActionPerformed
+        txtTimKiem.setText("");
+        hienthiPhong();
+    }//GEN-LAST:event_btResetPhongActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btResetLoai;
+    private javax.swing.JButton btResetPhong;
     private javax.swing.JButton btSuaLoai;
     private javax.swing.JButton btThemLoai;
     private javax.swing.JButton btThemPhong;
     private javax.swing.JButton btXoaLoai;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btXoaPhong;
+    private javax.swing.JComboBox<String> cbTKPhong;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -555,6 +600,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMaloai;
     private javax.swing.JTextArea txtMota;
     private javax.swing.JTextField txtTenLoai;
+    private javax.swing.JTextField txtTimKiem;
     private javax.swing.JButton vtSuaPhong;
     // End of variables declaration//GEN-END:variables
 }
