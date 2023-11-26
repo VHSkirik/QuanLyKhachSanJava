@@ -9,6 +9,7 @@ import DAO.DAOPhong;
 import Model.LoaiPhong;
 import Model.Phong;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +30,8 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         ui.setNorthPane(null);
         dtm_Loaiphong = (DefaultTableModel) tbLoaiphong.getModel();
         dtm_Phong = (DefaultTableModel) tbPhong.getModel();
+        tbLoaiphong.setAutoCreateRowSorter(true);
+        tbPhong.setAutoCreateRowSorter(true);
         hienthiLoaiPhong();
         hienthiPhong();
     }
@@ -38,6 +41,15 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         txtTenLoai.setText("");
         txtGia.setText("");
         txtMota.setText("");
+    }
+
+    public String[] getDSMaLoai() {
+        int soHang = tbLoaiphong.getRowCount();
+        String dsMaloai[] = new String[soHang];
+        for (int i = 0; i < soHang; i++) {
+            dsMaloai[i] = dtm_Loaiphong.getValueAt(i, 0).toString();
+        }
+        return dsMaloai;
     }
 
     public boolean kiemtraText() {
@@ -101,8 +113,8 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPhong = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btThemPhong = new javax.swing.JButton();
+        vtSuaPhong = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton9 = new javax.swing.JButton();
@@ -157,25 +169,35 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         jToolBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng Phòng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jToolBar1.setRollover(true);
 
-        jButton1.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
-        jButton1.setText("Thêm");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
+        btThemPhong.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
+        btThemPhong.setForeground(new java.awt.Color(0, 0, 0));
+        btThemPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
+        btThemPhong.setText("Thêm");
+        btThemPhong.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btThemPhong.setFocusable(false);
+        btThemPhong.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btThemPhong.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btThemPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThemPhongActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btThemPhong);
 
-        jButton4.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_sua.png"))); // NOI18N
-        jButton4.setText("Sửa");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
+        vtSuaPhong.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
+        vtSuaPhong.setForeground(new java.awt.Color(0, 0, 0));
+        vtSuaPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_sua.png"))); // NOI18N
+        vtSuaPhong.setText("Sửa");
+        vtSuaPhong.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        vtSuaPhong.setFocusable(false);
+        vtSuaPhong.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        vtSuaPhong.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        vtSuaPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vtSuaPhongActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(vtSuaPhong);
 
         jButton5.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 0, 0));
@@ -364,14 +386,30 @@ public class vQLPhong extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        int currentRowPhong = tbPhong.getSelectedRow();
+        if (currentRowPhong == -1) {
+            JOptionPane.showMessageDialog(this, "Hãy chọn bản ghi cần xóa");
+        } else {
+            String maphong = dtm_Phong.getValueAt(currentRowPhong, 0).toString();
+            int rsXacnhan = JOptionPane.showConfirmDialog(this, "Xác nhận xóa phòng có mã " + maphong + "?", "Xác Nhận", JOptionPane.YES_NO_OPTION);
+            if (rsXacnhan == JOptionPane.YES_OPTION) {
+                //thực hiện xóa.
+                int rsXoa = DAOPhong.getInstance().delete(maphong);
+                if (rsXoa == -1) {
+                    JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    hienthiPhong();
+                }
+            }
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btXoaLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaLoaiActionPerformed
         int currentRowLoai = tbLoaiphong.getSelectedRow();
         //kiem tra chon
         if (currentRowLoai == -1) {
-            JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần xóa");
+            JOptionPane.showMessageDialog(this, "Hãy chọn bản ghi cần xóa");
         } else {
             String maloaiphong = dtm_Loaiphong.getValueAt(currentRowLoai, 0).toString();
             //xác nhận xóa
@@ -469,15 +507,33 @@ public class vQLPhong extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_txtMaloaiKeyPressed
 
+    private void btThemPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemPhongActionPerformed
+        //Khoi tao dialog để thêm
+        UpdatePhong themphong = new UpdatePhong(this, new JFrame(), getDSMaLoai(), null);
+        themphong.setVisible(true);
+    }//GEN-LAST:event_btThemPhongActionPerformed
+
+    private void vtSuaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vtSuaPhongActionPerformed
+        int currentRowPhong = tbPhong.getSelectedRow();
+        //kiểm tra chọn
+        if (currentRowPhong == -1) {
+            JOptionPane.showMessageDialog(this, "Hãy chọn phòng cần sửa");
+        } else {
+            //khởi tạo dialog để sửa
+            String maphong = dtm_Phong.getValueAt(currentRowPhong, 0).toString();
+            UpdatePhong suaphong = new UpdatePhong(this, new JFrame(), getDSMaLoai(), maphong);
+            suaphong.setVisible(true);
+        }
+    }//GEN-LAST:event_vtSuaPhongActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btResetLoai;
     private javax.swing.JButton btSuaLoai;
     private javax.swing.JButton btThemLoai;
+    private javax.swing.JButton btThemPhong;
     private javax.swing.JButton btXoaLoai;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -499,5 +555,6 @@ public class vQLPhong extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMaloai;
     private javax.swing.JTextArea txtMota;
     private javax.swing.JTextField txtTenLoai;
+    private javax.swing.JButton vtSuaPhong;
     // End of variables declaration//GEN-END:variables
 }
