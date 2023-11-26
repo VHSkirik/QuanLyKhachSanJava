@@ -57,24 +57,34 @@ public class vQLPhong extends javax.swing.JInternalFrame {
     public void hienthiLoaiPhong() {
         ArrayList<LoaiPhong> dsLoaiPhong = DAOLoaiPhong.getInstance().getAll();
         dtm_Loaiphong.setRowCount(0);
-        for (LoaiPhong lp : dsLoaiPhong){
+        for (LoaiPhong lp : dsLoaiPhong) {
             dtm_Loaiphong.addRow(new Object[]{
-            lp.getMaloaiphong(),
-            lp.getTenloaiphong(),
-            lp.getGiaphong(),
-            lp.getMota()});
+                lp.getMaloaiphong(),
+                lp.getTenloaiphong(),
+                lp.getGiaphong(),
+                lp.getMota()});
         }
     }
-    
-    public void hienthiPhong(){
+
+    public void hienthiPhong() {
         dsPhong = DAOPhong.getInstance().getAll();
         dtm_Phong.setRowCount(0);
-        for (Phong phong : dsPhong){
+        for (Phong phong : dsPhong) {
             dtm_Phong.addRow(new Object[]{
-            phong.getMaphong(),
-            phong.getTenphong(),
-            phong.getMaloaiphong(),
-            phong.getTinhtrang()});
+                phong.getMaphong(),
+                phong.getTenphong(),
+                phong.getMaloaiphong(),
+                phong.getTinhtrang()});
+        }
+    }
+
+    public void hienthiDuLieuLoaiPhong() {
+        int currenRowLP = tbLoaiphong.getSelectedRow();
+        if (currenRowLP != -1) {
+            txtMaloai.setText(dtm_Loaiphong.getValueAt(currenRowLP, 0).toString());
+            txtTenLoai.setText(dtm_Loaiphong.getValueAt(currenRowLP, 1).toString());
+            txtGia.setText(dtm_Loaiphong.getValueAt(currenRowLP, 2).toString());
+            txtMota.setText(dtm_Loaiphong.getValueAt(currenRowLP, 3).toString());
         }
     }
 
@@ -210,7 +220,6 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 130, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 590, 80));
-        jPanel2.getAccessibleContext().setAccessibleName("Tìm Kiếm Phòng");
 
         tbLoaiphong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -274,7 +283,6 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         btSuaLoai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_sua.png"))); // NOI18N
         btSuaLoai.setText("Sửa");
         btSuaLoai.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btSuaLoai.setFocusable(false);
         btSuaLoai.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btSuaLoai.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btSuaLoai.addActionListener(new java.awt.event.ActionListener() {
@@ -362,16 +370,16 @@ public class vQLPhong extends javax.swing.JInternalFrame {
     private void btXoaLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaLoaiActionPerformed
         int currentRowLoai = tbLoaiphong.getSelectedRow();
         //kiem tra chon
-        if (currentRowLoai == -1){
+        if (currentRowLoai == -1) {
             JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần xóa");
         } else {
             String maloaiphong = dtm_Loaiphong.getValueAt(currentRowLoai, 0).toString();
             //xác nhận xóa
-            int rsXacnhan = JOptionPane.showConfirmDialog(this, "Xác nhận xóa loại phòng có mã " + maloaiphong + "?","Xác Nhận",JOptionPane.YES_NO_OPTION);
-            if (rsXacnhan == JOptionPane.YES_OPTION){
+            int rsXacnhan = JOptionPane.showConfirmDialog(this, "Xác nhận xóa loại phòng có mã " + maloaiphong + "?", "Xác Nhận", JOptionPane.YES_NO_OPTION);
+            if (rsXacnhan == JOptionPane.YES_OPTION) {
                 //thực hiện xóa.
                 int rsXoa = DAOLoaiPhong.getInstance().delete(maloaiphong);
-                if (rsXoa == -1){
+                if (rsXoa == -1) {
                     JOptionPane.showMessageDialog(this, "Xóa thất bại");
                 } else {
                     JOptionPane.showMessageDialog(this, "Xóa thành công");
@@ -421,15 +429,40 @@ public class vQLPhong extends javax.swing.JInternalFrame {
                 }
             }
         }
-
     }//GEN-LAST:event_btThemLoaiActionPerformed
 
     private void btSuaLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaLoaiActionPerformed
-        // TODO add your handling code here:
+        //kiem tra dien du thong tin
+        if (kiemtraText() == false) {
+            JOptionPane.showMessageDialog(this, "Kiểm tra lại thông tin");
+        } else {
+            //Xác Nhận sửa?
+            int rsXacnhan = JOptionPane.showConfirmDialog(this, "Xác nhận sửa?", "Xác Nhận", JOptionPane.YES_NO_OPTION);
+            if (rsXacnhan == JOptionPane.YES_OPTION) {
+                //kiểm tra mã loại
+                String maloaiphong = txtMaloai.getText();
+                if (DAOLoaiPhong.getInstance().getByID(maloaiphong) == null) {
+                    JOptionPane.showMessageDialog(this, "Mã loại phòng không đúng");
+                } else {
+                    //cập nhật
+                    String tenloaiphong = txtTenLoai.getText();
+                    int gia = Integer.parseInt(txtGia.getText());
+                    String mota = txtMota.getText();
+                    LoaiPhong lp = new LoaiPhong(maloaiphong, tenloaiphong, gia, mota);
+                    int rsSua = DAOLoaiPhong.getInstance().update(lp);
+                    if (rsSua == -1) {
+                        JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Sửa thành công");
+                        hienthiLoaiPhong();
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btSuaLoaiActionPerformed
 
     private void tbLoaiphongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLoaiphongMouseClicked
-        
+        hienthiDuLieuLoaiPhong();
     }//GEN-LAST:event_tbLoaiphongMouseClicked
 
     private void txtMaloaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaloaiKeyPressed
