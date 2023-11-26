@@ -22,8 +22,8 @@ public class DAOLoaiPhong implements InterfaceDAO<LoaiPhong> {
     }
 
     @Override
-    public int delete(String id) {
-        String query = "DELETE FROM loaiphong WHERE maloaiphong='" + id + "'";
+    public int delete(String maloaiphong) {
+        String query = "DELETE FROM loaiphong WHERE maloaiphong='" + maloaiphong + "'";
         return SqlManager.updateData(query);
     }
 
@@ -54,10 +54,10 @@ public class DAOLoaiPhong implements InterfaceDAO<LoaiPhong> {
     }
 
     @Override
-    public LoaiPhong getByID(String id) {
+    public LoaiPhong getByID(String maloaiphong) {
         LoaiPhong lp = null;
         try {
-            ResultSet rs = SqlManager.getDataTable("loaiphong WHERE maloaiphong='" + id + "'");
+            ResultSet rs = SqlManager.getDataTable("loaiphong WHERE maloaiphong='" + maloaiphong + "'");
             if (rs.next()) {
                 lp = new LoaiPhong(
                         rs.getString("maloaiphong"),

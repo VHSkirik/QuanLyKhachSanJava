@@ -225,7 +225,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         // TODO add your handling code here:
-        
+        JOptionPane.showMessageDialog(this, "Tính năng chưa khả dụng");
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
