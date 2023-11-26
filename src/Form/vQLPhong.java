@@ -8,7 +8,6 @@ import DAO.DAOLoaiPhong;
 import DAO.DAOPhong;
 import Model.LoaiPhong;
 import Model.Phong;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -361,7 +360,25 @@ public class vQLPhong extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btXoaLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaLoaiActionPerformed
-        // TODO add your handling code here:
+        int currentRowLoai = tbLoaiphong.getSelectedRow();
+        //kiem tra chon
+        if (currentRowLoai == -1){
+            JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần xóa");
+        } else {
+            String maloaiphong = dtm_Loaiphong.getValueAt(currentRowLoai, 0).toString();
+            //xác nhận xóa
+            int rsXacnhan = JOptionPane.showConfirmDialog(this, "Xác nhận xóa loại phòng có mã " + maloaiphong + "?","Xác Nhận",JOptionPane.YES_NO_OPTION);
+            if (rsXacnhan == JOptionPane.YES_OPTION){
+                //thực hiện xóa.
+                int rsXoa = DAOLoaiPhong.getInstance().delete(maloaiphong);
+                if (rsXoa == -1){
+                    JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    hienthiLoaiPhong();
+                }
+            }
+        }
     }//GEN-LAST:event_btXoaLoaiActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
