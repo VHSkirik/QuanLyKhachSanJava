@@ -536,16 +536,16 @@ public class Main extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/info.png"))); // NOI18N
-        jLabel16.setText("THÔNG TIN");
+        jLabel16.setText("SỬA THÔNG TIN");
 
         javax.swing.GroupLayout pnButtonTTLayout = new javax.swing.GroupLayout(pnButtonTT);
         pnButtonTT.setLayout(pnButtonTTLayout);
         pnButtonTTLayout.setHorizontalGroup(
             pnButtonTTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnButtonTTLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnButtonTTLayout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(jLabel16)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
         pnButtonTTLayout.setVerticalGroup(
             pnButtonTTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
