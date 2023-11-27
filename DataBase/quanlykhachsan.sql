@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 25, 2023 lúc 01:35 PM
+-- Thời gian đã tạo: Th10 27, 2023 lúc 01:23 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.6
 
@@ -39,7 +39,11 @@ CREATE TABLE `chitiethoadon` (
 --
 
 INSERT INTO `chitiethoadon` (`mahd`, `madichvu`, `dongia`, `soluong`) VALUES
-('HD001', 'DV001', 20000, 1);
+('HD001', 'DV002', 50000, 10),
+('HD003', 'DV003', 50000, 1),
+('HD003', 'DV004', 150000, 1),
+('HD007', 'DV001', 20000, 5),
+('HD007', 'DV003', 50000, 5);
 
 -- --------------------------------------------------------
 
@@ -61,7 +65,8 @@ INSERT INTO `dichvu` (`madichvu`, `tendichvu`, `giadichvu`) VALUES
 ('DV001', 'Dịch Vụ Dọn Dẹp', 20000),
 ('DV002', 'Dịch Vụ Đưa Đón', 50000),
 ('DV003', 'Dịch Vụ Giữ Trẻ', 50000),
-('DV004', 'Dịch Vụ Massage', 150000);
+('DV004', 'Dịch Vụ Massage', 150000),
+('DV005', 'Đặt Đồ Ăn Tại Phòng', 30000);
 
 -- --------------------------------------------------------
 
@@ -86,8 +91,13 @@ CREATE TABLE `hoadon` (
 --
 
 INSERT INTO `hoadon` (`mahd`, `makh`, `manv`, `maphong`, `giaphong`, `ngaythue`, `ngaytra`, `thanhtien`, `dathanhtoan`) VALUES
-('HD001', 'KH001', 'admin', 'P7002', 500000, '2023-11-24', '2023-11-27', 1520000, 1),
-('HD003', 'KH005', 'admin', 'P6001', 100000, '2023-11-25', '2023-11-27', 200000, 1);
+('HD001', 'KH001', 'admin', 'P2001', 250000, '2023-11-27', '2023-11-27', 750000, 1),
+('HD002', 'KH005', 'admin', 'P3001', 500000, '2023-09-27', '2023-11-27', 30500000, 1),
+('HD003', 'KH004', 'admin', 'P1001', 100000, '2023-11-20', '2023-11-26', 800000, 1),
+('HD004', 'KH005', 'admin', 'P8001', 2000000, '2023-10-07', NULL, 0, 0),
+('HD006', 'KH011', 'admin', 'P1001', 100000, '2023-11-27', NULL, 0, 0),
+('HD007', 'KH001', 'bchieu', 'P1002', 100000, '2023-10-08', NULL, 0, 0),
+('HD008', 'KH002', 'bchieu', 'P6002', 100000, '2023-11-01', NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -130,7 +140,8 @@ INSERT INTO `khachhang` (`makh`, `tenkh`, `ngaysinhkh`, `cmt`, `quoctich`, `gioi
 ('KH018', 'Đỗ Văn Giáp', '1996-07-07', '278901234', 'Việt Nam', 'Nam', '0978901234'),
 ('KH019', 'Hoàng Thị Hồng', '1997-08-08', '289012345', 'Việt Nam', 'Nữ', '0989012345'),
 ('KH020', 'Trần Thành Kiên', '1998-09-09', '290123456', 'Việt Nam', 'Nam', '0990123456'),
-('KH021', 'Lê Thị Mậu', '1999-10-10', '301234567', 'Việt Nam', 'Nữ', '0910123457');
+('KH021', 'Lê Thị Mậu', '1999-10-10', '301234567', 'Việt Nam', 'Nữ', '0910123457'),
+('KH022', 'Vịnh Xuân Quyền', '2022-02-22', '0123456789', 'Trung Hoa', 'Nam', '0123456789');
 
 -- --------------------------------------------------------
 
@@ -176,17 +187,18 @@ CREATE TABLE `nhanvien` (
 
 INSERT INTO `nhanvien` (`taikhoan`, `hotennv`, `ngaysinhnv`, `gioitinhnv`, `matkhau`, `loainguoidung`) VALUES
 ('admin', 'Bùi Chí Hiếu', '2002-05-08', 'Nam', 'admin', 'admin'),
+('bchieu', 'Bùi Chí Hiếu', '2002-01-01', 'Nam', 'bchieu', 'nhanvien'),
 ('bthanh', 'Bùi Thị Hồng', '2002-08-08', 'Khác', 'matkhau08', 'nhanvien'),
 ('dvgiau', 'Dinh Van G', '1992-07-07', 'Nam', 'matkhau07', 'nhanvien'),
 ('hoangvane', 'Hoang Van E', '1988-05-05', 'Nam', 'matkhau05', 'nhanvien'),
-('lvcong', 'Le Van C', '1984-03-03', 'Nam', 'matkhau03', 'nhanvien'),
-('mtluyen', 'Mai Thi J', '1998-10-10', 'Nữ', 'matkhau10', 'nhanvien'),
-('nhanvien', 'Bùi Minh Ngọc', '2006-03-26', 'Nam', 'nhanvien', 'nhanvien'),
+('lvcong', 'Le Van Công', '1984-03-03', 'Nam', 'matkhau03', 'nhanvien'),
+('mtluyen', 'Mai Thi Luyến', '1998-10-10', 'Nữ', 'matkhau10', 'nhanvien'),
+('nhanvien', 'Bùi Minh Ngọc', '2006-03-26', 'Nam', 'nhanvien1', 'nhanvien'),
 ('nvaach', 'Nguyễn Văn Ách', '1980-01-01', 'Nam', 'matkhau01', 'nhanvien'),
-('ptdau', 'Pham Thi D', '1986-04-04', 'Nữ', 'matkhau04', 'nhanvien'),
-('ttbic', 'Tran Thi B', '1982-02-02', 'Nữ', 'matkhau02', 'nhanvien'),
-('tving', 'Trinh Van I', '1996-09-09', 'Nam', 'matkhau09', 'nhanvien'),
-('vuthif', 'Vu Thi F', '1990-06-06', 'Nữ', 'matkhau06', 'nhanvien');
+('ptdau', 'Pham Thi Dậu', '1986-04-04', 'Nữ', 'matkhau04', 'nhanvien'),
+('ttbic', 'Trần Thị Bích Ngọc', '1982-02-02', 'Nữ', 'matkhau02', 'nhanvien'),
+('tving', 'Trịnh Văn Linh', '1996-09-09', 'Nam', 'matkhau09', 'nhanvien'),
+('vuthif', 'Vu Thi Phương', '1990-06-06', 'Nữ', 'matkhau06', 'nhanvien');
 
 -- --------------------------------------------------------
 
@@ -206,29 +218,30 @@ CREATE TABLE `phong` (
 --
 
 INSERT INTO `phong` (`maphong`, `tenphong`, `maloaiphong`, `tinhtrang`) VALUES
-('P10001', 'Tầng 10 Phòng 1001', 'LP002', 1),
+('P10001', 'Tầng 10 Phòng 1001', 'LP002', 0),
 ('P10002', 'Tầng 10 Phòng 1002', 'LP002', 0),
 ('P1001', 'Tầng 1 Phòng 101', 'LP001', 1),
 ('P1002', 'Tầng 1 Phòng 102', 'LP001', 1),
+('P1003', 'Tầng 1 Phòng 103', 'LP001', 0),
 ('P2001', 'Tầng 2 Phòng 201', 'LP002', 0),
-('P2002', 'Tầng 2 Phòng 202', 'LP002', 1),
+('P2002', 'Tầng 2 Phòng 202', 'LP002', 0),
 ('P2003', 'Tầng 2 Phòng 203', 'LP002', 0),
-('P2004', 'Tầng 2 Phòng 204', 'LP002', 1),
+('P2004', 'Tầng 2 Phòng 204', 'LP002', 0),
 ('P3001', 'Tầng 3 Phòng 301', 'LP003', 0),
-('P3002', 'Tầng 3 Phòng 302', 'LP003', 1),
+('P3002', 'Tầng 3 Phòng 302', 'LP003', 0),
 ('P4001', 'Tầng 4 Phòng 401', 'LP004', 0),
-('P4002', 'Tầng 4 Phòng 402', 'LP004', 1),
-('P5001', 'Tầng 5 Hội Trường 1', 'LP004', 1),
-('P5002', 'Tầng 5 Hội Trường 2', 'LP004', 1),
-('P6001', 'Tầng 6 Phòng 601', 'LP001', 1),
+('P4002', 'Tầng 4 Phòng 402', 'LP004', 0),
+('P5001', 'Tầng 5 Hội Trường 1', 'LP004', 0),
+('P5002', 'Tầng 5 Hội Trường 2', 'LP004', 0),
+('P6001', 'Tầng 6 Phòng 601', 'LP001', 0),
 ('P6002', 'Tầng 6 Phòng 602', 'LP001', 1),
 ('P6003', 'Tầng 6 Phòng 603', 'LP002', 0),
-('P6004', 'Tầng 6 Phòng 604', 'LP002', 1),
-('P7001', 'Tầng 7 Phòng 701', 'LP003', 1),
+('P6004', 'Tầng 6 Phòng 604', 'LP002', 0),
+('P7001', 'Tầng 7 Phòng 701', 'LP003', 0),
 ('P7002', 'Tầng 7 Phòng 702', 'LP003', 0),
 ('P8001', 'Tầng 8 Phòng 801', 'LP004', 1),
 ('P8002', 'Tầng 8 Phòng 802', 'LP004', 0),
-('P9001', 'Tầng 9 Phòng 901', 'LP001', 1),
+('P9001', 'Tầng 9 Phòng 901', 'LP001', 0),
 ('P9002', 'Tầng 9 Phòng 902', 'LP001', 0);
 
 --
