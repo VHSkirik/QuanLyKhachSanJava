@@ -32,7 +32,7 @@ public class Main extends javax.swing.JFrame {
         lbTenNV.setText(this.nhanvien.getHotenvn());
         defaultColor = new Color(0, 153, 255);
         clickColor = new Color(26, 188, 156);
-        if (!nhanvien.getLoainguoidung().equals("admin")){
+        if (!nhanvien.getLoainguoidung().equals("admin")) {
             pnButtonDichVu.setEnabled(false);
             pnButtonNV.setEnabled(false);
             pnButtonPhong.setEnabled(false);
@@ -101,6 +101,33 @@ public class Main extends javax.swing.JFrame {
 
     }
 
+    private void btPhongClicked() {
+        if (pnButtonPhong.isEnabled()) {
+            currentPanel = pnButtonPhong.getName();
+            removeColer();
+            pnButtonPhong.setBackground(clickColor);
+            hienthiQLP();
+        }
+    }
+
+    private void btNhanVienClicked() {
+        if (pnButtonNV.isEnabled()) {
+            currentPanel = pnButtonNV.getName();
+            removeColer();
+            pnButtonNV.setBackground(clickColor);
+            hienthiQLNV();
+        }
+    }
+
+    private void btDichVuClicked() {
+        if (pnButtonDichVu.isEnabled()) {
+            currentPanel = pnButtonDichVu.getName();
+            removeColer();
+            pnButtonDichVu.setBackground(clickColor);
+            hienthiQLDV();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -134,6 +161,7 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phần mềm quản lý khách sạn");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnButton.setBackground(new java.awt.Color(0, 153, 255));
@@ -545,17 +573,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_pnButtonLogoutMousePressed
 
     private void pnButtonNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonNVMouseClicked
-        currentPanel = pnButtonNV.getName();
-        removeColer();
-        pnButtonNV.setBackground(clickColor);
-        hienthiQLNV();
+        btNhanVienClicked();
     }//GEN-LAST:event_pnButtonNVMouseClicked
 
     private void pnButtonNVMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonNVMousePressed
-        currentPanel = pnButtonNV.getName();
-        removeColer();
-        pnButtonNV.setBackground(clickColor);
-        hienthiQLNV();
+        btNhanVienClicked();
     }//GEN-LAST:event_pnButtonNVMousePressed
 
     private void pnButtonKHMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonKHMouseEntered
@@ -581,17 +603,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_pnButtonHomeMouseExited
 
     private void pnButtonDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonDichVuMouseClicked
-        currentPanel = pnButtonDichVu.getName();
-        removeColer();
-        pnButtonDichVu.setBackground(clickColor);
-        hienthiQLDV();
+        btDichVuClicked();
     }//GEN-LAST:event_pnButtonDichVuMouseClicked
 
     private void pnButtonDichVuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonDichVuMousePressed
-        currentPanel = pnButtonDichVu.getName();
-        removeColer();
-        pnButtonDichVu.setBackground(clickColor);
-        hienthiQLDV();
+        btDichVuClicked();
     }//GEN-LAST:event_pnButtonDichVuMousePressed
 
     private void pnButtonThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonThongKeMouseClicked
@@ -654,10 +670,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_pnButtonHomeMouseClicked
 
     private void pnButtonPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonPhongMouseClicked
-        currentPanel = pnButtonPhong.getName();
-        removeColer();
-        pnButtonPhong.setBackground(clickColor);
-        hienthiQLP();
+        btPhongClicked();
     }//GEN-LAST:event_pnButtonPhongMouseClicked
 
     private void pnButtonPhongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonPhongMouseEntered
@@ -670,7 +683,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_pnButtonPhongMouseExited
 
     private void pnButtonPhongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonPhongMousePressed
-
+        btPhongClicked();
     }//GEN-LAST:event_pnButtonPhongMousePressed
 
     private void pnButtonKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonKHMouseClicked
