@@ -17,18 +17,29 @@ public class Main extends javax.swing.JFrame {
     public static NhanVien nhanvien;
     Color defaultColor;
     Color clickColor;
+    String currentPanel = "";
 
     public Main(NhanVien nhanvien) {
         initComponents();
-        this.setIconImage(new ImageIcon("src/Icons/Main.png").getImage());
         this.nhanvien = nhanvien;
-//        lbTitle.setText(this.nhanvien.getLoainguoidung().toUpperCase());
-//        lbTenNV.setText(this.nhanvien.getHotenvn());
-        defaultColor = new Color(0, 153, 255);
-        clickColor = new Color(26, 188, 156);       
+        setup();
+        hienthiHome();
     }
 
-    public void logOut() {
+    private void setup() {
+        this.setIconImage(new ImageIcon("src/Icons/Main.png").getImage());
+        lbTitle.setText(this.nhanvien.getLoainguoidung().toUpperCase());
+        lbTenNV.setText(this.nhanvien.getHotenvn());
+        defaultColor = new Color(0, 153, 255);
+        clickColor = new Color(26, 188, 156);
+        if (!nhanvien.getLoainguoidung().equals("admin")){
+            pnButtonDichVu.setEnabled(false);
+            pnButtonNV.setEnabled(false);
+            pnButtonPhong.setEnabled(false);
+        }
+    }
+
+    private void logOut() {
         int check = JOptionPane.showConfirmDialog(this, "Bạn muốn đăng xuất?", "Xác Nhận", JOptionPane.YES_NO_OPTION);
         if (check == JOptionPane.YES_OPTION) {
             Login login = new Login();
@@ -37,12 +48,12 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
-    private void hienthiHome(){
+    private void hienthiHome() {
         Home home = new Home();
         pnMainContent.removeAll();
         pnMainContent.add(home).setVisible(true);
     }
-    
+
     private void hienthiQLNV() {
         vQLNhanVien qlnhanvien = new vQLNhanVien();
         pnMainContent.removeAll();
@@ -66,11 +77,28 @@ public class Main extends javax.swing.JFrame {
         pnMainContent.removeAll();
         pnMainContent.add(qlphong).setVisible(true);
     }
-    
-    private void hienthiQLHD(){
+
+    private void hienthiQLHD() {
         vQLHoaDon qlhoadon = new vQLHoaDon(null);
         pnMainContent.removeAll();
         pnMainContent.add(qlhoadon).setVisible(true);
+    }
+
+    private void hienthiTK() {
+        vThongKe thongke = new vThongKe();
+        pnMainContent.removeAll();
+        pnMainContent.add(thongke).setVisible(true);
+    }
+
+    private void removeColer() {
+        pnButtonHome.setBackground(defaultColor);
+        pnButtonKH.setBackground(defaultColor);
+        pnButtonNV.setBackground(defaultColor);
+        pnButtonDichVu.setBackground(defaultColor);
+        pnButtonPhong.setBackground(defaultColor);
+        pnButtonHoaDon.setBackground(defaultColor);
+        pnButtonThongKe.setBackground(defaultColor);
+
     }
 
     /**
@@ -94,12 +122,14 @@ public class Main extends javax.swing.JFrame {
         lbTenNV = new javax.swing.JLabel();
         pnButtonHome = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        pnButtonPhong = new javax.swing.JPanel();
+        pnButtonThongKe = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         pnButtonDichVu = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         pnButtonHoaDon = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
+        pnButtonPhong = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
         pnMainContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -146,6 +176,7 @@ public class Main extends javax.swing.JFrame {
 
         pnButtonNV.setBackground(new java.awt.Color(0, 153, 255));
         pnButtonNV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnButtonNV.setName("NhanVien"); // NOI18N
         pnButtonNV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnButtonNVMouseClicked(evt);
@@ -181,14 +212,18 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pnButtonNVLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnButton.add(pnButtonNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 230, 60));
+        pnButton.add(pnButtonNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 230, 50));
 
         pnButtonKH.setBackground(new java.awt.Color(0, 153, 255));
         pnButtonKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnButtonKH.setName("KhachHang"); // NOI18N
         pnButtonKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnButtonKHMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnButtonKHMouseEntered(evt);
             }
@@ -220,10 +255,10 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pnButtonKHLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnButton.add(pnButtonKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 230, 60));
+        pnButton.add(pnButtonKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 230, 50));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -247,6 +282,7 @@ public class Main extends javax.swing.JFrame {
         pnButton.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 130));
 
         pnButtonHome.setBackground(new java.awt.Color(0, 153, 255));
+        pnButtonHome.setName("Home"); // NOI18N
         pnButtonHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnButtonHomeMouseClicked(evt);
@@ -280,54 +316,56 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pnButtonHomeLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel11)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnButton.add(pnButtonHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 230, 60));
+        pnButton.add(pnButtonHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 230, 50));
 
-        pnButtonPhong.setBackground(new java.awt.Color(0, 153, 255));
-        pnButtonPhong.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnButtonThongKe.setBackground(new java.awt.Color(0, 153, 255));
+        pnButtonThongKe.setName("ThongKe"); // NOI18N
+        pnButtonThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnButtonPhongMouseClicked(evt);
+                pnButtonThongKeMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pnButtonPhongMouseEntered(evt);
+                pnButtonThongKeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnButtonPhongMouseExited(evt);
+                pnButtonThongKeMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnButtonPhongMousePressed(evt);
+                pnButtonThongKeMousePressed(evt);
             }
         });
 
         jLabel12.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_phong.png"))); // NOI18N
-        jLabel12.setText("PHÒNG");
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/thongke.png"))); // NOI18N
+        jLabel12.setText("THỐNG KÊ");
         jLabel12.setIconTextGap(10);
 
-        javax.swing.GroupLayout pnButtonPhongLayout = new javax.swing.GroupLayout(pnButtonPhong);
-        pnButtonPhong.setLayout(pnButtonPhongLayout);
-        pnButtonPhongLayout.setHorizontalGroup(
-            pnButtonPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnButtonPhongLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+        javax.swing.GroupLayout pnButtonThongKeLayout = new javax.swing.GroupLayout(pnButtonThongKe);
+        pnButtonThongKe.setLayout(pnButtonThongKeLayout);
+        pnButtonThongKeLayout.setHorizontalGroup(
+            pnButtonThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnButtonThongKeLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
-        pnButtonPhongLayout.setVerticalGroup(
-            pnButtonPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnButtonPhongLayout.createSequentialGroup()
+        pnButtonThongKeLayout.setVerticalGroup(
+            pnButtonThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnButtonThongKeLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnButton.add(pnButtonPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 230, 60));
+        pnButton.add(pnButtonThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 230, 50));
 
         pnButtonDichVu.setBackground(new java.awt.Color(0, 153, 255));
+        pnButtonDichVu.setName("DichVu"); // NOI18N
         pnButtonDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnButtonDichVuMouseClicked(evt);
@@ -364,12 +402,13 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pnButtonDichVuLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnButton.add(pnButtonDichVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 230, 60));
+        pnButton.add(pnButtonDichVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 230, 50));
 
         pnButtonHoaDon.setBackground(new java.awt.Color(0, 153, 255));
+        pnButtonHoaDon.setName("HoaDon"); // NOI18N
         pnButtonHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnButtonHoaDonMouseClicked(evt);
@@ -406,10 +445,53 @@ public class Main extends javax.swing.JFrame {
             .addGroup(pnButtonHoaDonLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnButton.add(pnButtonHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 230, 60));
+        pnButton.add(pnButtonHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 230, 50));
+
+        pnButtonPhong.setBackground(new java.awt.Color(0, 153, 255));
+        pnButtonPhong.setName("Phong"); // NOI18N
+        pnButtonPhong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnButtonPhongMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnButtonPhongMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnButtonPhongMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnButtonPhongMousePressed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_phong.png"))); // NOI18N
+        jLabel15.setText("PHÒNG");
+        jLabel15.setIconTextGap(10);
+
+        javax.swing.GroupLayout pnButtonPhongLayout = new javax.swing.GroupLayout(pnButtonPhong);
+        pnButtonPhong.setLayout(pnButtonPhongLayout);
+        pnButtonPhongLayout.setHorizontalGroup(
+            pnButtonPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnButtonPhongLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
+        );
+        pnButtonPhongLayout.setVerticalGroup(
+            pnButtonPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnButtonPhongLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnButton.add(pnButtonPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 230, 50));
 
         getContentPane().add(pnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 630));
 
@@ -450,7 +532,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_pnButtonNVMouseEntered
 
     private void pnButtonNVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonNVMouseExited
-        pnButtonNV.setBackground(defaultColor);
+        if (!currentPanel.equals(pnButtonNV.getName()))
+            pnButtonNV.setBackground(defaultColor);
     }//GEN-LAST:event_pnButtonNVMouseExited
 
     private void pnButtonLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonLogoutMouseClicked
@@ -462,10 +545,16 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_pnButtonLogoutMousePressed
 
     private void pnButtonNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonNVMouseClicked
+        currentPanel = pnButtonNV.getName();
+        removeColer();
+        pnButtonNV.setBackground(clickColor);
         hienthiQLNV();
     }//GEN-LAST:event_pnButtonNVMouseClicked
 
     private void pnButtonNVMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonNVMousePressed
+        currentPanel = pnButtonNV.getName();
+        removeColer();
+        pnButtonNV.setBackground(clickColor);
         hienthiQLNV();
     }//GEN-LAST:event_pnButtonNVMousePressed
 
@@ -474,11 +563,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_pnButtonKHMouseEntered
 
     private void pnButtonKHMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonKHMouseExited
-        pnButtonKH.setBackground(defaultColor);
+        if (!currentPanel.equals(pnButtonKH.getName()))
+            pnButtonKH.setBackground(defaultColor);
     }//GEN-LAST:event_pnButtonKHMouseExited
 
     private void pnButtonKHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonKHMousePressed
-        hienthiQLKH();
+        //
     }//GEN-LAST:event_pnButtonKHMousePressed
 
     private void pnButtonHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHomeMouseEntered
@@ -486,47 +576,65 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_pnButtonHomeMouseEntered
 
     private void pnButtonHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHomeMouseExited
-        pnButtonHome.setBackground(defaultColor);
+        if (!currentPanel.equals(pnButtonHome.getName()))
+            pnButtonHome.setBackground(defaultColor);
     }//GEN-LAST:event_pnButtonHomeMouseExited
 
     private void pnButtonDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonDichVuMouseClicked
+        currentPanel = pnButtonDichVu.getName();
+        removeColer();
+        pnButtonDichVu.setBackground(clickColor);
         hienthiQLDV();
     }//GEN-LAST:event_pnButtonDichVuMouseClicked
 
     private void pnButtonDichVuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonDichVuMousePressed
+        currentPanel = pnButtonDichVu.getName();
+        removeColer();
+        pnButtonDichVu.setBackground(clickColor);
         hienthiQLDV();
     }//GEN-LAST:event_pnButtonDichVuMousePressed
 
-    private void pnButtonPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonPhongMouseClicked
-        hienthiQLP();
-    }//GEN-LAST:event_pnButtonPhongMouseClicked
+    private void pnButtonThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonThongKeMouseClicked
+        currentPanel = pnButtonThongKe.getName();
+        removeColer();
+        pnButtonThongKe.setBackground(clickColor);
+        hienthiTK();
+    }//GEN-LAST:event_pnButtonThongKeMouseClicked
 
-    private void pnButtonPhongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonPhongMousePressed
-        hienthiQLP();
-    }//GEN-LAST:event_pnButtonPhongMousePressed
+    private void pnButtonThongKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonThongKeMousePressed
+        currentPanel = pnButtonThongKe.getName();
+        removeColer();
+        pnButtonThongKe.setBackground(clickColor);
+        hienthiTK();
+    }//GEN-LAST:event_pnButtonThongKeMousePressed
 
-    private void pnButtonPhongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonPhongMouseEntered
-        pnButtonPhong.setBackground(clickColor);
-    }//GEN-LAST:event_pnButtonPhongMouseEntered
+    private void pnButtonThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonThongKeMouseEntered
+        pnButtonThongKe.setBackground(clickColor);
+    }//GEN-LAST:event_pnButtonThongKeMouseEntered
 
-    private void pnButtonPhongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonPhongMouseExited
-        pnButtonPhong.setBackground(defaultColor);
-    }//GEN-LAST:event_pnButtonPhongMouseExited
+    private void pnButtonThongKeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonThongKeMouseExited
+        if (!currentPanel.equals(pnButtonThongKe.getName()))
+            pnButtonThongKe.setBackground(defaultColor);
+    }//GEN-LAST:event_pnButtonThongKeMouseExited
 
     private void pnButtonDichVuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonDichVuMouseEntered
         pnButtonDichVu.setBackground(clickColor);
     }//GEN-LAST:event_pnButtonDichVuMouseEntered
 
     private void pnButtonDichVuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonDichVuMouseExited
-        pnButtonDichVu.setBackground(defaultColor);
+        if (!currentPanel.equals(pnButtonDichVu.getName()))
+            pnButtonDichVu.setBackground(defaultColor);
     }//GEN-LAST:event_pnButtonDichVuMouseExited
 
     private void pnButtonHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHoaDonMouseClicked
+        currentPanel = pnButtonHoaDon.getName();
+        removeColer();
+        pnButtonHoaDon.setBackground(clickColor);
         hienthiQLHD();
     }//GEN-LAST:event_pnButtonHoaDonMouseClicked
 
     private void pnButtonHoaDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHoaDonMousePressed
-        hienthiQLHD();
+        //
     }//GEN-LAST:event_pnButtonHoaDonMousePressed
 
     private void pnButtonHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHoaDonMouseEntered
@@ -534,12 +642,43 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_pnButtonHoaDonMouseEntered
 
     private void pnButtonHoaDonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHoaDonMouseExited
-        pnButtonHoaDon.setBackground(defaultColor);
+        if (!currentPanel.equals(pnButtonHoaDon.getName()))
+            pnButtonHoaDon.setBackground(defaultColor);
     }//GEN-LAST:event_pnButtonHoaDonMouseExited
 
     private void pnButtonHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHomeMouseClicked
+        currentPanel = pnButtonHome.getName();
+        removeColer();
+        pnButtonHome.setBackground(clickColor);
         hienthiHome();
     }//GEN-LAST:event_pnButtonHomeMouseClicked
+
+    private void pnButtonPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonPhongMouseClicked
+        currentPanel = pnButtonPhong.getName();
+        removeColer();
+        pnButtonPhong.setBackground(clickColor);
+        hienthiQLP();
+    }//GEN-LAST:event_pnButtonPhongMouseClicked
+
+    private void pnButtonPhongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonPhongMouseEntered
+        pnButtonPhong.setBackground(clickColor);
+    }//GEN-LAST:event_pnButtonPhongMouseEntered
+
+    private void pnButtonPhongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonPhongMouseExited
+        if (!currentPanel.equals(pnButtonPhong.getName()))
+            pnButtonPhong.setBackground(defaultColor);
+    }//GEN-LAST:event_pnButtonPhongMouseExited
+
+    private void pnButtonPhongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonPhongMousePressed
+
+    }//GEN-LAST:event_pnButtonPhongMousePressed
+
+    private void pnButtonKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonKHMouseClicked
+        currentPanel = pnButtonKH.getName();
+        removeColer();
+        pnButtonKH.setBackground(clickColor);
+        hienthiQLKH();
+    }//GEN-LAST:event_pnButtonKHMouseClicked
 
     /**
      * @param args the command line arguments
@@ -549,7 +688,8 @@ public class Main extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main(new NhanVien("admin")).setVisible(true);
+                NhanVien nv = new NhanVien("admin", "Bùi Chí Hiếu", "2002-5-8", "Nam", "admin", "admin");
+                new Main(nv).setVisible(true);
             }
         });
     }
@@ -560,6 +700,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -573,6 +714,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel pnButtonLogout;
     private javax.swing.JPanel pnButtonNV;
     private javax.swing.JPanel pnButtonPhong;
+    private javax.swing.JPanel pnButtonThongKe;
     private javax.swing.JPanel pnMainContent;
     // End of variables declaration//GEN-END:variables
 }

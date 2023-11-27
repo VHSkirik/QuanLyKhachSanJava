@@ -167,7 +167,6 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/excel.png"))); // NOI18N
         jButton2.setText("Xuất Excel");
-        jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -230,10 +229,6 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_btXoaActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JOptionPane.showMessageDialog(this, "Chức năng chưa khả dụng");
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         if (kiemtraText() == false) {
@@ -310,6 +305,10 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
     private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
         clearText();
     }//GEN-LAST:event_btResetActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JOptionPane.showMessageDialog(this, "Chức năng chưa khả dụng");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

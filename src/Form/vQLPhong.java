@@ -117,7 +117,6 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         vtSuaPhong = new javax.swing.JButton();
         btXoaPhong = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton9 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btResetPhong = new javax.swing.JButton();
         cbTKPhong = new javax.swing.JComboBox<>();
@@ -216,20 +215,6 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btXoaPhong);
         jToolBar1.add(jSeparator1);
-
-        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(0, 0, 0));
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/excel.png"))); // NOI18N
-        jButton9.setText("Xuất Excel");
-        jButton9.setFocusable(false);
-        jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton9);
 
         jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 250, 80));
 
@@ -447,10 +432,6 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btXoaLoaiActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        JOptionPane.showMessageDialog(this, "Tính năng chưa hoàn thiện");
-    }//GEN-LAST:event_jButton9ActionPerformed
-
     private void btResetLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetLoaiActionPerformed
         resetText();
         txtMaloai.requestFocus();
@@ -580,7 +561,6 @@ public class vQLPhong extends javax.swing.JInternalFrame {
     private javax.swing.JButton btXoaLoai;
     private javax.swing.JButton btXoaPhong;
     private javax.swing.JComboBox<String> cbTKPhong;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
