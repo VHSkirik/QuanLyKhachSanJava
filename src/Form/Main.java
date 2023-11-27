@@ -37,6 +37,12 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
+    private void hienthiHome(){
+        Home home = new Home();
+        pnMainContent.removeAll();
+        pnMainContent.add(home).setVisible(true);
+    }
+    
     private void hienthiQLNV() {
         vQLNhanVien qlnhanvien = new vQLNhanVien();
         pnMainContent.removeAll();
@@ -242,6 +248,9 @@ public class Main extends javax.swing.JFrame {
 
         pnButtonHome.setBackground(new java.awt.Color(0, 153, 255));
         pnButtonHome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnButtonHomeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnButtonHomeMouseEntered(evt);
             }
@@ -527,6 +536,10 @@ public class Main extends javax.swing.JFrame {
     private void pnButtonHoaDonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHoaDonMouseExited
         pnButtonHoaDon.setBackground(defaultColor);
     }//GEN-LAST:event_pnButtonHoaDonMouseExited
+
+    private void pnButtonHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonHomeMouseClicked
+        hienthiHome();
+    }//GEN-LAST:event_pnButtonHomeMouseClicked
 
     /**
      * @param args the command line arguments
