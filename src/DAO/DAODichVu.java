@@ -22,8 +22,8 @@ public class DAODichVu implements InterfaceDAO<DichVu> {
     }
 
     @Override
-    public int delete(String id) {
-        String query = "DELETE FROM dichvu WHERE madichvu='" + id + "'";
+    public int delete(String madichvu) {
+        String query = "DELETE FROM dichvu WHERE madichvu='" + madichvu + "'";
         return SqlManager.updateData(query);
     }
 
@@ -53,10 +53,10 @@ public class DAODichVu implements InterfaceDAO<DichVu> {
     }
 
     @Override
-    public DichVu getByID(String id) {
+    public DichVu getByID(String madichvu) {
         DichVu dv = null;
         try {
-            ResultSet rs = SqlManager.getDataTable("dichvu WHERE madichvu='" + id + "'");
+            ResultSet rs = SqlManager.getDataTable("dichvu WHERE madichvu='" + madichvu + "'");
             if (rs.next()) {
                 dv = new DichVu(
                         rs.getString("madichvu"),
