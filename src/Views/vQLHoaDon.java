@@ -4,8 +4,10 @@ import Controller.ConvertTime;
 import Controller.LogicHoaDon;
 import DAO.DAOChiTietHoaDon;
 import DAO.DAOHoaDon;
+import DAO.DAOPhong;
 import Model.ChiTietHoaDon;
 import Model.HoaDon;
+import Model.Phong;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -369,6 +371,7 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
                 HoaDon hd = DAOHoaDon.getInstance().getByID(mahd);
                 if (hd.getNgaytra() == null)
                     hd.setNgaytra(ConvertTime.toString(new Date()));
+                //cập nhật hóa đơn
                 hd.setThanhtien(thanhtien);
                 hd.setDathanhtoan(1);
                 int rs = DAOHoaDon.getInstance().update(hd);
@@ -377,6 +380,11 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
                     return;
                 } else {
                     JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+                    //Cập nhật lại phòng
+                    Phong phong = DAOPhong.getInstance().getByID(hd.getMaphong());
+                    phong.setTinhtrang(0);
+                    DAOPhong.getInstance().update(phong);
+                    //làm mới danh sách
                     dtm_ChitietHD.setRowCount(0);
                     loadAllHoadon("");
                     lbThanhtien.setText("");

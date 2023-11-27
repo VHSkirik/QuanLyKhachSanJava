@@ -154,6 +154,8 @@ public class Main extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         pnButtonPhong = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
+        pnButtonTT = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
         pnMainContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -518,6 +520,43 @@ public class Main extends javax.swing.JFrame {
 
         pnButton.add(pnButtonPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 230, 50));
 
+        pnButtonTT.setBackground(new java.awt.Color(0, 153, 255));
+        pnButtonTT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnButtonTTMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnButtonTTMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnButtonTTMouseExited(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/info.png"))); // NOI18N
+        jLabel16.setText("THÔNG TIN");
+
+        javax.swing.GroupLayout pnButtonTTLayout = new javax.swing.GroupLayout(pnButtonTT);
+        pnButtonTT.setLayout(pnButtonTTLayout);
+        pnButtonTTLayout.setHorizontalGroup(
+            pnButtonTTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnButtonTTLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jLabel16)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+        pnButtonTTLayout.setVerticalGroup(
+            pnButtonTTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnButtonTTLayout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pnButton.add(pnButtonTT, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 230, 50));
+
         getContentPane().add(pnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 630));
 
         pnMainContent.setBackground(new java.awt.Color(255, 255, 255));
@@ -690,6 +729,19 @@ public class Main extends javax.swing.JFrame {
         hienthiQLKH();
     }//GEN-LAST:event_pnButtonKHMouseClicked
 
+    private void pnButtonTTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonTTMouseEntered
+        pnButtonTT.setBackground(clickColor);
+    }//GEN-LAST:event_pnButtonTTMouseEntered
+
+    private void pnButtonTTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonTTMouseExited
+        pnButtonTT.setBackground(defaultColor);
+    }//GEN-LAST:event_pnButtonTTMouseExited
+
+    private void pnButtonTTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnButtonTTMouseClicked
+        UpdateThongTin updateTT = new UpdateThongTin(this);
+        updateTT.setVisible(true);
+    }//GEN-LAST:event_pnButtonTTMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -711,6 +763,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -724,6 +777,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel pnButtonLogout;
     private javax.swing.JPanel pnButtonNV;
     private javax.swing.JPanel pnButtonPhong;
+    private javax.swing.JPanel pnButtonTT;
     private javax.swing.JPanel pnButtonThongKe;
     private javax.swing.JPanel pnMainContent;
     // End of variables declaration//GEN-END:variables
