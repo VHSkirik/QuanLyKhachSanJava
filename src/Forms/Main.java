@@ -1,4 +1,4 @@
-package Views;
+package Forms;
 
 import Model.NhanVien;
 import java.awt.Color;

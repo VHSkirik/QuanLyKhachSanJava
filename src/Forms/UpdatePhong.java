@@ -1,4 +1,4 @@
-package Views;
+package Forms;
 
 import DAO.DAOPhong;
 import Model.Phong;

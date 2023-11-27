@@ -1,4 +1,4 @@
-package Views;
+package Forms;
 
 import DAO.DAODichVu;
 import Model.DichVu;

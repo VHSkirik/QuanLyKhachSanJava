@@ -1,4 +1,4 @@
-package Views;
+package Forms;
 
 import DAO.DAONhanVien;
 import Model.NhanVien;

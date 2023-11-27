@@ -1,5 +1,5 @@
 
-package Views;
+package Forms;
 
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 

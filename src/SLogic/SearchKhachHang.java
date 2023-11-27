@@ -1,4 +1,4 @@
-package Controller;
+package SLogic;
 
 import DAO.DAOKhachHang;
 import Model.KhachHang;

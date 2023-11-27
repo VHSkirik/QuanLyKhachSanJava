@@ -1,13 +1,15 @@
-package Views;
+package Forms;
 
 import DAO.DAOHoaDon;
 import DAO.DAOKhachHang;
 import DAO.DAOPhong;
-import Controller.ConvertTime;
+import SLogic.ConvertTime;
 import Model.HoaDon;
 import Model.KhachHang;
 import Model.Phong;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -109,6 +111,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
         pnHoaDon = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbHoaDon = new javax.swing.JTable();
+        btXemchitiet = new javax.swing.JButton();
         pnKhachHang = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbKhachhang = new javax.swing.JTable();
@@ -206,20 +209,33 @@ public class vThongKe extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbHoaDon);
 
+        btXemchitiet.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btXemchitiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/info.png"))); // NOI18N
+        btXemchitiet.setText("Xem Chi tiết");
+        btXemchitiet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXemchitietActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnHoaDonLayout = new javax.swing.GroupLayout(pnHoaDon);
         pnHoaDon.setLayout(pnHoaDonLayout);
         pnHoaDonLayout.setHorizontalGroup(
             pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnHoaDonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btXemchitiet, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
         pnHoaDonLayout.setVerticalGroup(
             pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHoaDonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addComponent(btXemchitiet, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -336,8 +352,21 @@ public class vThongKe extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btXemchitietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXemchitietActionPerformed
+        int currentRow = tbHoaDon.getSelectedRow();
+        if (currentRow == -1) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn hóa đơn cần xem");
+        } else {
+            String mahd = dtm_Hoadon.getValueAt(currentRow, 0).toString();
+            HoaDon hd = DAOHoaDon.getInstance().getByID(mahd);
+            xemCTHD xem = new xemCTHD(new JFrame(), hd);
+            xem.setVisible(true);
+        }
+    }//GEN-LAST:event_btXemchitietActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btXemchitiet;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

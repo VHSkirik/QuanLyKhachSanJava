@@ -1,5 +1,5 @@
 
-package Controller;
+package SLogic;
 
 import DAO.DAOPhong;
 import Model.Phong;

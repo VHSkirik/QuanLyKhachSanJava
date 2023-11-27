@@ -1,8 +1,8 @@
-package Views;
+package Forms;
 
-import Controller.ConvertTime;
-import Controller.LogicHoaDon;
-import Controller.SearchPhong;
+import SLogic.ConvertTime;
+import SLogic.LogicHoaDon;
+import SLogic.SearchPhong;
 import DAO.DAOHoaDon;
 import DAO.DAOLoaiPhong;
 import Model.HoaDon;

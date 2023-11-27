@@ -1,7 +1,7 @@
-package Views;
+package Forms;
 
-import Controller.ConvertTime;
-import Controller.SearchNhanVien;
+import SLogic.ConvertTime;
+import SLogic.SearchNhanVien;
 import DAO.DAONhanVien;
 import Model.NhanVien;
 import java.util.ArrayList;
