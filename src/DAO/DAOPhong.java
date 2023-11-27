@@ -1,5 +1,6 @@
 package DAO;
 
+import DataBase.KetNoiData;
 import DataBase.SqlManager;
 import Model.Phong;
 import java.util.ArrayList;
@@ -70,5 +71,19 @@ public class DAOPhong implements InterfaceDAO<Phong> {
             e.printStackTrace();
         }
         return p;
+    }
+    
+    public int getSLThue(){
+        int soluong = 0;
+        try {
+            String query = "SELECT COUNT(*) FROM phong WHERE tinhtrang=1";
+            ResultSet rs = SqlManager.executeQuery(query);
+            if (rs.next()){
+                soluong = rs.getInt(1);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return soluong;
     }
 }
