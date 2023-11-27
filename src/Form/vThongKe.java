@@ -116,7 +116,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
         pnKhachHang = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbKhachhang = new javax.swing.JTable();
-        jPanel5 = new javax.swing.JPanel();
+        pnPhong = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbPhong = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
@@ -190,12 +190,11 @@ public class vThongKe extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 270, 90));
 
+        pnHoaDon.setBackground(new java.awt.Color(255, 255, 255));
+
         tbHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã HD", "Mã KH", "Mã NV", "Mã Phòng", "Giá", "Ngày thuê", "Ngày trả", "Thành tiền", "Thanh toán"
@@ -215,20 +214,22 @@ public class vThongKe extends javax.swing.JInternalFrame {
         pnHoaDon.setLayout(pnHoaDonLayout);
         pnHoaDonLayout.setHorizontalGroup(
             pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHoaDonLayout.createSequentialGroup()
+            .addGroup(pnHoaDonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
         pnHoaDonLayout.setVerticalGroup(
             pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnHoaDonLayout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHoaDonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         tabMain.addTab("Hóa Đơn", pnHoaDon);
+
+        pnKhachHang.setBackground(new java.awt.Color(255, 255, 255));
 
         tbKhachhang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -252,12 +253,14 @@ public class vThongKe extends javax.swing.JInternalFrame {
         pnKhachHangLayout.setVerticalGroup(
             pnKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnKhachHangLayout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         tabMain.addTab("Khách Hàng", pnKhachHang);
+
+        pnPhong.setBackground(new java.awt.Color(255, 255, 255));
 
         tbPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -277,24 +280,23 @@ public class vThongKe extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(tbPhong);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
-                .addContainerGap())
+        javax.swing.GroupLayout pnPhongLayout = new javax.swing.GroupLayout(pnPhong);
+        pnPhong.setLayout(pnPhongLayout);
+        pnPhongLayout.setHorizontalGroup(
+            pnPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnPhongLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+        pnPhongLayout.setVerticalGroup(
+            pnPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnPhongLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8))
         );
 
-        tabMain.addTab("Phòng", jPanel5);
+        tabMain.addTab("Phòng", pnPhong);
 
         jPanel1.add(tabMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 850, 430));
 
@@ -353,7 +355,6 @@ public class vThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -365,6 +366,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbTongHD;
     private javax.swing.JPanel pnHoaDon;
     private javax.swing.JPanel pnKhachHang;
+    private javax.swing.JPanel pnPhong;
     private javax.swing.JTabbedPane tabMain;
     private javax.swing.JTable tbHoaDon;
     private javax.swing.JTable tbKhachhang;

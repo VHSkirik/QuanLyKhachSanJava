@@ -116,7 +116,6 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         btThemPhong = new javax.swing.JButton();
         vtSuaPhong = new javax.swing.JButton();
         btXoaPhong = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
         jPanel2 = new javax.swing.JPanel();
         btResetPhong = new javax.swing.JButton();
         cbTKPhong = new javax.swing.JComboBox<>();
@@ -214,9 +213,8 @@ public class vQLPhong extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btXoaPhong);
-        jToolBar1.add(jSeparator1);
 
-        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 250, 80));
+        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 150, 80));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm Phòng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -231,10 +229,10 @@ public class vQLPhong extends javax.swing.JInternalFrame {
                 btResetPhongActionPerformed(evt);
             }
         });
-        jPanel2.add(btResetPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 130, 50));
+        jPanel2.add(btResetPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 150, 50));
 
         cbTKPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã Phòng" }));
-        jPanel2.add(cbTKPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 50));
+        jPanel2.add(cbTKPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 120, 50));
 
         txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -244,9 +242,9 @@ public class vQLPhong extends javax.swing.JInternalFrame {
                 txtTimKiemKeyReleased(evt);
             }
         });
-        jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 300, 50));
+        jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 370, 50));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 590, 80));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 690, 80));
 
         tbLoaiphong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -570,7 +568,6 @@ public class vQLPhong extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;

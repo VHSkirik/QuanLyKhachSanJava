@@ -69,7 +69,6 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
         btThem = new javax.swing.JButton();
         btSua = new javax.swing.JButton();
         btXoa = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
         jPanel2 = new javax.swing.JPanel();
         cbLoaiTK = new javax.swing.JComboBox<>();
         txtTimKiem = new javax.swing.JTextField();
@@ -154,9 +153,8 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btXoa);
-        jToolBar1.add(jSeparator1);
 
-        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 90));
+        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 90));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -170,7 +168,7 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
                 txtTimKiemKeyReleased(evt);
             }
         });
-        jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 300, 40));
+        jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 390, 40));
 
         btReset.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_reset.png"))); // NOI18N
@@ -182,9 +180,9 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
                 btResetActionPerformed(evt);
             }
         });
-        jPanel2.add(btReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 120, 40));
+        jPanel2.add(btReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 140, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 570, 90));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 690, 90));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 630));
 
@@ -259,7 +257,6 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTable tbNhanVien;
     private javax.swing.JTextField txtTimKiem;
