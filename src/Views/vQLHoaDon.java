@@ -1,7 +1,7 @@
-package Form;
+package Views;
 
-import Logic.ConvertTime;
-import Logic.LogicHoaDon;
+import Controller.ConvertTime;
+import Controller.LogicHoaDon;
 import DAO.DAOChiTietHoaDon;
 import DAO.DAOHoaDon;
 import Model.ChiTietHoaDon;

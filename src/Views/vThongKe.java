@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
-package Form;
+package Views;
 
 import DAO.DAOHoaDon;
 import DAO.DAOKhachHang;
 import DAO.DAOPhong;
-import Logic.ConvertTime;
+import Controller.ConvertTime;
 import Model.HoaDon;
 import Model.KhachHang;
 import Model.Phong;

@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
-package Form;
+package Views;
 
 import DAO.DAOLoaiPhong;
 import DAO.DAOPhong;
@@ -169,7 +165,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         jToolBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng Phòng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jToolBar1.setRollover(true);
 
-        btThemPhong.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
+        btThemPhong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btThemPhong.setForeground(new java.awt.Color(0, 0, 0));
         btThemPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
         btThemPhong.setText("Thêm");
@@ -184,7 +180,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btThemPhong);
 
-        vtSuaPhong.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
+        vtSuaPhong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         vtSuaPhong.setForeground(new java.awt.Color(0, 0, 0));
         vtSuaPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_sua.png"))); // NOI18N
         vtSuaPhong.setText("Sửa");
@@ -199,7 +195,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(vtSuaPhong);
 
-        btXoaPhong.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
+        btXoaPhong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btXoaPhong.setForeground(new java.awt.Color(0, 0, 0));
         btXoaPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_xoa.png"))); // NOI18N
         btXoaPhong.setText("Xóa");
@@ -288,7 +284,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         jToolBar2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng Loại Phòng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jToolBar2.setRollover(true);
 
-        btThemLoai.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
+        btThemLoai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btThemLoai.setForeground(new java.awt.Color(0, 0, 0));
         btThemLoai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
         btThemLoai.setText("Thêm");
@@ -303,7 +299,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         });
         jToolBar2.add(btThemLoai);
 
-        btSuaLoai.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
+        btSuaLoai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btSuaLoai.setForeground(new java.awt.Color(0, 0, 0));
         btSuaLoai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_sua.png"))); // NOI18N
         btSuaLoai.setText("Sửa");
@@ -317,7 +313,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
         });
         jToolBar2.add(btSuaLoai);
 
-        btXoaLoai.setFont(new java.awt.Font("SF Pro Display", 1, 16)); // NOI18N
+        btXoaLoai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btXoaLoai.setForeground(new java.awt.Color(0, 0, 0));
         btXoaLoai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_xoa.png"))); // NOI18N
         btXoaLoai.setText("Xóa");

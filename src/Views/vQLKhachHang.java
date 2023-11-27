@@ -1,7 +1,7 @@
-package Form;
+package Views;
 
-import Logic.ConvertTime;
-import Logic.SearchKhachHang;
+import Controller.ConvertTime;
+import Controller.SearchKhachHang;
 import DAO.DAOHoaDon;
 import DAO.DAOKhachHang;
 import Model.KhachHang;

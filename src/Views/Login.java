@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package Form;
+package Views;
 
 import DAO.DAONhanVien;
 import Model.NhanVien;
@@ -20,26 +16,27 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Login extends javax.swing.JFrame {
 
     Color LoginIn, LoginOut;
-    
+
     public Login() {
         initComponents();
-        LoginIn = new Color(0,204,204);
-        LoginOut = new Color(0,204,102);
+        LoginIn = new Color(0, 204, 204);
+        LoginOut = new Color(0, 204, 102);
     }
-    public void checkLogin(){
+
+    public void checkLogin() {
         String taikhoan = txtUser.getText().trim();
         String matkhau = txtPass.getText().trim();
-        if (taikhoan.isBlank() || matkhau.isBlank()){
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin!","Cảnh Báo",JOptionPane.WARNING_MESSAGE);
+        if (taikhoan.isBlank() || matkhau.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin!", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
         } else {
             NhanVien nv = DAONhanVien.getInstance().getByID(taikhoan);
-            if (nv == null){
-                JOptionPane.showMessageDialog(this, "Tài khoản không tồn tại!","Cảnh Báo",JOptionPane.WARNING_MESSAGE);
+            if (nv == null) {
+                JOptionPane.showMessageDialog(this, "Tài khoản không tồn tại!", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (!nv.getMatkhau().equals(matkhau)){
-                    JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác!","Cảnh Báo",JOptionPane.WARNING_MESSAGE);
+                if (!nv.getMatkhau().equals(matkhau)) {
+                    JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác!", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công!","Thông báo",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     Main main = new Main(nv);
                     main.setVisible(true);
                     this.dispose();
@@ -47,6 +44,7 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -213,7 +211,7 @@ public class Login extends javax.swing.JFrame {
 
     private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
             txtPass.requestFocus();
         }
     }//GEN-LAST:event_txtUserKeyPressed
@@ -230,10 +228,10 @@ public class Login extends javax.swing.JFrame {
 
     private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             checkLogin();
         }
-        if (evt.getKeyCode() == KeyEvent.VK_UP){
+        if (evt.getKeyCode() == KeyEvent.VK_UP) {
             txtUser.requestFocus();
         }
     }//GEN-LAST:event_txtPassKeyPressed
@@ -248,7 +246,7 @@ public class Login extends javax.swing.JFrame {
      */
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel(new FlatLightLaf());
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);

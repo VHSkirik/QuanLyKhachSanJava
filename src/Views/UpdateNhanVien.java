@@ -1,6 +1,6 @@
-package Form;
+package Views;
 
-import Logic.ConvertTime;
+import Controller.ConvertTime;
 import DAO.DAONhanVien;
 import Model.NhanVien;
 import javax.swing.JOptionPane;
@@ -201,7 +201,7 @@ public class UpdateNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNgaySinhActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int rs = JOptionPane.showConfirmDialog(this, "Xác nhận hủy","Xác Nhận",JOptionPane.YES_NO_OPTION);
+        int rs = JOptionPane.showConfirmDialog(this, "Xác nhận hủy", "Xác Nhận", JOptionPane.YES_NO_OPTION);
         if (rs == JOptionPane.YES_OPTION)
             this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

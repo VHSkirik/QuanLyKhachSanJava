@@ -1,6 +1,5 @@
 package DAO;
 
-import DataBase.KetNoiData;
 import DataBase.SqlManager;
 import Model.Phong;
 import java.util.ArrayList;

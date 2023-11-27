@@ -1,4 +1,4 @@
-package Logic;
+package Controller;
 
 import DAO.DAOChiTietHoaDon;
 import DAO.DAOHoaDon;

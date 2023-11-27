@@ -1,21 +1,74 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
-package Form;
+package Views;
+
+import Controller.ConvertTime;
+import Controller.LogicHoaDon;
+import DAO.DAOHoaDon;
+import DAO.DAOKhachHang;
+import DAO.DAONhanVien;
+import Model.HoaDon;
+import Model.KhachHang;
+import Model.NhanVien;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author @VHSkirik
  */
-public class InterfaceDialog extends javax.swing.JDialog {
+public class UpdateHoaDon extends javax.swing.JDialog {
 
-    /**
-     * Creates new form InterfaceDialog
-     */
-    public InterfaceDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    vQLHoaDon formQLHoaDon;
+    HoaDon oldHoaDon;
+    LinkedHashMap<String, Integer> hmMLoai_GPhong;
+
+    public UpdateHoaDon(vQLHoaDon parent, java.awt.Frame frame, HoaDon hd) {
+        super(frame, true);
+        formQLHoaDon = parent;
+        oldHoaDon = hd;
         initComponents();
+
+    }
+
+    //load ma phong len combox
+    private void initCombobox() {
+        hmMLoai_GPhong = LogicHoaDon.getMaLoai_GiaPhong();
+        for (String s : hmMLoai_GPhong.keySet()) {
+            cbMaPhong.addItem(s);
+        }
+        cbMaPhong.setSelectedItem(oldHoaDon.getMaphong());
+        //ma nhan vien
+        ArrayList<NhanVien> dsNhanVien = DAONhanVien.getInstance().getAll();
+        for (NhanVien nv : dsNhanVien) {
+            cbMaNV.addItem(nv.getTaikhoan());
+        }
+        cbMaNV.setSelectedItem(oldHoaDon.getManv());
+        //ma khach hang
+        ArrayList<KhachHang> dsKhachHang = DAOKhachHang.getInstance().getAll();
+        for (KhachHang kh : dsKhachHang) {
+            cbMaKH.addItem(kh.getMakh());
+        }
+        cbMaKH.setSelectedItem(oldHoaDon.getMakh());
+    }
+
+    //load thong tin khach hang cu
+    private void loadOldData() {
+        txtMahd.setText(oldHoaDon.getMahd());
+        cbMaKH.setSelectedItem(oldHoaDon.getMakh());
+        txtNgaythue.setText(ConvertTime.changeToDMY(oldHoaDon.getNgaythue()));
+        String ngaytra;
+        try {
+            ngaytra = ConvertTime.changeToDMY(oldHoaDon.getNgaytra());
+        } catch (NullPointerException e) {
+            ngaytra = "";
+        }
+        txtNgaytra.setText(ngaytra);
+        txtThanhtien.setText(oldHoaDon.getThanhtien() + "");
+    }
+
+    private void setCheckBox() {
+        boolean check = oldHoaDon.getDathanhtoan() == 1 ? true : false;
+        chbThanhToan.setSelected(check);
     }
 
     /**
@@ -31,8 +84,6 @@ public class InterfaceDialog extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         lbTitle = new javax.swing.JLabel();
         txtMahd = new javax.swing.JTextField();
-        txtMakh = new javax.swing.JTextField();
-        txtManv = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -49,8 +100,15 @@ public class InterfaceDialog extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         chbThanhToan = new javax.swing.JCheckBox();
+        cbMaKH = new javax.swing.JComboBox<>();
+        cbMaNV = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -84,18 +142,8 @@ public class InterfaceDialog extends javax.swing.JDialog {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 60));
 
         txtMahd.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        txtMahd.setEnabled(false);
         jPanel1.add(txtMahd, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 320, 40));
-
-        txtMakh.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        jPanel1.add(txtMakh, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 40));
-
-        txtManv.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        txtManv.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtManvActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtManv, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 320, 40));
 
         jLabel4.setFont(new java.awt.Font("SF Mono", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -156,6 +204,11 @@ public class InterfaceDialog extends javax.swing.JDialog {
         txtThanhtien.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jPanel1.add(txtThanhtien, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 320, 40));
 
+        cbMaPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMaPhongActionPerformed(evt);
+            }
+        });
         jPanel1.add(cbMaPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 320, 40));
 
         jLabel5.setFont(new java.awt.Font("SF Mono", 0, 14)); // NOI18N
@@ -182,6 +235,11 @@ public class InterfaceDialog extends javax.swing.JDialog {
         chbThanhToan.setText("Đã Thanh Toán");
         jPanel1.add(chbThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 160, 30));
 
+        jPanel1.add(cbMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 40));
+
+        cbMaNV.setEnabled(false);
+        jPanel1.add(cbMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 320, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,70 +248,78 @@ public class InterfaceDialog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtManvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtManvActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtManvActionPerformed
+    private void btSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSubmitActionPerformed
+        String mahd = txtMahd.getText();
+        String makh = cbMaKH.getSelectedItem().toString();
+        String manv = cbMaNV.getSelectedItem().toString();
+        String maphong = cbMaPhong.getSelectedItem().toString();
+        int giaphong = Integer.parseInt(txtGiaphong.getText());
+        String ngaythue = ConvertTime.changeToYMD(txtNgaythue.getText());
+        String ngaytra = txtNgaytra.getText();
+        int dathanhtoan = chbThanhToan.isSelected() == true ? 1 : 0;
+        int thanhtien;
+        try {
+            thanhtien = Integer.parseInt(txtThanhtien.getText());
+        } catch (Exception e) {
+            thanhtien = -1;
+        }
+
+        if (ngaythue == null || thanhtien == -1) {
+            JOptionPane.showMessageDialog(this, "Hãy kiểm tra lại thông tin");
+        } else {
+            if (!ngaytra.isBlank()) {
+                ngaytra = ConvertTime.changeToYMD(ngaytra);
+                if (ngaytra == null) {
+                    JOptionPane.showMessageDialog(this, "Ngày trả nhập không đúng");
+                    return;
+                }
+            }
+            HoaDon hd = new HoaDon(mahd, makh, manv, maphong, giaphong, ngaythue, ngaytra, thanhtien, dathanhtoan);
+            int rs = DAOHoaDon.getInstance().update(hd);
+            if (rs == -1) {
+                JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                return;
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                formQLHoaDon.loadAllHoadon("");
+                this.dispose();
+            }
+        }
+    }//GEN-LAST:event_btSubmitActionPerformed
 
     private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        int rs = JOptionPane.showConfirmDialog(this, "Xác nhận hủy", "Xác Nhận", JOptionPane.YES_NO_OPTION);
+        if (rs == JOptionPane.YES_OPTION)
+            this.dispose();
     }//GEN-LAST:event_btHuyActionPerformed
 
-    private void btSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSubmitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btSubmitActionPerformed
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        initCombobox();
+        loadOldData();
+        setCheckBox();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void cbMaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMaPhongActionPerformed
+        String gia = hmMLoai_GPhong.get(cbMaPhong.getSelectedItem()) + "";
+        txtGiaphong.setText(gia);
+    }//GEN-LAST:event_cbMaPhongActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfaceDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfaceDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfaceDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfaceDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                InterfaceDialog dialog = new InterfaceDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btHuy;
     private javax.swing.JButton btSubmit;
+    private javax.swing.JComboBox<String> cbMaKH;
+    private javax.swing.JComboBox<String> cbMaNV;
     private javax.swing.JComboBox<String> cbMaPhong;
     private javax.swing.JCheckBox chbThanhToan;
     private javax.swing.JLabel jLabel10;
@@ -269,8 +335,6 @@ public class InterfaceDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lbTitle;
     private javax.swing.JTextField txtGiaphong;
     private javax.swing.JTextField txtMahd;
-    private javax.swing.JTextField txtMakh;
-    private javax.swing.JTextField txtManv;
     private javax.swing.JTextField txtNgaythue;
     private javax.swing.JTextField txtNgaytra;
     private javax.swing.JTextField txtThanhtien;

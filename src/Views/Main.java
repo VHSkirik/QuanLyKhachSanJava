@@ -1,12 +1,9 @@
-package Form;
+package Views;
 
 import Model.NhanVien;
-import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -696,16 +693,16 @@ public class Main extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) throws UnsupportedLookAndFeelException {
-        UIManager.setLookAndFeel(new FlatLightLaf());
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                NhanVien nv = new NhanVien("admin", "Bùi Chí Hiếu", "2002-5-8", "Nam", "admin", "admin");
-                new Main(nv).setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) throws UnsupportedLookAndFeelException {
+//        UIManager.setLookAndFeel(new FlatLightLaf());
+//
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                NhanVien nv = new NhanVien("admin", "Bùi Chí Hiếu", "2002-5-8", "Nam", "admin", "admin");
+//                new Main(nv).setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel10;

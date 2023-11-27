@@ -1,5 +1,5 @@
 
-package Logic;
+package Controller;
 
 import DAO.DAOPhong;
 import Model.Phong;

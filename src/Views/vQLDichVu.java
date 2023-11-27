@@ -1,4 +1,4 @@
-package Form;
+package Views;
 
 import DAO.DAODichVu;
 import Model.DichVu;
@@ -111,13 +111,13 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbDichVu);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 850, 480));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 850, 500));
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jToolBar1.setRollover(true);
 
-        btThem.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btThem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btThem.setForeground(new java.awt.Color(0, 0, 0));
         btThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plus.png"))); // NOI18N
         btThem.setText("Thêm");
@@ -132,7 +132,7 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btThem);
 
-        btSua.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btSua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btSua.setForeground(new java.awt.Color(0, 0, 0));
         btSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_sua.png"))); // NOI18N
         btSua.setText("Sửa");
@@ -147,7 +147,7 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btSua);
 
-        btXoa.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btXoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btXoa.setForeground(new java.awt.Color(0, 0, 0));
         btXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_xoa.png"))); // NOI18N
         btXoa.setText("Xóa");
@@ -176,7 +176,7 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(jButton2);
 
-        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 90));
+        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 240, 90));
         jPanel1.add(txtMaDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 210, 30));
         jPanel1.add(txtTenDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 210, 30));
         jPanel1.add(txtGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 190, 30));

@@ -2,7 +2,6 @@ package DAO;
 
 import DataBase.SqlManager;
 import Model.ChiTietHoaDon;
-import Model.HoaDon;
 import java.util.ArrayList;
 import java.sql.*;
 

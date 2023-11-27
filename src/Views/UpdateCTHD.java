@@ -1,6 +1,6 @@
-package Form;
+package Views;
 
-import Logic.LogicHoaDon;
+import Controller.LogicHoaDon;
 import DAO.DAOChiTietHoaDon;
 import DAO.DAODichVu;
 import Model.ChiTietHoaDon;
