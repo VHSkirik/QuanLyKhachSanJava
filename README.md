@@ -32,7 +32,7 @@ Bài Tập Lớn Môn Thực Hành Lập Trình Mạng DHTI14A7HN.
 
 ## Cài Đặt và Sử Dụng
 - Yêu cầu: JDK/ JRE 13+, Xampp 3.3.0, (NetBeans 13).
-- Cài đặt: Tải Project xuống, mở Xampp thêm database từ file DataBase/quanlikhachsan.sql. Sau đó chạy file dist/QuanLyKhachSanJava.jar hoặc mở project bằng Netbeans.
+- Cài đặt: Tải Project xuống, mở Xampp thêm database từ file DataBase/quanlikhachsan.sql. Sau đó mở project bằng Netbeans chạy Login.java.
 - Sử dụng: Xem video Demo tại ().
 
 ## Liên Hệ và Hỗ Trợ
