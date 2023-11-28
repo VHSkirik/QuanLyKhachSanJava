@@ -33,7 +33,7 @@ Bài Tập Lớn Môn Lập Trình Mạng Nhóm 2 DHTI14A7HN.
 ## Cài Đặt và Sử Dụng
 - Yêu cầu: JDK/ JRE 13+, Xampp 3.3.0, (NetBeans 13).
 - Cài đặt: Tải Project xuống, thêm database từ file DataBase/quanlikhachsan.sql. Sau đó chạy file dist/QuanLyKhachSanJava.jar hoặc mở bằng Netbeans.
-- Sử dụng: Mở ứng dụng và làm theo hướng dẫn trên giao diện.
+- Sử dụng: Xem video Demo tại ().
 
 ## Liên Hệ và Hỗ Trợ
 Để biết thêm thông tin hoặc yêu cầu hỗ trợ, vui lòng liên hệ [VHSkirik].
