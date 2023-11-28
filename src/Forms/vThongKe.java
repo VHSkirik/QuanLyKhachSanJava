@@ -400,9 +400,27 @@ public class vThongKe extends javax.swing.JInternalFrame {
                     fileSave = new File(url + ".xlsx");
                 }
 
-                //kiểm tra tab muốn in
+                //nếu đang chọn bảng hóa đơn
                 if (currentTab == 0) {
                     boolean rs = XuatExcel.dsHoaDon(dsHoaDon, fileSave);
+                    if (rs) {
+                        JOptionPane.showMessageDialog(this, "Xuất file thành công");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Xuất file thất bại");
+                    }
+                }
+                //bảng khách hàng
+                if (currentTab == 1) {
+                    boolean rs = XuatExcel.dsKhacHang(dsKhachHang, fileSave);
+                    if (rs) {
+                        JOptionPane.showMessageDialog(this, "Xuất file thành công");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Xuất file thất bại");
+                    }
+                }
+                //bảng phòng
+                if (currentTab == 2) {
+                    boolean rs = XuatExcel.dsPhong(dsPhong, fileSave);
                     if (rs) {
                         JOptionPane.showMessageDialog(this, "Xuất file thành công");
                     } else {
