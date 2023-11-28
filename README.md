@@ -4,14 +4,14 @@ PHẦN MỀM QUẢN LÝ KHÁCH SẠN
 
 # Mô tả
 
-Bài Tập Lớn Môn Lập Trình Mạng Nhóm 2 DHTI14A7HN.
+Bài Tập Lớn Môn Thực Hành Lập Trình Mạng DHTI14A7HN.
 
 ## Tính Năng
-- Quản lý thông tin phòng: Đặt phòng, kiểm tra tình trạng, cập nhật thông tin.
+- Quản lý thông tin phòng: kiểm tra tình trạng, cập nhật thông tin phòng và loại phòng.
 - Quản lý khách hàng: Lưu trữ, chỉnh sửa thông tin khách hàng.
 - Quản lý dịch vụ: Thêm, sửa, xóa các dịch vụ khách sạn cung cấp.
-- Quản lý hóa đơn: Thêm, sửa xóa hóa, xuất đơn đơn khách hàng.
-- Báo cáo và thống kê: Tạo báo cáo doanh thu, tình hình hoạt động (chưa có sẵn).
+- Quản lý hóa đơn: Đặt hóa đơn, sửa xóa, xuất đơn đơn khách hàng.
+- Báo cáo và thống kê: Xuất ra file Excel.
 ## Hình Ảnh Minh Họa
 - Các Giao Diện Chính.
   
@@ -32,7 +32,7 @@ Bài Tập Lớn Môn Lập Trình Mạng Nhóm 2 DHTI14A7HN.
 
 ## Cài Đặt và Sử Dụng
 - Yêu cầu: JDK/ JRE 13+, Xampp 3.3.0, (NetBeans 13).
-- Cài đặt: Tải Project xuống, thêm database từ file DataBase/quanlikhachsan.sql. Sau đó chạy file dist/QuanLyKhachSanJava.jar hoặc mở bằng Netbeans.
+- Cài đặt: Tải Project xuống, mở Xampp thêm database từ file DataBase/quanlikhachsan.sql. Sau đó chạy file dist/QuanLyKhachSanJava.jar hoặc mở project bằng Netbeans.
 - Sử dụng: Xem video Demo tại ().
 
 ## Liên Hệ và Hỗ Trợ
@@ -40,10 +40,10 @@ Bài Tập Lớn Môn Lập Trình Mạng Nhóm 2 DHTI14A7HN.
 
 ## Lưu ý
 - Phần mềm vẫn đang trong quá trình hoàn thiện và còn tồn tại nhiều lỗi.
-- Phần mềm được tạo ra phục vụ mục đích học tập và thử sức lần đầu với phần mềm desktop.
+- Phần mềm được tạo ra phục vụ mục đích học tập và thử sức với phần mềm desktop.
 
 ---
 
 Made with ❤️ using Java Swing
 
-28-11-2023
+update lần cuối: 28-11-2023
