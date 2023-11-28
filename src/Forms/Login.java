@@ -1,6 +1,7 @@
 package Forms;
 
 import DAO.DAONhanVien;
+import DataBase.KetNoiData;
 import Model.NhanVien;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
@@ -8,6 +9,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import java.sql.Connection;
 
 /**
  *
@@ -71,6 +73,11 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng Nhập");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(13, 39, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -240,6 +247,15 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         checkLogin();
     }//GEN-LAST:event_pnLoginMousePressed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        //Kiểm tra kết nối DataBase
+        Connection c = KetNoiData.getConnection();
+        if (c == null){
+            JOptionPane.showMessageDialog(this, "Không thể kết nối tới Database!");
+            System.exit(0);
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

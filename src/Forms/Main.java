@@ -24,7 +24,6 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void setup() {
-        this.setIconImage(new ImageIcon("src/Icons/Main.png").getImage());
         lbTitle.setText(this.nhanvien.getLoainguoidung().toUpperCase());
         lbTenNV.setText(this.nhanvien.getHotenvn());
         defaultColor = new Color(0, 153, 255);

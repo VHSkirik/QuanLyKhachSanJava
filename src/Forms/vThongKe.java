@@ -7,9 +7,13 @@ import SLogic.ConvertTime;
 import Model.HoaDon;
 import Model.KhachHang;
 import Model.Phong;
+import SLogic.XuatExcel;
+import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class vThongKe extends javax.swing.JInternalFrame {
 
     ArrayList<HoaDon> dsHoaDon;
+
     ArrayList<Phong> dsPhong;
     ArrayList<KhachHang> dsKhachHang;
     DefaultTableModel dtm_Hoadon;
@@ -33,19 +38,23 @@ public class vThongKe extends javax.swing.JInternalFrame {
         dtm_Hoadon = (DefaultTableModel) tbHoaDon.getModel();
         dtm_Khachhang = (DefaultTableModel) tbKhachhang.getModel();
         dtm_Phong = (DefaultTableModel) tbPhong.getModel();
-        initLabel();
         initData();
         initTable();
+        initLabel();
     }
 
     private void initLabel() {
-        lbTongHD.setText(DAOHoaDon.getInstance().getAll().size() + "");
-        lbTKKhachHang.setText(DAOKhachHang.getInstance().getAll().size() + "");
+        lbTongHD.setText(dsHoaDon.size() + "");
+        lbTKKhachHang.setText(dsKhachHang.size() + "");
         lbPhongThue.setText(DAOPhong.getInstance().getSLThue() + "");
     }
 
     private void initData() {
-        dsHoaDon = DAOHoaDon.getInstance().getAll();
+        dsHoaDon = new ArrayList<>();
+        for (HoaDon hd : DAOHoaDon.getInstance().getAll()){
+            if (hd.getDathanhtoan() == 1)
+                dsHoaDon.add(hd);
+        }
         dsPhong = DAOPhong.getInstance().getAll();
         dsKhachHang = DAOKhachHang.getInstance().getAll();
     }
@@ -119,7 +128,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tbPhong = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
+        btXuatExcel = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton2 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
@@ -145,7 +154,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
 
         jLabel6.setFont(new java.awt.Font("SF Pro Display", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Tổng hóa đơn");
+        jLabel6.setText("Hóa đơn đã trả");
         jLabel6.setToolTipText("");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, 30));
 
@@ -184,7 +193,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
         jLabel4.setToolTipText("");
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, 30));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/thanhtoan64px.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bedroom.png"))); // NOI18N
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 70));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 270, 90));
@@ -316,14 +325,19 @@ public class vThongKe extends javax.swing.JInternalFrame {
         jToolBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Xuất thống kê dữ liệu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jToolBar1.setRollover(true);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/excel.png"))); // NOI18N
-        jButton1.setText("Xuất Excel");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
+        btXuatExcel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btXuatExcel.setForeground(new java.awt.Color(0, 0, 0));
+        btXuatExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/excel.png"))); // NOI18N
+        btXuatExcel.setText("Xuất Excel");
+        btXuatExcel.setFocusable(false);
+        btXuatExcel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btXuatExcel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btXuatExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXuatExcelActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btXuatExcel);
         jToolBar1.add(jSeparator1);
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -364,10 +378,49 @@ public class vThongKe extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btXemchitietActionPerformed
 
+    private void btXuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXuatExcelActionPerformed
+        int currentTab = tabMain.getSelectedIndex();
+        if (currentTab == -1) {
+            JOptionPane.showMessageDialog(this, "Chưa có danh sách nào được chọn");
+            return;
+        }
+
+        try {
+            //chọn nơi lưu
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Chọn nơi lưu");
+            //định dạng
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Excel file (.xlsx)", "xlsx"));
+            int luachon = fileChooser.showSaveDialog(this);
+            if (luachon == JFileChooser.APPROVE_OPTION) {
+                //kiểm tra tên file đã đặt
+                File fileSave = fileChooser.getSelectedFile();
+                String url = fileSave.getAbsolutePath();
+                if (!url.endsWith(".xlsx")) {
+                    fileSave = new File(url + ".xlsx");
+                }
+
+                //kiểm tra tab muốn in
+                if (currentTab == 0) {
+                    boolean rs = XuatExcel.dsHoaDon(dsHoaDon, fileSave);
+                    if (rs) {
+                        JOptionPane.showMessageDialog(this, "Xuất file thành công");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Xuất file thất bại");
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+
+    }//GEN-LAST:event_btXuatExcelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btXemchitiet;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btXuatExcel;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
