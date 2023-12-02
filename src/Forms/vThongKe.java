@@ -10,7 +10,6 @@ import Model.Phong;
 import SLogic.XuatExcel;
 import java.io.File;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -35,6 +34,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
     DefaultTableModel dtm_Khachhang;
     DefaultTableModel dtm_Phong;
     int doanhThu;
+    String doanhthuString;
 
     public vThongKe() {
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
@@ -43,6 +43,8 @@ public class vThongKe extends javax.swing.JInternalFrame {
         dtm_Hoadon = (DefaultTableModel) tbHoaDon.getModel();
         dtm_Khachhang = (DefaultTableModel) tbKhachhang.getModel();
         dtm_Phong = (DefaultTableModel) tbPhong.getModel();
+        dsHoaDonHienTai = new ArrayList<>();
+        doanhthuString = "";
         initData();
         initTable();
         tinhDoanhThu();
@@ -62,6 +64,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
                 dsHoaDon.add(hd);
             }
         }
+        dsHoaDonHienTai.addAll(dsHoaDon);
         dsPhong = DAOPhong.getInstance().getAll();
         dsKhachHang = DAOKhachHang.getInstance().getAll();
     }
@@ -125,12 +128,12 @@ public class vThongKe extends javax.swing.JInternalFrame {
             for (HoaDon hd : dsHoaDon) {
                 String ngaythue = ConvertTime.changeToDMY(hd.getNgaythue());
                 String ngaytra = ConvertTime.changeToDMY(hd.getNgaytra());
-                
+
                 Date dateNgayThue = ConvertTime.toDate(ngaythue);
                 dateNgayThue.setHours(23);
                 dateNgayThue.setMinutes(59);
                 dateNgayThue.setSeconds(59);
-                
+
                 Date dateNgayTra = ConvertTime.toDate(ngaytra);
                 dateNgayTra.setHours(0);
                 dateNgayTra.setMinutes(0);
@@ -151,23 +154,23 @@ public class vThongKe extends javax.swing.JInternalFrame {
                 }
             }
         } catch (Exception e) {
-            System.out.println("ERR");
+
         }
         tinhDoanhThu();
     }
 
     private void tinhDoanhThu() {
         doanhThu = 0;
-        try {          
+        try {
             for (int i = 0; i < tbHoaDon.getRowCount(); i++) {
                 doanhThu += Integer.parseInt(dtm_Hoadon.getValueAt(i, 7).toString());
             }
         } catch (Exception e) {
-            System.out.println("tinhDoanhThu Err");
+
         }
         //phan cach bo hang nghin
-        String rs = NumberFormat.getNumberInstance(Locale.GERMAN).format(doanhThu);
-        txtDanhSo.setText( rs + " VND");
+        doanhthuString = NumberFormat.getNumberInstance(Locale.GERMAN).format(doanhThu);
+        txtDanhSo.setText(doanhthuString + " VND");
     }
 
     /**
@@ -501,7 +504,16 @@ public class vThongKe extends javax.swing.JInternalFrame {
 
                 //nếu đang chọn bảng hóa đơn
                 if (currentTab == 0) {
-                    boolean rs = XuatExcel.dsHoaDon(dsHoaDon, fileSave);
+                    //lay ngay thang
+                    String ngayBatDau = ConvertTime.changeToDMY(ConvertTime.toString(dcBatDau.getDate()));
+                    String ngayKetThuc = ConvertTime.changeToDMY(ConvertTime.toString(dcKetThuc.getDate()));
+                    if (ngayBatDau == null)
+                        ngayBatDau = "";
+                    if (ngayKetThuc == null)
+                        ngayKetThuc = "";
+                    //
+                    
+                    boolean rs = XuatExcel.dsHoaDon(dsHoaDonHienTai, fileSave, ngayBatDau, ngayKetThuc, doanhthuString);
                     if (rs) {
                         JOptionPane.showMessageDialog(this, "Xuất file thành công");
                     } else {
@@ -542,7 +554,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
         dcBatDau.setDate(null);
         dcKetThuc.setDate(null);
         initTableHoaDon();
-        dsHoaDonHienTai = new ArrayList<>();
+        dsHoaDonHienTai.removeAll(dsHoaDonHienTai);
         dsHoaDonHienTai.addAll(dsHoaDon);
         tinhDoanhThu();
     }//GEN-LAST:event_jButton1ActionPerformed

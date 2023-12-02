@@ -17,15 +17,23 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class XuatExcel {
 
-    public static boolean dsHoaDon(ArrayList<HoaDon> dsHoaDon, File filename) {
+    public static boolean dsHoaDon(ArrayList<HoaDon> dsHoaDon, File filename, String ngaybatDau, String ngayKetThuc, String doanhthu) {
         boolean rs = false;
         try {
             //khởi tạo 
             XSSFWorkbook workbook = new XSSFWorkbook();
-            XSSFSheet sheet = workbook.createSheet("Danh Sách Hóa Đơn");
+            XSSFSheet sheet = workbook.createSheet("Thống Kê Doanh Thu");
             XSSFRow row = null;
-            //tạo tiêu đề
+            //tạo ngày tháng
             row = sheet.createRow(0);
+            row.createCell(0).setCellValue("Từ ngày:");
+            row.createCell(1).setCellValue(ngaybatDau);
+            
+            row = sheet.createRow(1);
+            row.createCell(0).setCellValue("Đến ngày:");
+            row.createCell(1).setCellValue(ngayKetThuc);
+            //tạo tiêu đề
+            row = sheet.createRow(3);
             row.createCell(0).setCellValue("Mã Hóa đơn");
             row.createCell(1).setCellValue("Mã khách hàng");
             row.createCell(2).setCellValue("Mã nhân viên");
@@ -38,7 +46,7 @@ public class XuatExcel {
 
             for (int i = 0; i < dsHoaDon.size(); i++) {
                 HoaDon hd = dsHoaDon.get(i);
-                row = sheet.createRow(1 + i);
+                row = sheet.createRow(4 + i);
 
                 row.createCell(0).setCellValue(hd.getMahd());
                 row.createCell(1).setCellValue(hd.getMahd());
@@ -50,6 +58,11 @@ public class XuatExcel {
                 row.createCell(7).setCellValue(hd.getThanhtien());
                 row.createCell(8).setCellValue(hd.getDathanhtoan());
             }
+            
+            row = sheet.createRow(dsHoaDon.size() + 5);
+            row.createCell(6).setCellValue("Tổng:");
+            row.createCell(7).setCellValue(doanhthu + " VND");
+            
 
             //ghi thông tin vào file
             try {

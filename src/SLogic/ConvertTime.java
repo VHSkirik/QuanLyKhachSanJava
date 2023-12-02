@@ -66,8 +66,12 @@ public class ConvertTime {
     }
 
     public static String toString(Date date) {
-        String datesString = new SimpleDateFormat("yyyy-MM-dd").format(date);
-        return datesString;
+        try {
+            String datesString = new SimpleDateFormat("yyyy-MM-dd").format(date);
+            return datesString;
+        } catch (Exception e){
+            return null;
+        }
     }
 
     public static Date toDate(String dateString) {
@@ -77,11 +81,5 @@ public class ConvertTime {
             e.printStackTrace();
             return null;
         }
-    }
-    
-    public static void main(String[] args) {
-        String dateString = "8-5-2002";
-        Date date = toDate(dateString);
-        System.out.println(date);
     }
 }
