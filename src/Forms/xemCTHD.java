@@ -88,6 +88,7 @@ public class xemCTHD extends javax.swing.JDialog {
         txtGiaphong = new javax.swing.JLabel();
         txtNgaythue = new javax.swing.JLabel();
         txtNgaytra = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Chi tiết hóa đơn");
@@ -198,6 +199,11 @@ public class xemCTHD extends javax.swing.JDialog {
         txtNgaytra.setText("t");
         jPanel1.add(txtNgaytra, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 120, -1));
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/doc.png"))); // NOI18N
+        jButton1.setText("Xuất Word");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 570, 140, 50));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -220,6 +226,7 @@ public class xemCTHD extends javax.swing.JDialog {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

@@ -21,6 +21,9 @@ import javax.swing.JOptionPane;
  */
 public class vQLHoaDon extends javax.swing.JInternalFrame {
 
+    final int TK_MAHD = 0;
+    final int TK_MAKH = 1;
+    final int TK_MANV = 2;
     DefaultTableModel dtm_Hoadon;
     DefaultTableModel dtm_ChitietHD;
     String makh;
@@ -79,6 +82,40 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         }
     }
 
+    public boolean kiemtraTimKiem(HoaDon hd) {
+        switch (cbTimKiem.getSelectedIndex()) {
+            case TK_MAHD:
+                return (hd.getMahd().toLowerCase().contains(txtTimKiem.getText().trim().toLowerCase()));
+            case TK_MAKH:
+                return (hd.getMakh().toLowerCase().contains(txtTimKiem.getText().trim().toLowerCase()));
+            case TK_MANV:
+                return (hd.getManv().toLowerCase().contains(txtTimKiem.getText().trim().toLowerCase()));
+            default:
+                return false;
+        }
+    }
+
+    public void hienthiTimKiem() {
+        ArrayList<HoaDon> dsHoaDon = DAOHoaDon.getInstance().getAll();
+        dtm_Hoadon.setRowCount(0);
+        for (HoaDon hd : dsHoaDon) {
+            if (kiemtraTimKiem(hd)) {
+                String ngaythue = ConvertTime.changeToDMY(hd.getNgaythue());
+                String ngaytra = ConvertTime.changeToDMY(hd.getNgaytra());
+                dtm_Hoadon.addRow(new Object[]{
+                    hd.getMahd(),
+                    hd.getMakh(),
+                    hd.getManv(),
+                    hd.getMaphong(),
+                    hd.getGiaphong(),
+                    ngaythue,
+                    ngaytra,
+                    hd.getThanhtien(),
+                    hd.getDathanhtoan()});
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,6 +138,8 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        txtTimKiem = new javax.swing.JTextField();
+        cbTimKiem = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbChitietHD = new javax.swing.JTable();
         btThanhToan = new javax.swing.JButton();
@@ -217,6 +256,24 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtTimKiem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 320, 50));
+
+        cbTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã HD", "Mã KH", "Mã NV" }));
+        cbTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTimKiemActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cbTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 100, 50));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 450, 80));
 
         tbChitietHD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -317,9 +374,14 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
         if (currentRow == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn hóa đơn cần thêm dịch vụ");
         } else {
-            String mahd = dtm_Hoadon.getValueAt(currentRow, 0).toString();
-            UpdateCTHD addCthd = new UpdateCTHD(this, new JFrame(), mahd);
-            addCthd.setVisible(true);
+            int daTra = Integer.parseInt(dtm_Hoadon.getValueAt(currentRow, 8).toString());
+            if (daTra == 1) {
+                JOptionPane.showMessageDialog(this, "Không thể thêm vào hóa đơn đã thanh toán");
+            } else {
+                String mahd = dtm_Hoadon.getValueAt(currentRow, 0).toString();
+                UpdateCTHD addCthd = new UpdateCTHD(this, new JFrame(), mahd);
+                addCthd.setVisible(true);
+            }
         }
     }//GEN-LAST:event_btThemDVActionPerformed
 
@@ -369,8 +431,9 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
                 int thanhtien = Integer.parseInt(lbThanhtien.getText());
                 String mahd = dtm_Hoadon.getValueAt(currentRowHD, 0).toString();
                 HoaDon hd = DAOHoaDon.getInstance().getByID(mahd);
-                if (hd.getNgaytra() == null)
+                if (hd.getNgaytra() == null) {
                     hd.setNgaytra(ConvertTime.toString(new Date()));
+                }
                 //cập nhật hóa đơn
                 hd.setThanhtien(thanhtien);
                 hd.setDathanhtoan(1);
@@ -396,6 +459,14 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btThanhToanActionPerformed
 
+    private void cbTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTimKiemActionPerformed
+        hienthiTimKiem();
+    }//GEN-LAST:event_cbTimKiemActionPerformed
+
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        hienthiTimKiem();
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSua;
@@ -403,6 +474,7 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
     private javax.swing.JButton btThanhToan;
     private javax.swing.JButton btThemDV;
     private javax.swing.JButton btXoa;
+    private javax.swing.JComboBox<String> cbTimKiem;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -416,5 +488,6 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnThanhTien;
     private javax.swing.JTable tbChitietHD;
     private javax.swing.JTable tbHoaDon;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
