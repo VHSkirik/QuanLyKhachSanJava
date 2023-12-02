@@ -19,14 +19,14 @@ public class UpdateCTHD extends javax.swing.JDialog {
     private vQLHoaDon fromHoaDon;
     LinkedHashMap<String, String> hmDichVu = new LinkedHashMap<>();
     ChiTietHoaDon cthdCu;
-
+    //khoi tao de them
     public UpdateCTHD(vQLHoaDon parent, JFrame frame, String mahd) {
         super(frame, true);
         this.fromHoaDon = parent;
         initComponents();
         txtMahd.setText(mahd);
     }
-
+    //khoi tao de sua
     public UpdateCTHD(vQLHoaDon parent, JFrame frame, ChiTietHoaDon cthd) {
         super(frame, true);
         this.fromHoaDon = parent;

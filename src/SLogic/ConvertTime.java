@@ -15,8 +15,9 @@ public class ConvertTime {
     }
 
     public static String changeToYMD(String dateString) {
-        if (dateString == null)
+        if (dateString == null) {
             return null;
+        }
         try {
             SimpleDateFormat formatter;
             if (dateString.trim().contains("-")) {
@@ -35,8 +36,9 @@ public class ConvertTime {
     }
 
     public static String changeToDMY(String dateString) {
-        if (dateString == null)
+        if (dateString == null) {
             return null;
+        }
         try {
             SimpleDateFormat formatter;
             if (dateString.trim().contains("-")) {
@@ -62,9 +64,24 @@ public class ConvertTime {
         String rsText = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(input);
         return rsText;
     }
-    
-    public static String toString(Date date){
+
+    public static String toString(Date date) {
         String datesString = new SimpleDateFormat("yyyy-MM-dd").format(date);
         return datesString;
+    }
+
+    public static Date toDate(String dateString) {
+        try {
+            return new SimpleDateFormat("dd-MM-yyyy").parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static void main(String[] args) {
+        String dateString = "8-5-2002";
+        Date date = toDate(dateString);
+        System.out.println(date);
     }
 }

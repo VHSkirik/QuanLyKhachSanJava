@@ -286,10 +286,11 @@ public class AddHoaDon extends javax.swing.JInternalFrame {
         int currentRowLoai = tbLoai.getSelectedRow();
         int currentRowPhong = tbPhong.getSelectedRow();
         String mahd = txtMahoadon.getText().trim();
-
+        //kiem tra trong
         if (mahd.isBlank() || currentRowLoai == -1 || currentRowPhong == -1) {
             JOptionPane.showMessageDialog(this, "Chưa điền đủ thông tin");
         } else {
+            //kiem tra tinh trang phong
             if (dtmPhong.getValueAt(currentRowPhong, 2).toString().equals("1")) {
                 JOptionPane.showMessageDialog(this, "Phòng đang được thuê bởi người khác");
             } else {
@@ -298,7 +299,7 @@ public class AddHoaDon extends javax.swing.JInternalFrame {
                 String maphong = dtmPhong.getValueAt(currentRowPhong, 0).toString();
                 int giaphong = Integer.parseInt(dtmLoai.getValueAt(currentRowLoai, 2).toString());
                 String ngaythue = ConvertTime.toString(new Date());
-
+                //kiem tra mahd
                 if (DAOHoaDon.getInstance().getByID(mahd) != null) {
                     JOptionPane.showMessageDialog(this, "Mã hóa đơn đã tồn tại");
                 } else {
