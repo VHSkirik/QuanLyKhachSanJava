@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 public class vThongKe extends javax.swing.JInternalFrame {
 
     ArrayList<HoaDon> dsHoaDon;
+    ArrayList<HoaDon> dsHoaDonHienTai;
     ArrayList<Phong> dsPhong;
     ArrayList<KhachHang> dsKhachHang;
     DefaultTableModel dtm_Hoadon;
@@ -120,13 +121,23 @@ public class vThongKe extends javax.swing.JInternalFrame {
             }
             //hien thi hoa don thoa man dieu kien ngay
             dtm_Hoadon.setRowCount(0);
+            dsHoaDonHienTai = new ArrayList<>();
             for (HoaDon hd : dsHoaDon) {
                 String ngaythue = ConvertTime.changeToDMY(hd.getNgaythue());
                 String ngaytra = ConvertTime.changeToDMY(hd.getNgaytra());
+                
                 Date dateNgayThue = ConvertTime.toDate(ngaythue);
+                dateNgayThue.setHours(23);
+                dateNgayThue.setMinutes(59);
+                dateNgayThue.setSeconds(59);
+                
                 Date dateNgayTra = ConvertTime.toDate(ngaytra);
+                dateNgayTra.setHours(0);
+                dateNgayTra.setMinutes(0);
+                dateNgayTra.setSeconds(0);
 
                 if (!dateNgayThue.before(dateBatDau) && !dateNgayTra.after(dateKetThuc)) {
+                    dsHoaDonHienTai.add(hd);
                     dtm_Hoadon.addRow(new Object[]{
                         hd.getMahd(),
                         hd.getMakh(),
@@ -200,10 +211,6 @@ public class vThongKe extends javax.swing.JInternalFrame {
         tbPhong = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         btXuatExcel = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton2 = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
-        jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         txtDanhSo = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -323,7 +330,13 @@ public class vThongKe extends javax.swing.JInternalFrame {
         pnHoaDon.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 90, 20));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_reset.png"))); // NOI18N
         jButton1.setText("Reset");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         pnHoaDon.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 140, 40));
 
         btThongKe.setBackground(new java.awt.Color(255, 255, 255));
@@ -427,28 +440,8 @@ public class vThongKe extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btXuatExcel);
-        jToolBar1.add(jSeparator1);
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/doc.png"))); // NOI18N
-        jButton2.setText("Xuất Word");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
-        jToolBar1.add(jSeparator2);
-
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/fpd.png"))); // NOI18N
-        jButton3.setText("Xuất PDF");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
-
-        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 250, 80));
+        jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 140, 80));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true));
@@ -545,6 +538,15 @@ public class vThongKe extends javax.swing.JInternalFrame {
         thongkeDoanhThu();
     }//GEN-LAST:event_btThongKeActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dcBatDau.setDate(null);
+        dcKetThuc.setDate(null);
+        initTableHoaDon();
+        dsHoaDonHienTai = new ArrayList<>();
+        dsHoaDonHienTai.addAll(dsHoaDon);
+        tinhDoanhThu();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btThongKe;
@@ -553,8 +555,6 @@ public class vThongKe extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser dcBatDau;
     private com.toedter.calendar.JDateChooser dcKetThuc;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -572,8 +572,6 @@ public class vThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbPhongThue;
     private javax.swing.JLabel lbTKKhachHang;
