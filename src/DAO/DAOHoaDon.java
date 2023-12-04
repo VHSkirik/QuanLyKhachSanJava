@@ -116,4 +116,15 @@ public class DAOHoaDon implements InterfaceDAO<HoaDon> {
         }
         return songay;
     }
+    
+    public ArrayList<HoaDon> getAll_DTT(){
+        ArrayList<HoaDon> rs = new  ArrayList<>();
+        ArrayList<HoaDon> dsHoaDon = getAll();
+        for (HoaDon hd : dsHoaDon){
+            if (hd.getDathanhtoan()== 1){
+                rs.add(hd);
+            }
+        }
+        return rs;
+    }
 }

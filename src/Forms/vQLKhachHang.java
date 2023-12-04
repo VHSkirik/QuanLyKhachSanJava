@@ -21,6 +21,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
 
     public vQLKhachHang() {
         initComponents();
+        tbKhachHang.setAutoCreateRowSorter(true);
         dtm = (DefaultTableModel) tbKhachHang.getModel();
         //Xóa title
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();

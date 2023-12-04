@@ -22,6 +22,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
 
     public vQLPhong() {
         initComponents();
+        tbPhong.setAutoCreateRowSorter(true);
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
         dtm_Loaiphong = (DefaultTableModel) tbLoaiphong.getModel();

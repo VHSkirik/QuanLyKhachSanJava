@@ -20,6 +20,7 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
 
     public vQLNhanVien() {
         initComponents();
+        tbNhanVien.setAutoCreateRowSorter(true);
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
         dtm = (DefaultTableModel) tbNhanVien.getModel();
@@ -62,6 +63,7 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbNhanVien = new javax.swing.JTable();
@@ -73,12 +75,12 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
         cbLoaiTK = new javax.swing.JComboBox<>();
         txtTimKiem = new javax.swing.JTextField();
         btReset = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(870, 644));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(870, 620));
@@ -103,7 +105,7 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbNhanVien);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 850, 510));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 850, 480));
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức Năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -184,7 +186,22 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 690, 90));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 630));
+        jTabbedPane1.addTab("Thông Tin Nhân Viên", jPanel1);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTabbedPane1.addTab("Lịch Sử", jPanel3);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -256,7 +273,9 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbLoaiTK;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTable tbNhanVien;
     private javax.swing.JTextField txtTimKiem;

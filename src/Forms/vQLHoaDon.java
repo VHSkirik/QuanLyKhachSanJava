@@ -31,6 +31,8 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
 
     public vQLHoaDon(String makh) {
         initComponents();
+        tbHoaDon.setAutoCreateRowSorter(true);
+        tbChitietHD.setAutoCreateRowSorter(true);
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
         dtm_Hoadon = (DefaultTableModel) tbHoaDon.getModel();

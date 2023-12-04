@@ -40,6 +40,9 @@ public class vThongKe extends javax.swing.JInternalFrame {
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
         initComponents();
+        tbHoaDon.setAutoCreateRowSorter(true);
+        tbKhachhang.setAutoCreateRowSorter(true);
+        tbPhong.setAutoCreateRowSorter(true);
         dtm_Hoadon = (DefaultTableModel) tbHoaDon.getModel();
         dtm_Khachhang = (DefaultTableModel) tbKhachhang.getModel();
         dtm_Phong = (DefaultTableModel) tbPhong.getModel();
@@ -58,12 +61,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
     }
 
     private void initData() {
-        dsHoaDon = new ArrayList<>();
-        for (HoaDon hd : DAOHoaDon.getInstance().getAll()) {
-            if (hd.getDathanhtoan() == 1) {
-                dsHoaDon.add(hd);
-            }
-        }
+        dsHoaDon = DAOHoaDon.getInstance().getAll_DTT();
         dsHoaDonHienTai.addAll(dsHoaDon);
         dsPhong = DAOPhong.getInstance().getAll();
         dsKhachHang = DAOKhachHang.getInstance().getAll();
@@ -80,8 +78,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
                 hd.getGiaphong(),
                 ConvertTime.changeToDMY(hd.getNgaythue()),
                 ConvertTime.changeToDMY(hd.getNgaytra()),
-                hd.getThanhtien(),
-                hd.getDathanhtoan()});
+                hd.getThanhtien()});
         }
     }
 
@@ -149,8 +146,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
                         hd.getGiaphong(),
                         ConvertTime.changeToDMY(hd.getNgaythue()),
                         ConvertTime.changeToDMY(hd.getNgaytra()),
-                        hd.getThanhtien(),
-                        hd.getDathanhtoan()});
+                        hd.getThanhtien()});
                 }
             }
         } catch (Exception e) {
@@ -204,7 +200,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
         dcKetThuc = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btReset = new javax.swing.JButton();
         btThongKe = new javax.swing.JButton();
         pnKhachHang = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -212,6 +208,9 @@ public class vThongKe extends javax.swing.JInternalFrame {
         pnPhong = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbPhong = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         btXuatExcel = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -290,11 +289,11 @@ public class vThongKe extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Mã HD", "Mã KH", "Mã NV", "Mã Phòng", "Giá", "Ngày thuê", "Ngày trả", "Thành tiền", "Thanh toán"
+                "Mã HD", "Mã KH", "Mã NV", "Mã Phòng", "Giá", "Ngày thuê", "Ngày trả", "Thành tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, true, false, false, false
+                false, false, true, false, false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -332,20 +331,20 @@ public class vThongKe extends javax.swing.JInternalFrame {
         jLabel8.setText("Ngày bắt đầu");
         pnHoaDon.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 90, 20));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_reset.png"))); // NOI18N
-        jButton1.setText("Reset");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btReset.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_reset.png"))); // NOI18N
+        btReset.setText("Reset");
+        btReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btResetActionPerformed(evt);
             }
         });
-        pnHoaDon.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 140, 40));
+        pnHoaDon.add(btReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 140, 40));
 
         btThongKe.setBackground(new java.awt.Color(255, 255, 255));
         btThongKe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/test.png"))); // NOI18N
-        btThongKe.setText("Thống kê");
+        btThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dollar.png"))); // NOI18N
+        btThongKe.setText("Cập Nhật");
         btThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btThongKeActionPerformed(evt);
@@ -424,6 +423,33 @@ public class vThongKe extends javax.swing.JInternalFrame {
 
         tabMain.addTab("Phòng", pnPhong);
 
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Mã Nhân Viên", "Tên Nhân Viên", "Doanh Số"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTable1);
+
+        jPanel6.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 830, 230));
+
+        tabMain.addTab("Doanh Số Nhân Viên", jPanel6);
+
         jPanel1.add(tabMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 850, 430));
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
@@ -454,14 +480,14 @@ public class vThongKe extends javax.swing.JInternalFrame {
         txtDanhSo.setForeground(new java.awt.Color(204, 0, 51));
         txtDanhSo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtDanhSo.setText(" 1000.000.000 VND");
-        jPanel5.add(txtDanhSo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 300, 60));
+        jPanel5.add(txtDanhSo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 320, 60));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("Doanh Số:");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 90, 60));
+        jLabel11.setText("Tổng Doanh Số:");
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 140, 60));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 550, 420, -1));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 550, 460, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
 
@@ -550,23 +576,23 @@ public class vThongKe extends javax.swing.JInternalFrame {
         thongkeDoanhThu();
     }//GEN-LAST:event_btThongKeActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
         dcBatDau.setDate(null);
         dcKetThuc.setDate(null);
         initTableHoaDon();
         dsHoaDonHienTai.removeAll(dsHoaDonHienTai);
         dsHoaDonHienTai.addAll(dsHoaDon);
         tinhDoanhThu();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btResetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btReset;
     private javax.swing.JButton btThongKe;
     private javax.swing.JButton btXemchitiet;
     private javax.swing.JButton btXuatExcel;
     private com.toedter.calendar.JDateChooser dcBatDau;
     private com.toedter.calendar.JDateChooser dcKetThuc;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -581,9 +607,12 @@ public class vThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbPhongThue;
     private javax.swing.JLabel lbTKKhachHang;
