@@ -5,6 +5,7 @@ import SLogic.SearchKhachHang;
 import DAO.DAOHoaDon;
 import DAO.DAOKhachHang;
 import Model.KhachHang;
+import SLogic.History;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -270,6 +271,7 @@ public class vQLKhachHang extends javax.swing.JInternalFrame {
                     return;
                 } else {
                     JOptionPane.showMessageDialog(this, "Xóa thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
+                    History.addAction("XÓA khách hàng có mã " + ma);
                 }
                 loadDataTable();
             }

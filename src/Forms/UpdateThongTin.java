@@ -3,6 +3,7 @@ package Forms;
 import SLogic.ConvertTime;
 import DAO.DAONhanVien;
 import Model.NhanVien;
+import SLogic.History;
 import javax.swing.JOptionPane;
 
 /**
@@ -208,6 +209,7 @@ public class UpdateThongTin extends javax.swing.JDialog {
                     return;
                 } else {
                     JOptionPane.showMessageDialog(this, "Update thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
+                    History.addAction("SỬA thông tin cá nhân");
                     this.dispose();
                 }
 

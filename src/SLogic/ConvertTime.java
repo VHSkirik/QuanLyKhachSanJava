@@ -55,21 +55,29 @@ public class ConvertTime {
         }
     }
 
-    public static String changeToYMDTime(Date input) {
-        String rsText = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(input);
-        return rsText;
+    public static String changeToDMYTime(Date input) {
+        try {
+            String rsText = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(input);
+            return rsText;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public static String changeToDMYTime(Date input) {
-        String rsText = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(input);
-        return rsText;
+    public static String changeToYMDTime(Date input) {
+        try {
+            String rsText = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(input);
+            return rsText;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static String toString(Date date) {
         try {
             String datesString = new SimpleDateFormat("yyyy-MM-dd").format(date);
             return datesString;
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
@@ -82,4 +90,12 @@ public class ConvertTime {
             return null;
         }
     }
+    
+//    public static void main(String[] args) {
+//        Date date = new Date();
+//        
+//        String tmp = ConvertTime.changeToYMDTime(date);
+//        
+//        System.out.println(tmp);
+//    }
 }

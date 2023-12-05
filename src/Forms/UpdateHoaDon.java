@@ -8,6 +8,7 @@ import DAO.DAONhanVien;
 import Model.HoaDon;
 import Model.KhachHang;
 import Model.NhanVien;
+import SLogic.History;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import javax.swing.JOptionPane;
@@ -288,6 +289,7 @@ public class UpdateHoaDon extends javax.swing.JDialog {
                 return;
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa thành công");
+                History.addAction("SỬA hóa đơn mã " + mahd);
                 formQLHoaDon.loadAllHoadon("");
                 this.dispose();
             }

@@ -3,6 +3,7 @@ package Forms;
 import SLogic.ConvertTime;
 import DAO.DAOKhachHang;
 import Model.KhachHang;
+import SLogic.History;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -246,6 +247,7 @@ public class UpdateKH extends javax.swing.JDialog {
                             return;
                         } else {
                             JOptionPane.showMessageDialog(this, "Thêm thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
+                            History.addAction("THÊM khách hàng mã " + ma);
                         }
                     }
                 }
@@ -258,6 +260,7 @@ public class UpdateKH extends javax.swing.JDialog {
                         return;
                     } else {
                         JOptionPane.showMessageDialog(this, "Sửa thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
+                        History.addAction("SỬA khách hàng có mã " + ma);
                     }
 
                 }

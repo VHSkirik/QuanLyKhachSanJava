@@ -10,6 +10,7 @@ import Model.KhachHang;
 import Model.LoaiPhong;
 import Model.NhanVien;
 import Model.Phong;
+import SLogic.History;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -309,6 +310,7 @@ public class AddHoaDon extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(this, "Thêm thất bại");
                     } else {
                         JOptionPane.showMessageDialog(this, "Thêm thành công");
+                        History.addAction("THÊM hóa đơn mã " + mahd);
                         backKhachHang();
                     }
                 }

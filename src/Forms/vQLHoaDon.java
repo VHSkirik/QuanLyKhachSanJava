@@ -8,6 +8,7 @@ import DAO.DAOPhong;
 import Model.ChiTietHoaDon;
 import Model.HoaDon;
 import Model.Phong;
+import SLogic.History;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -334,7 +335,7 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần xóa");
         } else {
             if (target.equals("CTHD")) {
-                int check = JOptionPane.showConfirmDialog(this, "Xác chi tiết hóa đơn đang chọn?", "Xác Nhận", JOptionPane.YES_NO_OPTION);
+                int check = JOptionPane.showConfirmDialog(this, "Xóa chi tiết hóa đơn đang chọn?", "Xác Nhận", JOptionPane.YES_NO_OPTION);
                 if (check == JOptionPane.YES_OPTION) {
                     String mahd = dtm_ChitietHD.getValueAt(currentRowCTHD, 0).toString();
                     String madv = dtm_ChitietHD.getValueAt(currentRowCTHD, 1).toString();
@@ -343,6 +344,7 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(this, "Xóa thất bại");
                     } else {
                         JOptionPane.showMessageDialog(this, "Xóa Thành Công");
+                        History.addAction("XÓA chi tiết hóa đơn mã (" + mahd + "," + madv + ")");
                         hienthiCTHD();
                     }
                 }
@@ -357,6 +359,7 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(this, "Xóa thất bại");
                     } else {
                         JOptionPane.showMessageDialog(this, "Xóa thành công");
+                        History.addAction("XÓA hóa đơn có mã " + mahd);
                         dtm_ChitietHD.setRowCount(0);
                         loadAllHoadon("");
                     }
@@ -373,9 +376,14 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
 
     private void btThemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemDVActionPerformed
         int currentRow = tbHoaDon.getSelectedRow();
+        int currentRowHoaDon = tbHoaDon.getSelectedRow();
         if (currentRow == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn hóa đơn cần thêm dịch vụ");
         } else {
+            if (dtm_Hoadon.getValueAt(currentRowHoaDon, 8).toString().equals("1")){
+                JOptionPane.showMessageDialog(this, "Không thể thay đổi dịch vụ của hóa đơn đã thanh toán");
+                return;
+            }
             int daTra = Integer.parseInt(dtm_Hoadon.getValueAt(currentRow, 8).toString());
             if (daTra == 1) {
                 JOptionPane.showMessageDialog(this, "Không thể thêm vào hóa đơn đã thanh toán");
@@ -399,6 +407,10 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
             return;
         }
         if (target.equals("CTHD")) {
+            if (dtm_Hoadon.getValueAt(currentRowHoaDon, 8).toString().equals("1")){
+                JOptionPane.showMessageDialog(this, "Không thể thay đổi dịch vụ của hóa đơn đã thanh toán");
+                return;
+            }
             String mahd = dtm_ChitietHD.getValueAt(currentRowCTHD, 0).toString();
             String madv = dtm_ChitietHD.getValueAt(currentRowCTHD, 1).toString();
             ChiTietHoaDon cthd = DAOChiTietHoaDon.getInstance().getByID(mahd, madv);
@@ -445,6 +457,7 @@ public class vQLHoaDon extends javax.swing.JInternalFrame {
                     return;
                 } else {
                     JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+                    History.addAction("THANH TOÁN hóa đơn mã " + hd.getMahd());
                     //Cập nhật lại phòng
                     Phong phong = DAOPhong.getInstance().getByID(hd.getMaphong());
                     phong.setTinhtrang(0);

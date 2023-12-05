@@ -4,6 +4,7 @@ import DAO.DAOLoaiPhong;
 import DAO.DAOPhong;
 import Model.LoaiPhong;
 import Model.Phong;
+import SLogic.History;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -399,6 +400,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Xóa thất bại");
                 } else {
                     JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    History.addAction("XÓA phòng mã " + maphong);
                     hienthiPhong();
                 }
             }
@@ -421,6 +423,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Xóa thất bại");
                 } else {
                     JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    History.addAction("XÓA loại phòng mã " + maloaiphong);
                     hienthiLoaiPhong();
                 }
             }
@@ -457,6 +460,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
                     } else {
                         //thông báo và làm mới danh sách
                         JOptionPane.showMessageDialog(this, "Thêm thành công");
+                        History.addAction("THÊM loại phòng mã " + maloaiphong);
                         resetText();
                         hienthiLoaiPhong();
                     }
@@ -488,6 +492,7 @@ public class vQLPhong extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(this, "Sửa thất bại");
                     } else {
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
+                        History.addAction("Sửa loại phòng mã " + maloaiphong);
                         hienthiLoaiPhong();
                     }
                 }

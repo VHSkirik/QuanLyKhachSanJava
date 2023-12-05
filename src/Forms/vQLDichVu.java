@@ -2,6 +2,7 @@ package Forms;
 
 import DAO.DAODichVu;
 import Model.DichVu;
+import SLogic.History;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -223,6 +224,7 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Xóa thất bại");
                 } else {
                     JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    History.addAction("XÓA dịch vụ mã " + madichvu);
                     clearText();
                     hienthiDV();
                 }
@@ -252,6 +254,7 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(this, "Thêm thất bại");
                     } else {
                         JOptionPane.showMessageDialog(this, "Thêm thành công");
+                        History.addAction("THÊM dịch vụ mã " + madichvu);
                         clearText();
                         hienthiDV();
                     }
@@ -294,6 +297,7 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(this, "Sửa thất bại");
                     } else {
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
+                        History.addAction("SỦA dịch vụ mã " + madichvu);
                         clearText();
                         hienthiDV();
                     }

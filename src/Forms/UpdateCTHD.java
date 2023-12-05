@@ -5,6 +5,7 @@ import DAO.DAOChiTietHoaDon;
 import DAO.DAODichVu;
 import Model.ChiTietHoaDon;
 import Model.DichVu;
+import SLogic.History;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import javax.swing.JFrame;
@@ -19,6 +20,7 @@ public class UpdateCTHD extends javax.swing.JDialog {
     private vQLHoaDon fromHoaDon;
     LinkedHashMap<String, String> hmDichVu = new LinkedHashMap<>();
     ChiTietHoaDon cthdCu;
+
     //khoi tao de them
     public UpdateCTHD(vQLHoaDon parent, JFrame frame, String mahd) {
         super(frame, true);
@@ -26,6 +28,7 @@ public class UpdateCTHD extends javax.swing.JDialog {
         initComponents();
         txtMahd.setText(mahd);
     }
+
     //khoi tao de sua
     public UpdateCTHD(vQLHoaDon parent, JFrame frame, ChiTietHoaDon cthd) {
         super(frame, true);
@@ -51,7 +54,7 @@ public class UpdateCTHD extends javax.swing.JDialog {
     //nhung thay doi khi chuyen sang update
     private void setDataUpdate() {
         lbTitle.setText("SỬA CHI TIẾT HÓA ĐƠN");
-        btSubmit.setText("UPDATE");
+        btSubmit.setText("SỬA");
         txtMahd.setText(cthdCu.getMahd());
         cbMadv.setSelectedItem(cthdCu.getMadichvu());
         txtSoluong.setText(cthdCu.getSoluong() + "");
@@ -232,7 +235,7 @@ public class UpdateCTHD extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Chưa điền đủ thông tin");
             } else {
                 ChiTietHoaDon cthdMoi = new ChiTietHoaDon(mahd, madv, dongia, soluong);
-                if (btSubmit.getText().equals("UPDATE")) {
+                if (btSubmit.getText().equals("SỬA")) {
                     DAOChiTietHoaDon.getInstance().delete(cthdCu.getMahd(), cthdCu.getMadichvu());
                 }
                 int rs = LogicHoaDon.themCTHD(cthdMoi);
@@ -240,6 +243,11 @@ public class UpdateCTHD extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, btSubmit.getText() + " thất bại");
                 } else {
                     JOptionPane.showMessageDialog(this, btSubmit.getText() + " thành công");
+                    if (cthdCu == null){
+                        History.addAction("THÊM chi tiết hóa đơn mã (" + mahd + "," + madv + ")");
+                    } else {
+                        History.addAction("SỬA chi tiết hóa đơn mã (" + mahd + "," + cthdCu.getMadichvu() + ")");
+                    }
                 }
             }
         } catch (NumberFormatException e) {

@@ -2,6 +2,7 @@ package Forms;
 
 import DAO.DAOPhong;
 import Model.Phong;
+import SLogic.History;
 import javax.swing.JOptionPane;
 
 /**
@@ -200,6 +201,7 @@ public class UpdatePhong extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Thêm phòng thất bại");
                 } else {
                     JOptionPane.showMessageDialog(this, "Thêm phòng thành công");
+                    History.addAction("THÊM phòng mã " + maphong);
                     parent.hienthiPhong();
                     this.dispose();
                 }
@@ -214,6 +216,7 @@ public class UpdatePhong extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Sửa thông tin thất bại");
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa thành công");
+                History.addAction("SỬA phòng mã " + maphong);
                 parent.hienthiPhong();
                 this.dispose();
             }

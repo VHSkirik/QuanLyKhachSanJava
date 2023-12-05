@@ -3,6 +3,7 @@ package Forms;
 import SLogic.ConvertTime;
 import DAO.DAONhanVien;
 import Model.NhanVien;
+import SLogic.History;
 import javax.swing.JOptionPane;
 
 /**
@@ -233,7 +234,8 @@ public class UpdateNhanVien extends javax.swing.JDialog {
                             return;
                         } else {
                             JOptionPane.showMessageDialog(this, "Thêm thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
-                            formNV.loadDataTable();
+                            History.addAction("THÊM nhân viên có mã " + tk);
+                            formNV.loadTableNhanVien();
                             this.dispose();
                         }
                     }
@@ -246,7 +248,8 @@ public class UpdateNhanVien extends javax.swing.JDialog {
                         return;
                     } else {
                         JOptionPane.showMessageDialog(this, "Sửa thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
-                        formNV.loadDataTable();
+                        History.addAction("SỬA nhân viên có mã " + tk);
+                        formNV.loadTableNhanVien();
                         this.dispose();
                     }
                 }

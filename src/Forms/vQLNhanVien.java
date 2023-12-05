@@ -1,10 +1,14 @@
 package Forms;
 
+import DAO.DAOLichSu;
 import SLogic.ConvertTime;
 import SLogic.SearchNhanVien;
 import DAO.DAONhanVien;
+import Model.LichSu;
 import Model.NhanVien;
+import SLogic.History;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -16,35 +20,50 @@ import javax.swing.table.DefaultTableModel;
  */
 public class vQLNhanVien extends javax.swing.JInternalFrame {
 
-    DefaultTableModel dtm;
+    DefaultTableModel dtm_NhanVien, dtm_LichSu;
 
     public vQLNhanVien() {
         initComponents();
         tbNhanVien.setAutoCreateRowSorter(true);
+        tbLichSu.setAutoCreateRowSorter(true);
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
-        dtm = (DefaultTableModel) tbNhanVien.getModel();
-        loadDataTable();
+        dtm_NhanVien = (DefaultTableModel) tbNhanVien.getModel();
+        dtm_LichSu = (DefaultTableModel) tbLichSu.getModel();
+        loadTableNhanVien();
+        loadTableLichSu();
     }
 
-    public void loadDataTable() {
+    public void loadTableNhanVien() {
         ArrayList<NhanVien> dsNhanVien = DAONhanVien.getInstance().getAll();
-        dtm.setRowCount(0);
+        dtm_NhanVien.setRowCount(0);
         for (NhanVien nv : dsNhanVien) {
-            dtm.addRow(new Object[]{
+            dtm_NhanVien.addRow(new Object[]{
                 nv.getTaikhoan(),
                 nv.getHotenvn(),
-                nv.getNgaysinhnv(),
+                ConvertTime.changeToDMY(nv.getNgaysinhnv()),
                 nv.getGioitinhnv(),
                 nv.getMatkhau(),
                 nv.getLoainguoidung()});
         }
     }
+    
+    public void loadTableLichSu(){
+        ArrayList<LichSu> dsLichSu = DAOLichSu.getInstance().getAll();
+        dtm_LichSu.setRowCount(0);
+        for (LichSu ls : dsLichSu){
+            dtm_LichSu.addRow(new Object[]{
+            ls.getMalichsu(),
+            ls.getTaikhoan(),
+            ls.getThoigian(),
+            ls.getNoidung()});
+        }
+    }
 
     private void setDataTable(ArrayList<NhanVien> dsHienthi) {
-        dtm.setRowCount(0);
+        dtm_NhanVien.setRowCount(0);
         for (NhanVien nv : dsHienthi) {
-            dtm.addRow(new Object[]{
+            dtm_NhanVien.addRow(new Object[]{
                 nv.getTaikhoan(),
                 nv.getHotenvn(),
                 ConvertTime.changeToDMY(nv.getNgaysinhnv()),
@@ -63,7 +82,7 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tpNhanVien = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbNhanVien = new javax.swing.JTable();
@@ -76,11 +95,25 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
         txtTimKiem = new javax.swing.JTextField();
         btReset = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbLichSu = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        cbTKLS = new javax.swing.JComboBox<>();
+        txtTimKiemLS = new javax.swing.JTextField();
+        btResetLS = new javax.swing.JButton();
+        jToolBar2 = new javax.swing.JToolBar();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(870, 644));
+
+        tpNhanVien.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tpNhanVienStateChanged(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(870, 620));
@@ -186,21 +219,95 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 690, 90));
 
-        jTabbedPane1.addTab("Thông Tin Nhân Viên", jPanel1);
+        tpNhanVien.addTab("Thông Tin Nhân Viên", jPanel1);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jTabbedPane1.addTab("Lịch Sử", jPanel3);
+
+        tbLichSu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã LS", "Tài Khoản", "Thời Gian", "Nội Dung"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tbLichSu);
+        if (tbLichSu.getColumnModel().getColumnCount() > 0) {
+            tbLichSu.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tbLichSu.getColumnModel().getColumn(1).setPreferredWidth(0);
+            tbLichSu.getColumnModel().getColumn(2).setPreferredWidth(0);
+            tbLichSu.getColumnModel().getColumn(3).setPreferredWidth(350);
+        }
+
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 107, 850, 480));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cbTKLS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã NV", "Nội dung" }));
+        jPanel4.add(cbTKLS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, 40));
+
+        txtTimKiemLS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKiemLSActionPerformed(evt);
+            }
+        });
+        txtTimKiemLS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemLSKeyReleased(evt);
+            }
+        });
+        jPanel4.add(txtTimKiemLS, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 390, 40));
+
+        btResetLS.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btResetLS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_reset.png"))); // NOI18N
+        btResetLS.setText("Reset");
+        btResetLS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btResetLS.setIconTextGap(10);
+        btResetLS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btResetLSActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btResetLS, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 140, 40));
+
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 690, 90));
+
+        jToolBar2.setBackground(new java.awt.Color(255, 255, 255));
+        jToolBar2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        jToolBar2.setRollover(true);
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_xoa.png"))); // NOI18N
+        jButton1.setText("Xóa");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar2.add(jButton1);
+
+        jPanel3.add(jToolBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 90));
+
+        tpNhanVien.addTab("Lịch Sử", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(tpNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(tpNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -214,15 +321,18 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
         } else {
             int rs = JOptionPane.showConfirmDialog(this, "Xác nhận xóa", "Thông Báo", JOptionPane.YES_NO_OPTION);
             if (rs == JOptionPane.YES_OPTION) {
-                String taikhoan = dtm.getValueAt(currentRow, 0).toString();
+                String taikhoan = dtm_NhanVien.getValueAt(currentRow, 0).toString();
                 int kq = DAONhanVien.getInstance().delete(taikhoan);
                 if (kq == -1) {
                     JOptionPane.showMessageDialog(this, "Xóa thất bại", "Thông Báo", JOptionPane.ERROR_MESSAGE);
                     return;
                 } else {
                     JOptionPane.showMessageDialog(this, "Xóa thành công", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
+                    //lưu vết
+                    String nd = "XÓA nhân viên có mã" + taikhoan;
+                    History.addAction(nd);
                 }
-                loadDataTable();
+                loadTableNhanVien();
             }
         }
     }//GEN-LAST:event_btXoaActionPerformed
@@ -239,7 +349,7 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
         if (currentRow == -1) {
             JOptionPane.showMessageDialog(this, "Chưa bọn khách hàng cần sửa!", "Thông Báo", JOptionPane.WARNING_MESSAGE);
         } else {
-            String tk = dtm.getValueAt(currentRow, 0).toString();
+            String tk = dtm_NhanVien.getValueAt(currentRow, 0).toString();
             NhanVien nv = DAONhanVien.getInstance().getByID(tk);
             UpdateNhanVien formUpdate = new UpdateNhanVien(this, new JFrame(), nv);
             formUpdate.setVisible(true);
@@ -261,23 +371,49 @@ public class vQLNhanVien extends javax.swing.JInternalFrame {
 
     private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
         txtTimKiem.setText("");
-        loadDataTable();
+        loadTableNhanVien();
     }//GEN-LAST:event_btResetActionPerformed
+
+    private void txtTimKiemLSKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemLSKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemLSKeyReleased
+
+    private void btResetLSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetLSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btResetLSActionPerformed
+
+    private void txtTimKiemLSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemLSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemLSActionPerformed
+
+    private void tpNhanVienStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tpNhanVienStateChanged
+        if (tpNhanVien.getSelectedIndex() == 1){
+            loadTableLichSu();
+        }
+    }//GEN-LAST:event_tpNhanVienStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btReset;
+    private javax.swing.JButton btResetLS;
     private javax.swing.JButton btSua;
     private javax.swing.JButton btThem;
     private javax.swing.JButton btXoa;
     private javax.swing.JComboBox<String> cbLoaiTK;
+    private javax.swing.JComboBox<String> cbTKLS;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JTable tbLichSu;
     private javax.swing.JTable tbNhanVien;
+    private javax.swing.JTabbedPane tpNhanVien;
     private javax.swing.JTextField txtTimKiem;
+    private javax.swing.JTextField txtTimKiemLS;
     // End of variables declaration//GEN-END:variables
 }
