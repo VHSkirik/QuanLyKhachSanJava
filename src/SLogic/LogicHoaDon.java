@@ -56,7 +56,7 @@ public class LogicHoaDon {
         }
         return rs;
     }
-
+  
     public static int deleteAllbyMaHD(String mahd) {
         DAOChiTietHoaDon.getInstance().deleteByMahd(mahd);  //xoa cac cthd lien ket
         return DAOHoaDon.getInstance().delete(mahd);    //xoa hoa don
@@ -103,6 +103,6 @@ public class LogicHoaDon {
     
 
     public static void main(String[] args) {
-        System.out.println(TinhThanhTien("HD001"));
+        
     }
 }

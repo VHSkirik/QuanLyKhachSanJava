@@ -126,17 +126,17 @@ public class vThongKe extends javax.swing.JInternalFrame {
                 String ngaythue = ConvertTime.changeToDMY(hd.getNgaythue());
                 String ngaytra = ConvertTime.changeToDMY(hd.getNgaytra());
 
-                Date dateNgayThue = ConvertTime.toDate(ngaythue);
-                dateNgayThue.setHours(23);
-                dateNgayThue.setMinutes(59);
-                dateNgayThue.setSeconds(59);
-
                 Date dateNgayTra = ConvertTime.toDate(ngaytra);
                 dateNgayTra.setHours(0);
                 dateNgayTra.setMinutes(0);
                 dateNgayTra.setSeconds(0);
+                
+                Date dateNgayTra1 = ConvertTime.toDate(ngaytra);
+                dateNgayTra1.setHours(23);
+                dateNgayTra1.setMinutes(59);
+                dateNgayTra1.setSeconds(59);
 
-                if (!dateNgayThue.before(dateBatDau) && !dateNgayTra.after(dateKetThuc)) {
+                if (!dateNgayTra1.before(dateBatDau) && !dateNgayTra.after(dateKetThuc)) {
                     dsHoaDonHienTai.add(hd);
                     dtm_Hoadon.addRow(new Object[]{
                         hd.getMahd(),
@@ -208,9 +208,6 @@ public class vThongKe extends javax.swing.JInternalFrame {
         pnPhong = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbPhong = new javax.swing.JTable();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         btXuatExcel = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -292,9 +289,16 @@ public class vThongKe extends javax.swing.JInternalFrame {
                 "Mã HD", "Mã KH", "Mã NV", "Mã Phòng", "Giá", "Ngày thuê", "Ngày trả", "Thành tiền"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, true, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Long.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -316,19 +320,19 @@ public class vThongKe extends javax.swing.JInternalFrame {
 
         dcBatDau.setDateFormatString("dd-MM-yyy");
         dcBatDau.setMinSelectableDate(new java.util.Date(-62135791139000L));
-        pnHoaDon.add(dcBatDau, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 200, -1));
+        pnHoaDon.add(dcBatDau, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 200, -1));
 
         dcKetThuc.setDateFormatString("dd-MM-yyyy");
-        pnHoaDon.add(dcKetThuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 200, -1));
+        pnHoaDon.add(dcKetThuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 200, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Ngày kết thúc");
+        jLabel7.setText("Đến ngày");
         pnHoaDon.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 100, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Ngày bắt đầu");
+        jLabel8.setText("Từ ngày");
         pnHoaDon.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 90, 20));
 
         btReset.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -350,7 +354,7 @@ public class vThongKe extends javax.swing.JInternalFrame {
                 btThongKeActionPerformed(evt);
             }
         });
-        pnHoaDon.add(btThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 140, 40));
+        pnHoaDon.add(btThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 140, 40));
 
         tabMain.addTab("Hóa Đơn", pnHoaDon);
 
@@ -422,33 +426,6 @@ public class vThongKe extends javax.swing.JInternalFrame {
         );
 
         tabMain.addTab("Phòng", pnPhong);
-
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Mã Nhân Viên", "Tên Nhân Viên", "Doanh Số"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(jTable1);
-
-        jPanel6.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 830, 230));
-
-        tabMain.addTab("Doanh Số Nhân Viên", jPanel6);
 
         jPanel1.add(tabMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 850, 430));
 
@@ -607,12 +584,9 @@ public class vThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbPhongThue;
     private javax.swing.JLabel lbTKKhachHang;

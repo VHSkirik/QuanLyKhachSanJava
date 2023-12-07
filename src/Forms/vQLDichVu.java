@@ -3,8 +3,12 @@ package Forms;
 import DAO.DAODichVu;
 import Model.DichVu;
 import SLogic.History;
+import SLogic.XuatExcel;
+import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class vQLDichVu extends javax.swing.JInternalFrame {
 
     DefaultTableModel dtm;
+    ArrayList<DichVu> dsDichVu;
 
     public vQLDichVu() {
         initComponents();
@@ -25,7 +30,7 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
     }
 
     private void hienthiDV() {
-        ArrayList<DichVu> dsDichVu = DAODichVu.getInstance().getAll();
+        dsDichVu = DAODichVu.getInstance().getAll();
         dtm.setRowCount(0);
         for (DichVu dv : dsDichVu) {
             dtm.addRow(new Object[]{
@@ -178,24 +183,24 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
         jToolBar1.add(jButton2);
 
         jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 240, 90));
-        jPanel1.add(txtMaDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 210, 30));
-        jPanel1.add(txtTenDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 210, 30));
-        jPanel1.add(txtGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 190, 30));
+        jPanel1.add(txtMaDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 210, 30));
+        jPanel1.add(txtTenDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 210, 30));
+        jPanel1.add(txtGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 190, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Giá");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, 30, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 30, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Mã dịch vụ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 80, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 80, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Tên dịch vụ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 90, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 90, -1));
 
         btReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icon_reset.png"))); // NOI18N
         btReset.setText("RESET");
@@ -204,7 +209,7 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
                 btResetActionPerformed(evt);
             }
         });
-        jPanel1.add(btReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 60, 190, 40));
+        jPanel1.add(btReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 190, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 630));
 
@@ -311,7 +316,32 @@ public class vQLDichVu extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btResetActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JOptionPane.showMessageDialog(this, "Chức năng chưa khả dụng");
+
+        try {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Chọn nơi lưu");
+            //định dạng
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Excel file (.xlsx)", "xlsx"));
+            int luachon = fileChooser.showSaveDialog(this);
+
+            if (luachon == JFileChooser.APPROVE_OPTION) {
+                //kiểm tra tên file đã đặt
+                File fileSave = fileChooser.getSelectedFile();
+                String url = fileSave.getAbsolutePath();
+                if (!url.endsWith(".xlsx")) {
+                    fileSave = new File(url + ".xlsx");
+                }
+
+                boolean rs = XuatExcel.dsDichVu(dsDichVu, fileSave);
+                if (rs) {
+                    JOptionPane.showMessageDialog(this, "Xuất file thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xuất file thất bại");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

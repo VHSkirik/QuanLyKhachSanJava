@@ -8,6 +8,7 @@ import Model.DichVu;
 import SLogic.History;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -19,6 +20,7 @@ public class UpdateCTHD extends javax.swing.JDialog {
 
     private vQLHoaDon fromHoaDon;
     LinkedHashMap<String, String> hmDichVu = new LinkedHashMap<>();
+    ArrayList<Integer> giaDichVU = new ArrayList<>();
     ChiTietHoaDon cthdCu;
 
     //khoi tao de them
@@ -35,7 +37,6 @@ public class UpdateCTHD extends javax.swing.JDialog {
         this.fromHoaDon = parent;
         this.cthdCu = cthd;
         initComponents();
-        setDataUpdate();
 
     }
 
@@ -47,8 +48,13 @@ public class UpdateCTHD extends javax.swing.JDialog {
 
     //load gia khi chon ma tu combobox
     public void loadDsGia() {
-        String gia = hmDichVu.get(cbMadv.getSelectedItem());
+        String gia = giaDichVU.get(cbMadv.getSelectedIndex()) + "";
         txtDongia.setText(gia);
+        if (cbMadv.getSelectedItem().equals("Khác")) {
+            txtDongia.setEnabled(true);
+        } else {
+            txtDongia.setEnabled(false);
+        }
     }
 
     //nhung thay doi khi chuyen sang update
@@ -56,15 +62,26 @@ public class UpdateCTHD extends javax.swing.JDialog {
         lbTitle.setText("SỬA CHI TIẾT HÓA ĐƠN");
         btSubmit.setText("SỬA");
         txtMahd.setText(cthdCu.getMahd());
-        cbMadv.setSelectedItem(cthdCu.getMadichvu());
+        cbMadv.setSelectedItem(getKeybyValue(hmDichVu, cthdCu.getMadichvu()));
         txtSoluong.setText(cthdCu.getSoluong() + "");
     }
 
-    //khoi tao gia tri hashmap va them vao combox khi mo form
+    //lấy key theo value
+    private String getKeybyValue(LinkedHashMap<String, String> ds, String value) {
+        for (Map.Entry<String, String> entry : ds.entrySet()) {
+            if (value.equals(entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return "";
+    }
+
+    //khoi tao gia tri hashmap ma dich vu va ten dich vu kem gia
     private void setupData() {
         ArrayList<DichVu> dsDichVu = DAODichVu.getInstance().getAll();
         for (DichVu dv : dsDichVu) {
-            hmDichVu.put(dv.getMadichvu(), dv.getGiadichvu() + "");
+            hmDichVu.put(dv.getTendichvu(), dv.getMadichvu());
+            giaDichVU.add(dv.getGiadichvu());
         }
         loadComboBox();
     }
@@ -228,7 +245,7 @@ public class UpdateCTHD extends javax.swing.JDialog {
 
         try {
             String mahd = txtMahd.getText();
-            String madv = cbMadv.getSelectedItem().toString();
+            String madv = hmDichVu.get(cbMadv.getSelectedItem().toString());
             int dongia = Integer.parseInt(txtDongia.getText());
             int soluong = Integer.parseInt(txtSoluong.getText());
             if (mahd.isBlank() || madv.isBlank()) {
@@ -243,7 +260,7 @@ public class UpdateCTHD extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, btSubmit.getText() + " thất bại");
                 } else {
                     JOptionPane.showMessageDialog(this, btSubmit.getText() + " thành công");
-                    if (cthdCu == null){
+                    if (cthdCu == null) {
                         History.addAction("THÊM chi tiết hóa đơn mã (" + mahd + "," + madv + ")");
                     } else {
                         History.addAction("SỬA chi tiết hóa đơn mã (" + mahd + "," + cthdCu.getMadichvu() + ")");
@@ -265,6 +282,8 @@ public class UpdateCTHD extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setupData();
+        if (cthdCu != null)
+            setDataUpdate();
     }//GEN-LAST:event_formWindowOpened
 
     /**
