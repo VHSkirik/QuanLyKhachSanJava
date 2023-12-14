@@ -90,12 +90,4 @@ public class ConvertTime {
             return null;
         }
     }
-    
-//    public static void main(String[] args) {
-//        Date date = new Date();
-//        
-//        String tmp = ConvertTime.changeToYMDTime(date);
-//        
-//        System.out.println(tmp);
-//    }
 }
